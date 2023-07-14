@@ -1,6 +1,10 @@
 <?php
 
-use App\Http\Controllers\ProductController;
+
+use App\Http\Controllers\Admin\ProductController;
+
+
+
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,4 +19,13 @@ use Illuminate\Support\Facades\Route;
 */
 
 
-Route::get('/',[ProductController::class,'testProduct']);
+Route::get('/',[ProductController::class, 'index'])->name('admin');
+Route::get('/product/list',[ProductController::class, 'list'])->name('route_product_list');
+Route::match(['GET','POST'],'/product/add',[ProductController::class, 'add'])->name('route_product_add');
+Route::match(['GET','POST'],'/product/edit/{id}',[ProductController::class, 'edit'])->name('route_product_edit');
+
+
+
+
+
+

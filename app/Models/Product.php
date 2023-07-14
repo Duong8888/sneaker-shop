@@ -34,4 +34,5 @@ class Product extends Model
     public function imgages(){
         return $this->hasMany(ImagesProduct::class);
     }
+
 }
