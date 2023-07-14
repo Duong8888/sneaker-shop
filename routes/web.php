@@ -27,5 +27,5 @@ Route::match(['GET','POST'],'/product/edit/{id}',[ProductController::class, 'edi
 
 
 
-Route::get('/',[ProductController::class,'testProduct']);
+
 

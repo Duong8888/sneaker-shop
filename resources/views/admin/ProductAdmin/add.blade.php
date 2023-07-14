@@ -5,9 +5,11 @@
             <div class="card-body">
 
                 <div class="row">
-{{--                    <form action="" class="row">--}}
+                    <form action="https://coderthemes.com/" method="post" class="dropzone dz-clickable d-flex justify-content-between flex-wrap"
+                          id="myAwesomeDropzone" data-plugin="dropzone" data-previews-container="#file-previews"
+                          data-upload-preview-template="#uploadPreviewTemplate">
                         <div class="col-xl-6">
-                            {{-- Tên sản phẩm --}}
+                            Tên sản phẩm
                             <div class="mb-3">
                                 <label class="form-label">Tên sản phẩm</label>
                                 <input type="text" class="form-control">
@@ -66,7 +68,8 @@
                                     <!-- Date View -->
                                     <div class="mb-3">
                                         <label class="form-label">Ngày nhập</label>
-                                        <input type="hidden" class="form-control flatpickr-input" data-toggle="flatpicker"
+                                        <input type="hidden" class="form-control flatpickr-input"
+                                               data-toggle="flatpicker"
                                                placeholder="October 9, 2019">
                                         <input class="form-control flatpickr-input input" placeholder="October 9, 2019"
                                                tabindex="0" type="text" readonly="readonly">
@@ -79,15 +82,11 @@
                             <div class="my-3 mt-xl-0">
                                 <label for="projectname" class="mb-0 form-label">Avatar</label>
 
-                                <form action="https://coderthemes.com/" method="post" class="dropzone dz-clickable"
-                                      id="myAwesomeDropzone" data-plugin="dropzone" data-previews-container="#file-previews"
-                                      data-upload-preview-template="#uploadPreviewTemplate">
+                                <div class="dz-message needsclick">
+                                    <i class="bi bi-cloud-upload font-22"></i>
+                                    <h4>Thả tập tin ở đây hoặc bấm vào để tải tệp lên.</h4>
+                                </div>
 
-                                    <div class="dz-message needsclick">
-                                        <i class="bi bi-cloud-upload font-22"></i>
-                                        <h4>Thả tập tin ở đây hoặc bấm vào để tải tệp lên.</h4>
-                                    </div>
-                                </form>
 
                                 <!-- Preview -->
                                 <div class="dropzone-previews mt-3" id="file-previews"></div>
@@ -108,7 +107,8 @@
                                                 </div>
                                                 <div class="col-auto">
                                                     <!-- Button -->
-                                                    <a href="#" class="btn btn-link btn-lg text-muted" data-dz-remove="">
+                                                    <a href="#" class="btn btn-link btn-lg text-muted"
+                                                       data-dz-remove="">
                                                         <i class="bi bi-x"></i>
                                                     </a>
                                                 </div>
@@ -122,7 +122,7 @@
                         </div>
                         <!-- end row -->
 
-                        <div class="row mt-3">
+                        <div class="row mt-3 col-xl-12">
                             <div class="col-12 text-center">
                                 <button type="button" class="btn btn-success waves-effect waves-light m-1">
                                     <i class="bi bi-check-circle"></i> Create
@@ -134,7 +134,7 @@
                                 </a>
                             </div>
                         </div>
-{{--                    </form>--}}
+                    </form>
 
                 </div> <!-- end card-body -->
             </div> <!-- end card-->
