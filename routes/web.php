@@ -1,7 +1,8 @@
 <?php
 
+use App\Http\Controllers\Admin\ProductController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\AdminController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -13,8 +14,9 @@ use App\Http\Controllers\AdminController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-Route::get('admin',[AdminController::class, 'index']);
-Route::get('listProduct',[AdminController::class, 'listProduct']);
+Route::get('/',[ProductController::class, 'index'])->name('admin');
+Route::get('/product/list',[ProductController::class, 'list'])->name('route_product_list');
+Route::match(['GET','POST'],'/product/add',[ProductController::class, 'add'])->name('route_product_add');
+Route::match(['GET','POST'],'/product/edit/{id}',[ProductController::class, 'edit'])->name('route_product_edit');
+
+

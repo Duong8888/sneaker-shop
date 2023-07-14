@@ -10,19 +10,11 @@
     <meta content="A fully featured admin theme which can be used to build CRM, CMS, etc." name="description"/>
     <meta content="Coderthemes" name="author"/>
 
-    <!-- App favicon -->
-    <link rel="shortcut icon" href="images/favicon.ico">
 
-    <!-- third party css -->
-    <link href="{{asset('assets/libs/datatables.net-bs5/css/dataTables.bootstrap5.min.css')}}" rel="stylesheet"
-          type="text/css"/>
-    <link href="{{asset('assets/libs/datatables.net-responsive-bs5/css/responsive.bootstrap5.min.css')}}"
-          rel="stylesheet" type="text/css"/>
-    <link href="{{asset('assets/libs/datatables.net-buttons-bs5/css/buttons.bootstrap5.min.css')}}" rel="stylesheet"
-          type="text/css"/>
-    <link href="{{asset('assets/libs/datatables.net-select-bs5/css/select.bootstrap5.min.css')}}" rel="stylesheet"
-          type="text/css"/>
-    <!-- third party css end -->
+
+    @yield('link')
+
+
 
     <!-- Plugins css -->
     <link href="{{asset('assets/libs/flatpickr/flatpickr.min.css')}}" rel="stylesheet" type="text/css"/>
@@ -32,7 +24,6 @@
     <script src="{{asset('assets/js/head.js')}}"></script>
     <!-- Bootstrap css -->
     <link href="{{asset('assets/css/bootstrap.min.css')}}" rel="stylesheet" type="text/css" id="app-style"/>
-
 
     <!-- App css -->
     <link href="{{asset('assets/css/app.css')}}" rel="stylesheet" type="text/css" id="app-style"/>
@@ -52,18 +43,16 @@
         <!-- Brand Logo -->
         <div class="logo-box">
             <!-- Brand Logo Light -->
-            <a href="index.html" class="logo-light">
+            <a href="{{route('admin')}}" class="logo-light">
                 <img src="{{asset('assets/images/logo-light.png')}}" alt="logo" class="logo-lg">
                 <img src="{{asset('assets/images/logo-sm.png')}}" alt="small logo" class="logo-sm">
             </a>
-
             <!-- Brand Logo Dark -->
-            <a href="index.html" class="logo-dark">
+            <a href="{{route('admin')}}" class="logo-dark">
                 <img src="{{asset('assets/images/logo-dark.png')}}" alt="dark logo" class="logo-lg">
                 <img src="{{asset('assets/images/logo-light.png')}}" alt="small logo" class="logo-sm">
             </a>
         </div>
-
         <!-- menu-left -->
         <div class="scrollbar">
             <!-- User box -->
@@ -106,9 +95,7 @@
 
             <!--- Menu -->
             <ul class="menu">
-
                 <li class="menu-title">Navigation</li>
-
                 <li class="menu-item">
                     <a href="#menuDashboards" data-bs-toggle="collapse" class="menu-link">
                         <span class="menu-icon"><i data-feather="airplay"></i></span>
@@ -117,8 +104,13 @@
                     <div class="collapse" id="menuDashboards">
                         <ul class="sub-menu">
                             <li class="menu-item">
-                                <a href="{{url('/listProduct')}}" class="menu-link">
+                                <a href="{{route('route_product_list')}}" class="menu-link">
                                     <span class="menu-text">danh sách sản phẩm</span>
+                                </a>
+                            </li>
+                            <li class="menu-item">
+                                <a href="{{route('route_product_add')}}" class="menu-link">
+                                    <span class="menu-text">Thêm sản phẩm</span>
                                 </a>
                             </li>
                             <li class="menu-item">
@@ -271,11 +263,6 @@
                         <i class="bi bi-list"></i>
                     </button>
 
-                    <!-- Dropdown Menu -->
-
-
-                    <!-- Mega Menu Dropdown -->
-
                 </div>
 
                 <ul class="topbar-menu d-flex align-items-center">
@@ -318,7 +305,6 @@
                     <li class="dropdown d-none d-md-inline-block">
                         <a class="nav-link dropdown-toggle waves-effect waves-light arrow-none"
                            data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
-                            <!-- <i class="fe-grid font-22"></i> -->
                             <i class="bi bi-grid font-22"></i>
                         </a>
                         <div class="dropdown-menu dropdown-menu-end dropdown-menu-animated dropdown-lg p-0">
@@ -541,8 +527,6 @@
                 @yield('content')
 
 
-                <!-- end row -->
-
             </div> <!-- container -->
 
         </div> <!-- content -->
@@ -567,46 +551,27 @@
             </div>
         </footer>
         <!-- end Footer -->
-
     </div>
-
     <!-- ============================================================== -->
     <!-- End Page content -->
     <!-- ============================================================== -->
-
 </div>
-<!-- END wrapper -->
-
-<!-- Theme Settings -->
-
-
 <!-- Vendor js -->
 <script src="{{asset('assets/js/vendor.min.js')}}"></script>
-
 <!-- App js -->
 <script src="{{asset('assets/js/app.min.js')}}"></script>
 
-<!-- Plugins js-->
-{{--<script src="{{asset('assets/libs/flatpickr/flatpickr.min.js')}}"></script>--}}
-{{--<script src="{{asset('assets/libs/apexcharts/apexcharts.min.js')}}"></script>--}}
-{{--<script src="{{asset('assets/libs/selectize/js/standalone/selectize.min.js')}}"></script>--}}
 
 <!-- Dashboar 1 init js-->
 {{--<script src="{{asset('assets/js/pages/dashboard-1.init.js')}}"></script>--}}
 
 
-<script src="https://code.jquery.com/jquery-3.7.0.js"></script>
-<script src="https://cdn.datatables.net/1.13.5/js/jquery.dataTables.min.js"></script>
-<script src="https://cdn.datatables.net/1.13.5/js/dataTables.bootstrap5.min.js"></script>
-
 <!-- Datatables init -->
 {{--<script src="{{asset('assets/js/pages/datatables.init.js')}}"></script>--}}
 
-<script>
-    @yield('js')
-</script>
-</body>
 
-<!-- Mirrored from coderthemes.com/ubold/layouts/default/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 12 Jul 2023 10:25:14 GMT -->
+    @yield('js')
+
+</body>
 </html>
 
