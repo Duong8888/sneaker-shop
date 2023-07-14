@@ -8,4 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class Color extends Model
 {
     use HasFactory;
+    public $timestamps  = false;
+    protected $fillable = [
+        'color_value',
+    ];
+    public function product(){
+        return $this->belongsTo(Product::class, 'variations');
+    }
 }
