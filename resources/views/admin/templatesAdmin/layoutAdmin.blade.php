@@ -133,38 +133,20 @@
                 </li>
 
                 <li class="menu-item">
-                    <a href="#" class="menu-link">
-                        <span class="menu-icon"><i data-feather="message-square"></i></span>
-                        <span class="menu-text"> danh mục </span>
-                    </a>
-                </li>
-
-                <li class="menu-item">
-                    <a href="#" class="menu-link">
-                        <span class="menu-icon"><i data-feather="rss"></i></span>
-                        <span class="menu-text"> Social Feed </span>
-                        <span class="badge bg-pink ms-auto">Hot</span>
-                    </a>
-                </li>
-
-                <li class="menu-item">
-                    <a href="#" class="menu-link">
-                        <span class="menu-icon"><i data-feather="activity"></i></span>
-                        <span class="menu-text"> Companies </span>
-                    </a>
-                </li>
-
-                <li class="menu-item">
                     <a href="#menuProjects" data-bs-toggle="collapse" class="menu-link">
                         <span class="menu-icon"><i data-feather="briefcase"></i></span>
-                        <span class="menu-text"> Projects </span>
-                        <!-- <span class="menu-arrow"><i class="bi bi-chevron-right"></i></span> -->
+                        <span class="menu-text"> Thương hiệu </span>
                     </a>
                     <div class="collapse" id="menuProjects">
                         <ul class="sub-menu">
                             <li class="menu-item">
-                                <a href="#" class="menu-link">
-                                    <span class="menu-text">List</span>
+                                <a href="{{route('route.brands.list')}}" class="menu-link">
+                                    <span class="menu-text">danh sách Thương hiệu</span>
+                                </a>
+                            </li>
+                            <li class="menu-item">
+                                <a href="{{route('route.brands.add')}}" class="menu-link">
+                                    <span class="menu-text">Thêm Thương hiệu</span>
                                 </a>
                             </li>
                         </ul>
