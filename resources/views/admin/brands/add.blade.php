@@ -1,22 +1,42 @@
 @extends('admin.templatesAdmin.layoutAdmin')
 @section('content')
+    @if ($errors->any())
+
+        <div class="alert alert-danger alert-dismissible" role="alert">
+
+            <ul>
+
+                @foreach ($errors->all() as $error)
+
+                    <li>{{ $error }}</li>
+
+                @endforeach
+
+            </ul>
+
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+
+        </div>
+
+    @endif
     <div class="col-12">
         <div class="card">
             <div class="card-body">
                 <div class="row">
-                    <form action="https://coderthemes.com/" method="post" class="dropzone dz-clickable d-flex justify-content-between flex-wrap"
+                    <form action="{{route('route.brands.add')}}" method="post"
+                          class="dropzone dz-clickable d-flex justify-content-between flex-wrap"
                           id="myAwesomeDropzone" data-plugin="dropzone" data-previews-container="#file-previews"
-                          data-upload-preview-template="#uploadPreviewTemplate">
+                          data-upload-preview-template="#uploadPreviewTemplate" enctype="multipart/form-data">
                         <div class="col-xl-6">
+                            @csrf
 
                             <div class="mb-3">
                                 <label class="form-label">Tên thương hiệu</label>
-                                <input type="text" class="form-control" value="{{$data->name_brand}}">
+                                <input type="text" class="form-control" name="name_brand">
                             </div>
-
                             <div class="mb-3">
                                 <label class="form-label">slug</label>
-                                <input type="text" class="form-control" value="{{$data->slug}}">
+                                {{--                                <input type="text" class="form-control" name="slug" value="">--}}
                             </div>
 
                             <div class="row">
@@ -25,10 +45,8 @@
                                     <div class="mb-3">
                                         <label class="form-label">Ngày nhập</label>
                                         <input type="hidden" class="form-control flatpickr-input"
-                                               data-toggle="flatpicker"
-                                               placeholder="October 9, 2019">
-                                        <input class="form-control flatpickr-input input" placeholder="October 9, 2019"
-                                               tabindex="0" type="text" readonly="readonly">
+                                               data-toggle="flatpicker" placeholder="October 9, 2019" name="created_at">
+                                        {{--                                        <input class="form-control flatpickr-input input" placeholder="October 9, 2019" tabindex="0" type="date" readonly="readonly">--}}
                                     </div>
                                 </div>
                             </div>
@@ -43,6 +61,7 @@
                                     <h4>Thả tập tin ở đây hoặc bấm vào để tải tệp lên.</h4>
                                 </div>
 
+                                <input type="hidden" name="uploaded_files" id="uploadedFiles">
 
                                 <!-- Preview -->
                                 <div class="dropzone-previews mt-3" id="file-previews"></div>
@@ -80,10 +99,10 @@
 
                         <div class="row mt-3 col-xl-12">
                             <div class="col-12 text-center">
-                                <button type="button" class="btn btn-success waves-effect waves-light m-1">
+                                <button type="submit" class="btn btn-success waves-effect waves-light m-1">
                                     <i class="bi bi-check-circle"></i> Create
                                 </button>
-                                <a href="{{route('route_product_list')}}">
+                                <a href="{{route('route.brands.list')}}">
                                     <button type="button" class="btn btn-light waves-effect waves-light m-1">
                                         <i class="bi bi-x"></i> Cancel
                                     </button>
@@ -104,4 +123,4 @@
 
             <!-- Init js-->
             <script src="{{asset('assets/pages/create-project.init.js')}}"></script>
-@endsection
+        @endsection

@@ -3,6 +3,8 @@
 
 use App\Http\Controllers\Admin\ProductController;
 
+use App\Http\Controllers\Admin\AuthenController;
+use App\Http\Controllers\Admin\VariationController;
 
 
 use Illuminate\Support\Facades\Route;
@@ -30,7 +32,8 @@ Route::match(['GET','POST'],'/brands/add',[BrandsController::class, 'add'])->nam
 Route::match(['GET','POST'],'/brands/edit/{id}',[BrandsController::class, 'edit'])->name('route.brands.edit');
 
 
-
+Route::match(['GET','POST'],'/auth/login',[AuthenController::class,'login'])->name('route.auth.login');
+Route::match(['GET','POST'],'/auth/register',[AuthenController::class,'register'])->name('route.auth.register');
 
 
 
