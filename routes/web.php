@@ -1,12 +1,13 @@
 <?php
 
 
-use App\Http\Controllers\Admin\ProductController;
-
-
-
-use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\BrandsController;
+use App\Http\Controllers\Admin\color\ColorController;
+use App\Http\Controllers\Admin\product\ProductController;
+use App\Http\Controllers\Admin\size\SizeController;
+use Illuminate\Support\Facades\Route;
+
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -19,15 +20,26 @@ use App\Http\Controllers\Admin\BrandsController;
 */
 
 
-Route::get('/',[ProductController::class, 'index'])->name('admin');
-Route::get('/product/list',[ProductController::class, 'list'])->name('route_product_list');
-Route::match(['GET','POST'],'/product/add',[ProductController::class, 'add'])->name('route_product_add');
-Route::match(['GET','POST'],'/product/edit/{id}',[ProductController::class, 'edit'])->name('route_product_edit');
+Route::group(['prefix' => 'product', 'as' => 'product.'], function () {
+    Route::get('list', [ProductController::class, 'list'])->name('list');
+    Route::post('test', [ProductController::class, 'add'])->name('test');
+    Route::match(['GET', 'POST'], 'add', [ProductController::class, 'add'])->name('add');
+    Route::match(['GET', 'POST'], 'edit/{id}', [ProductController::class, 'edit'])->name('edit');
+});
+
+Route::group(['prefix' => 'color', 'as' => 'color.'], function () {
+    Route::match(['GET', 'POST'], 'add', [ColorController::class, 'add'])->name('add');
+});
+Route::group(['prefix' => 'size', 'as' => 'size.'], function () {
+    Route::match(['GET', 'POST'], 'add', [SizeController::class, 'add'])->name('add');
+});
+
+Route::get('/', [ProductController::class, 'index'])->name('admin');
 
 
-Route::get('/brands/list',[BrandsController::class, 'list'])->name('route.brands.list');
-Route::match(['GET','POST'],'/brands/add',[BrandsController::class, 'add'])->name('route.brands.add');
-Route::match(['GET','POST'],'/brands/edit/{id}',[BrandsController::class, 'edit'])->name('route.brands.edit');
+Route::get('/brands/list', [BrandsController::class, 'list'])->name('route.brands.list');
+Route::match(['GET', 'POST'], '/brands/add', [BrandsController::class, 'add'])->name('route.brands.add');
+Route::match(['GET', 'POST'], '/brands/edit/{id}', [BrandsController::class, 'edit'])->name('route.brands.edit');
 
 
 

@@ -9,8 +9,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta content="A fully featured admin theme which can be used to build CRM, CMS, etc." name="description"/>
     <meta content="Coderthemes" name="author"/>
-
-
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 
     @yield('link')
 
@@ -104,13 +103,8 @@
                     <div class="collapse" id="menuDashboards">
                         <ul class="sub-menu">
                             <li class="menu-item">
-                                <a href="{{route('route_product_list')}}" class="menu-link">
-                                    <span class="menu-text">danh sách sản phẩm</span>
-                                </a>
-                            </li>
-                            <li class="menu-item">
-                                <a href="{{route('route_product_add')}}" class="menu-link">
-                                    <span class="menu-text">Thêm sản phẩm</span>
+                                <a href="{{route('product.list')}}" class="menu-link">
+                                    <span class="menu-text">Danh sách sản phẩm</span>
                                 </a>
                             </li>
                             <li class="menu-item">
@@ -552,7 +546,7 @@
 {{--<script src="{{asset('assets/js/pages/datatables.init.js')}}"></script>--}}
 
 
-    @yield('js')
+@yield('js')
 
 </body>
 </html>
