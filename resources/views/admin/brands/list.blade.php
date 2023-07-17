@@ -12,6 +12,18 @@
     <!-- third party css end -->
 @endsection
 @section('content')
+    @if ( Session::has('success') )
+
+        <div class="alert alert-success alert-dismissible" role="alert">
+
+            <strong>{{ Session::get('success') }}</strong>
+
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+
+
+        </div>
+
+    @endif
     <style>
 
     </style>
@@ -32,9 +44,8 @@
                                     <tr style="text-align: center">
                                         <th>ID</th>
                                         <th>Name</th>
-                                        <th>description</th>
+                                        <th>images</th>
                                         <th>slug</th>
-                                        <th>brand_id</th>
                                         <th>Action</th>
                                     </tr>
                                     </thead>
@@ -42,17 +53,18 @@
                                     @foreach($data as $value)
                                         <tr class="odd">
                                             <td>{{$value->id}}</td>
-                                            <td>{{$value->product_name}}</td>
-                                            <td>{{$value->description}}</td>
+                                            <td>{{$value->name_brand}}</td>
+                                            <td>
+                                                <img src="{{$value->image}}" width="100" height="100" style="border-radius: 50%" alt="">
+                                            </td>
                                             <td>{{$value->slug}}</td>
-                                            <td>{{$value->brand_id}}</td>
                                             <td>
                                                 <form action="" method="get" style="display: none">
                                                     @csrf
                                                 </form>
                                                 <button class="btn btn-danger">Delete</button>
 
-                                                <a href="{{route('route_product_edit',['id' => $value->id])}}">
+                                                <a href="{{route('route.brands.edit',['id' => $value->id])}}">
                                                     <button class="btn btn-primary">Update</button>
                                                 </a>
 
