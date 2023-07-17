@@ -7,6 +7,8 @@
           rel="stylesheet" type="text/css"/>
     <link href="{{asset('assets/libs/datatables.net-buttons-bs5/css/buttons.bootstrap5.min.css')}}" rel="stylesheet"
           type="text/css"/>
+    <link href="{{asset('assets/libs/select2/css/select2.min.css')}}" rel="stylesheet"
+          type="text/css"/>
     <link href="{{asset('assets/libs/datatables.net-select-bs5/css/select.bootstrap5.min.css')}}" rel="stylesheet"
           type="text/css"/>
     <!-- third party css end -->
@@ -19,7 +21,21 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-body">
-                    <h4 class="header-title">Basic Data Table</h4>
+                    <!-- Full width modal content -->
+                    <div id="full-width-modal" class="modal fade" tabindex="-1" aria-labelledby="fullWidthModalLabel"
+                         style="display: none;" aria-hidden="true">
+                        <div class="modal-dialog modal-full-width">
+                            @include('admin.product.add')
+                        </div><!-- /.modal-dialog -->
+                    </div><!-- /.modal -->
+                    <div class="button-list">
+                        <!-- Full width modal -->
+                        <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                                data-bs-target="#full-width-modal">Thêm mới sản phẩm
+                        </button>
+                    </div>
+                </div> <!-- end card-body -->
+                <div class="card-body">
 
                     <div id="basic-datatable_wrapper" class="dataTables_wrapper dt-bootstrap5 no-footer">
 
@@ -52,7 +68,7 @@
                                                 </form>
                                                 <button class="btn btn-danger">Delete</button>
 
-                                                <a href="{{route('route_product_edit',['id' => $value->id])}}">
+                                                <a href="{{route('product.edit',['id' => $value->id])}}">
                                                     <button class="btn btn-primary">Update</button>
                                                 </a>
 
@@ -74,7 +90,13 @@
     <script src="https://cdn.datatables.net/1.13.5/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.13.5/js/dataTables.bootstrap5.min.js"></script>
 
-    <script>
-        new DataTable('#product__admin');
-    </script>
+    <!-- plugin js -->
+    <script src="{{asset('assets/libs/dropzone/min/dropzone.min.js')}}"></script>
+    <script src="{{asset('assets/libs/select2/js/select2.min.js')}}"></script>
+    <script src="{{asset('assets/libs/flatpickr/flatpickr.min.js')}}"></script>
+
+    <!-- Init js-->
+    <script src="{{asset('assets/pages/create-project.init.js')}}"></script>
+
+    <script src="{{asset('assets/js/custom-product.js')}}"></script>
 @endsection
