@@ -25,7 +25,19 @@ use App\Http\Controllers\Admin\size\SizeController;
 |
 */
 
+Route::group(['prefix' => 'product', 'as' => 'product.'], function () {
+    Route::get('list', [ProductController::class, 'list'])->name('list');
+    Route::post('test', [ProductController::class, 'add'])->name('test');
+    Route::match(['GET', 'POST'], 'add', [ProductController::class, 'add'])->name('add');
+    Route::match(['GET', 'POST'], 'edit/{id}', [ProductController::class, 'edit'])->name('edit');
+});
 
+Route::group(['prefix' => 'color', 'as' => 'color.'], function () {
+    Route::match(['GET', 'POST'], 'add', [ColorController::class, 'add'])->name('add');
+});
+Route::group(['prefix' => 'size', 'as' => 'size.'], function () {
+    Route::match(['GET', 'POST'], 'add', [SizeController::class, 'add'])->name('add');
+});
 
 
 Route::get('/', [ProductController::class, 'index'])->name('admin');

@@ -20,17 +20,25 @@ class BrandsController extends Controller
     return view(self::OBJECT . self::DOT . self::BRANDS . self::DOT . __FUNCTION__,compact('data'));
   }
     public function add(BrandRequest $request){
-//
+
+
         if ($request->isMethod('POST')){
-            $uploadedFiles = $request->input('uploaded_files');
-            dd($uploadedFiles);
-            dd($request->input('name_brand'));
             // tạo slug
             $slug = Str::slug($request->input('name_brand'));
             $data = $request->except('_token');
+
+            // nếu như tồn tại file thì up file
+            if ($request->hasFile('image') && $request->file('image')->isValid()){
+                $data['image'] = uploadFile('images',$request->file('image'));
+            }
             $data['slug'] = $slug;
+//            dd($data);
             $brands = Brand::create($data);
+//            dd($brands->id);
             if ($brands->id){
+//                $brand = Brand::find($brands->id);
+//                $brand->image = 'images/' . $request->file('image');;
+//                $brand->save();
                 Session::flash('success','Thêm thương hiệu thành công');
                 return redirect()->route('route.brands.list');
             }

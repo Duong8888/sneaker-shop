@@ -83,7 +83,7 @@
                                 <button type="submit" class="btn btn-success waves-effect waves-light m-1">
                                     <i class="bi bi-check-circle"></i> Create
                                 </button>
-                                <a href="{{route('route_product_list')}}">
+                                <a href="{{route('route.brands.list')}}">
                                     <button type="button" class="btn btn-light waves-effect waves-light m-1">
                                         <i class="bi bi-x"></i> Cancel
                                     </button>
