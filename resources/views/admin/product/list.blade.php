@@ -11,6 +11,8 @@
           type="text/css"/>
     <link href="{{asset('assets/libs/datatables.net-select-bs5/css/select.bootstrap5.min.css')}}" rel="stylesheet"
           type="text/css"/>
+    <link href="{{asset('assets/css/css-product.css')}}" rel="stylesheet"
+          type="text/css"/>
     <!-- third party css end -->
 @endsection
 @section('content')
@@ -99,4 +101,5 @@
     <script src="{{asset('assets/pages/create-project.init.js')}}"></script>
 
     <script src="{{asset('assets/js/custom-product.js')}}"></script>
+
 @endsection

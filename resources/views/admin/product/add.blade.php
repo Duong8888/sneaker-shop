@@ -9,24 +9,25 @@
                 <div class="card-body">
 
                     <div class="row">
-                        <form action="{{route('product.test')}}" method="post"
-                              class="dropzone dz-clickable d-flex justify-content-between flex-wrap"
-                              id="myAwesomeDropzone" data-plugin="dropzone" data-previews-container="#file-previews"
-                              data-upload-preview-template="#uploadPreviewTemplate" enctype="multipart/form-data">
+                        <form method="post" action="{{route('product.test')}}"
+                              id="form-add"
+                              class="dz-clickable d-flex justify-content-between flex-wrap"
+                              enctype="multipart/form-data">
+                            @csrf
                             <div class="col-xl-6">
                                 <div class="mb-3">
                                     <label class="form-label">Tên sản phẩm</label>
-                                    <input type="text" class="form-control">
+                                    <input type="text" name="product-name" class="form-control">
                                 </div>
 
                                 <div class="mb-3">
                                     <label class="form-label">Slug</label>
-                                    <input type="text" class="form-control">
+                                    <input type="text" name="slug" class="form-control">
                                 </div>
 
                                 <div class="mb-3">
                                     <label class="form-label">Thương hiệu</label> <br>
-                                        <select class="brand">
+                                    <select class="brand">
                                         <option value="one"></option>
                                         @foreach($brand as $value)
                                             <option value="{{$value->id}}">{{$value->name_brand}}</option>
@@ -37,14 +38,15 @@
                                 {{-- Mô tả sản phẩm --}}
                                 <div class="mb-3">
                                     <label for="project-overview" class="form-label">Mô tả sản phẩm</label>
-                                    <textarea class="form-control" rows="5"></textarea>
+                                    <textarea class="form-control" name="description" rows="5"></textarea>
                                 </div>
 
 
                                 {{-- kích cỡ và màu sắc --}}
                                 <div class="mb-3">
                                     <label class="form-label">Màu sắc sản phẩm</label> <br>
-                                    <select class="form-control select2" data-route="{{route('color.add')}}" name="color" multiple="multiple">
+                                    <select class="form-control select2" data-route="{{route('color.add')}}"
+                                            name="color" multiple="multiple">
                                         @foreach($color as $value)
                                             <option value="{{$value->id}}">{{$value->color_value}}</option>
                                         @endforeach
@@ -52,7 +54,8 @@
                                 </div>
                                 <div class="mb-3">
                                     <label class="form-label">Kích cỡ sản phẩm</label> <br>
-                                    <select class="form-control select2" data-route="{{route('size.add')}}" name="sizes" multiple="multiple">
+                                    <select class="form-control select2" data-route="{{route('size.add')}}" name="sizes"
+                                            multiple="multiple">
                                         @foreach($size as $value)
                                             <option value="{{$value->id}}">{{$value->size_value}}</option>
                                         @endforeach
@@ -63,10 +66,26 @@
                             <div class="col-xl-6 p-4">
                                 <div class="my-3 mt-xl-0">
                                     <div class="row">
-                                        <button type="button" class="btn btn-outline-success" id="variable">Tạo ra biến thể</button>
-                                        <div class="col-12 d-flex justify-content-between flex-column">
+                                        <button type="button" class="btn btn-outline-success mb-2" id="variable">Tạo ra biến
+                                            thể
+                                        </button>
+                                        <div class="col-12 d-flex justify-content-between flex-column p-0 custom-table">
                                             <!-- Date View -->
-                                            <table class="table mb-0">
+                                            <table class="table mb-0" id="table-variable">
+                                                <div class="mt-2 btn-table w-100">
+                                                    <div class="w-100 d-flex justify-content-between">
+                                                        <div class="mb-3 col-6">
+                                                            <button style="padding-right: 10px" type="button" id="btn-quantity"
+                                                                    class="btn btn-success w-100">Đặt số lương
+                                                            </button>
+                                                        </div>
+                                                        <div style="padding-left: 10px"  class="mb-3 col-6">
+                                                            <button type="button" id="btn-price"
+                                                                    class="btn btn-success w-100">Đặt giá chuẩn
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                </div>
                                                 <thead>
                                                 <tr>
                                                     <th>#</th>
@@ -76,58 +95,24 @@
                                                     <th>Giá</th>
                                                 </tr>
                                                 </thead>
-                                                <tbody>
-                                                <tr>
-                                                    <th scope="row">1</th>
-                                                    <td><input class="form-control"
-                                                               tabindex="0" type="text" readonly="readonly"></td>
-                                                    <td><input class="form-control"
-                                                               tabindex="0" type="text" readonly="readonly"></td>
-                                                    <td><input class="form-control"
-                                                               tabindex="0" type="number" min="0"></td>
-                                                    <td><input class="form-control"
-                                                               tabindex="0" type="number" min="0"></td>
-                                                </tr>
+                                                <tbody class="main-tab">
                                                 </tbody>
                                             </table>
                                         </div>
                                     </div>
 
-                                    <div class="dz-message needsclick">
-                                        <i class="bi bi-cloud-upload font-22"></i>
-                                        <p class="font-15">Thả tập tin ở đây hoặc bấm vào để tải tệp lên.</p>
+                                    <div class="row text-center">
+                                        <input type="file" name="files[]" id="product-image" multiple/>
+                                        <label for="product-image" style="font-size: 20px">Tải ảnh lên <i class="bi bi-cloud-upload font-22"></i></label>
                                     </div>
+                                    <div class="selected-images">
 
+                                    </div>
 
                                     <!-- Preview -->
-                                    <div class="dropzone-previews mt-3" id="file-previews"></div>
 
                                     <!-- mẫu xem trước tập tin -->
-                                    <div class="d-none" id="uploadPreviewTemplate">
-                                        <div class="card mt-1 mb-0 shadow-none border">
-                                            <div class="p-2">
-                                                <div class="row align-items-center">
-                                                    <div class="col-auto">
-                                                        <img data-dz-thumbnail="" src="#"
-                                                             class="avatar-sm rounded bg-light"
-                                                             alt="">
-                                                    </div>
-                                                    <div class="col ps-0">
-                                                        <a href="javascript:void(0);" class="text-muted fw-bold"
-                                                           data-dz-name=""></a>
-                                                        <p class="mb-0" data-dz-size=""></p>
-                                                    </div>
-                                                    <div class="col-auto">
-                                                        <!-- Button -->
-                                                        <a href="#" class="btn btn-link btn-lg text-muted"
-                                                           data-dz-remove="">
-                                                            <i class="bi bi-x"></i>
-                                                        </a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
+
                                     <!-- end mẫu xem trước tập tin -->
                                 </div>
 
@@ -136,7 +121,7 @@
 
                             <div class="row mt-3 col-xl-12">
                                 <div class="col-12 text-center">
-                                    <button type="button" class="btn btn-success waves-effect waves-light m-1">
+                                    <button type="submit" class="btn btn-success waves-effect waves-light m-1">
                                         <i class="bi bi-check-circle"></i> Create
                                     </button>
 
