@@ -51,27 +51,27 @@
                                     </tr>
                                     </thead>
                                     <tbody>
-{{--                                    @foreach($data as $value)--}}
-{{--                                        <tr class="odd">--}}
-{{--                                            <td>{{$value->id}}</td>--}}
-{{--                                            <td>{{$value->name_brand}}</td>--}}
-{{--                                            <td>--}}
-{{--                                                <img src="{{$value->image}}" width="100" height="100" style="border-radius: 50%" alt="">--}}
-{{--                                            </td>--}}
-{{--                                            <td>{{$value->slug}}</td>--}}
-{{--                                            <td>--}}
-{{--                                                <form action="" method="get" style="display: none">--}}
-{{--                                                    @csrf--}}
-{{--                                                </form>--}}
-{{--                                                <button class="btn btn-danger">Delete</button>--}}
+                                    {{--                                    @foreach($data as $value)--}}
+                                    {{--                                        <tr class="odd">--}}
+                                    {{--                                            <td>{{$value->id}}</td>--}}
+                                    {{--                                            <td>{{$value->name_brand}}</td>--}}
+                                    {{--                                            <td>--}}
+                                    {{--                                                <img src="{{$value->image}}" width="100" height="100" style="border-radius: 50%" alt="">--}}
+                                    {{--                                            </td>--}}
+                                    {{--                                            <td>{{$value->slug}}</td>--}}
+                                    {{--                                            <td>--}}
+                                    {{--                                                <form action="" method="get" style="display: none">--}}
+                                    {{--                                                    @csrf--}}
+                                    {{--                                                </form>--}}
+                                    {{--                                                <button class="btn btn-danger">Delete</button>--}}
 
-{{--                                                <a href="{{route('route.brands.edit',['id' => $value->id])}}">--}}
-{{--                                                    <button class="btn btn-primary">Update</button>--}}
-{{--                                                </a>--}}
+                                    {{--                                                <a href="{{route('route.brands.edit',['id' => $value->id])}}">--}}
+                                    {{--                                                    <button class="btn btn-primary">Update</button>--}}
+                                    {{--                                                </a>--}}
 
-{{--                                            </td>--}}
-{{--                                        </tr>--}}
-{{--                                    @endforeach--}}
+                                    {{--                                            </td>--}}
+                                    {{--                                        </tr>--}}
+                                    {{--                                    @endforeach--}}
                                     </tbody>
                                 </table>
                             </div>
@@ -102,27 +102,28 @@
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    {{--                                    @foreach($data as $value)--}}
-                                    {{--                                        <tr class="odd">--}}
-                                    {{--                                            <td>{{$value->id}}</td>--}}
-                                    {{--                                            <td>{{$value->name_brand}}</td>--}}
-                                    {{--                                            <td>--}}
-                                    {{--                                                <img src="{{$value->image}}" width="100" height="100" style="border-radius: 50%" alt="">--}}
-                                    {{--                                            </td>--}}
-                                    {{--                                            <td>{{$value->slug}}</td>--}}
-                                    {{--                                            <td>--}}
-                                    {{--                                                <form action="" method="get" style="display: none">--}}
-                                    {{--                                                    @csrf--}}
-                                    {{--                                                </form>--}}
-                                    {{--                                                <button class="btn btn-danger">Delete</button>--}}
+                                    @foreach($data as $value)
+                                        <tr class="odd">
+                                            <td>{{$value->id}}</td>
+                                            <td>{{$value->name_brand}}</td>
+                                            <td>
+                                                <img src="{{$value->image}}" width="100" height="100"
+                                                     style="border-radius: 50%" alt="">
+                                            </td>
+                                            <td>{{$value->slug}}</td>
+                                            <td>
+                                                <form action="" method="get" style="display: none">
+                                                    @csrf
+                                                </form>
+                                                <button class="btn btn-danger">Delete</button>
 
-                                    {{--                                                <a href="{{route('route.brands.edit',['id' => $value->id])}}">--}}
-                                    {{--                                                    <button class="btn btn-primary">Update</button>--}}
-                                    {{--                                                </a>--}}
+                                                <a href="{{route('route.brands.edit',['id' => $value->id])}}">
+                                                    <button class="btn btn-primary">Update</button>
+                                                </a>
 
-                                    {{--                                            </td>--}}
-                                    {{--                                        </tr>--}}
-                                    {{--                                    @endforeach--}}
+                                            </td>
+                                        </tr>
+                                    @endforeach
                                     </tbody>
                                 </table>
                             </div>
