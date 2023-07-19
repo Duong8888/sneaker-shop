@@ -55,7 +55,7 @@
                                         <th>Action</th>
                                     </tr>
                                     </thead>
-                                    <tbody class="table-main" data-route="{{route('product.list')}}">
+                                    <tbody  class="table-main" data-route="{{route('product.list')}}">
                                     {{--         load ajax                          --}}
                                     </tbody>
                                 </table>
@@ -81,5 +81,6 @@
     <script src="{{asset('assets/pages/create-project.init.js')}}"></script>
 
     <script src="{{asset('assets/js/custom-product.js')}}"></script>
+    <script src="{{asset('assets/js/toast.js')}}"></script>
 
 @endsection

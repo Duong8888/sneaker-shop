@@ -29,6 +29,7 @@
 
     <!-- Icons css -->
     <link href="{{asset('assets/css/icons.min.css')}}" rel="stylesheet" type="text/css" id="app-style"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
 </head>
 <style>
     @import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css");
@@ -103,13 +104,13 @@
                     <div class="collapse" id="menuDashboards">
                         <ul class="sub-menu">
                             <li class="menu-item">
-                                <a href="{{route('product.list')}}" class="menu-link">
+                                <a href="{{route('product.index')}}" class="menu-link">
                                     <span class="menu-text">Danh sách sản phẩm</span>
                                 </a>
                             </li>
                             <li class="menu-item">
                                 <a href="#" class="menu-link">
-                                    <span class="menu-text">các thuộc tính</span>
+                                    <span class="menu-text">Các thuộc tính</span>
                                 </a>
                             </li>
 
@@ -571,6 +572,7 @@
 <script src="{{asset('assets/js/vendor.min.js')}}"></script>
 <!-- App js -->
 <script src="{{asset('assets/js/app.min.js')}}"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 
 
 <!-- Dashboar 1 init js-->

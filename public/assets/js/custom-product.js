@@ -1,6 +1,8 @@
 $('document').ready(function () {
     var csrf_token = $('meta[name="csrf-token"]').attr('content')
     var dataTable;
+    var actionDelete = 'product/delete/'
+
     // ajax load dữ liệu
     function loadTable() {
         var url = $('.table-main').attr('data-route');
@@ -13,24 +15,33 @@ $('document').ready(function () {
                 }
                 dataTable = $('#product__admin').DataTable({
                     'pagingType': 'numbers',
-                    "data":  data.products,
+                    "data": data.products,
                     "columns": [
-                        { "data": "id" },
-                        { "data": "product_name" },
-                        { "data": "description" },
-                        { "data": "slug" },
-                        { "data": "brand.name_brand" },
-                        { "data": '' },
+                        {"data": "id"},
+                        {"data": "product_name"},
+                        {"data": "description"},
+                        {"data": "slug"},
+                        {"data": "brand.name_brand"},
+                        {"data": ''},
                     ],
                     "columnDefs": [
                         {
                             "targets": -1, // Cột cuối cùng (brand_id)
                             "data": null,
-                            "defaultContent": "" +
-                                "<button class='btn btn-blue btn-update'>Cập nhật</button>  " +
-                                "   <button class='btn btn-danger btn-delete'>Xóa</button>"
+                            "render": function (data, type, row, meta) {
+                                var productId = row.id; // Lấy ID của sản phẩm từ dữ liệu hàng (data)
+                                return "" +
+                                    `<button class='btn btn-blue btn-update' data-id='${productId}'>Cập nhật</button>  ` +
+                                    `<button class='btn btn-danger btn-delete' data-id='${productId}'>Xóa</button>`;
+                            }
                         }
                     ]
+                });
+                $(document).off('click', '.btn-delete');
+                $(document).on('click', '.btn-delete', function () {
+                    if (confirm('Bạn có chắc chắn xóa không.')) {
+                        deleteProduct($(this).data('id'));
+                    }
                 });
             },
             error: function (error) {
@@ -38,6 +49,7 @@ $('document').ready(function () {
             }
         });
     }
+
     loadTable();
 
 
@@ -56,7 +68,7 @@ $('document').ready(function () {
     let arrayColorText;
     let arraySizeText;
     let color = $('select[name="color"]');
-    let size =$('select[name="sizes"]');
+    let size = $('select[name="sizes"]');
     let btn = $('#variable').slideUp();
     let table = $('#table-variable').slideUp();
     let tableMain = $('.main-tab');
@@ -83,9 +95,9 @@ $('document').ready(function () {
                         var newOption = new Option(newValue, response.id, true, true);
                         console.log(newOption);
                         if (response.name === 'color') {
-                            var option = $('select[name="color"]').find('option[value="'+newValue+'"]').replaceWith(newOption);
+                            var option = $('select[name="color"]').find('option[value="' + newValue + '"]').replaceWith(newOption);
                         } else if (response.name === 'size') {
-                            var option = $('select[name="sizes"]').find('option[value="'+newValue+'"]').replaceWith(newOption);
+                            var option = $('select[name="sizes"]').find('option[value="' + newValue + '"]').replaceWith(newOption);
                         }
                     },
                     error: function (error) {
@@ -127,7 +139,7 @@ $('document').ready(function () {
                         <input class="form-control quantity-input" name="quantity-variable-${count}" value="" tabindex="0" type="number" min="0">
                    </td>
                    <td>
-                        <input class="form-control price-input" name="price-variable-${count}" value="" tabindex="0" type="number" min="0">
+                        <input class="form-control price-input"  name="price-variable-${count}" value="" tabindex="0" type="number" min="0">
                    </td>
                 </tr>
                 `);
@@ -204,6 +216,7 @@ $('document').ready(function () {
             success: function (response) {
                 loadTable();
                 console.log(response.message);
+                toastr["success"]("Thêm mới thành công!")
             },
             error: function (error) {
                 console.log(error)
@@ -211,5 +224,22 @@ $('document').ready(function () {
         });
     });
 
-    // Tùy chỉnh giao diện nút bằng CSS
+    // xóa sản phẩm sử dụng ajax
+    function deleteProduct(id) {
+        $.ajax({
+            url: actionDelete + id,
+            method: "DELETE",
+            success: function (data) {
+                loadTable();
+                toastr["success"]("Xóa thành công!");
+                console.log(data.message);
+            },
+            headers: {
+                'X-CSRF-TOKEN': csrf_token
+            },
+            error: function (error) {
+                console.log(error)
+            }
+        })
+    }
 });
