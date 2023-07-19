@@ -199,6 +199,32 @@
                         </ul>
                     </div>
                 </li>
+                <li class="menu-item">
+                    <a href="#menuTrush" data-bs-toggle="collapse" class="menu-link">
+                        <span class="menu-icon"><i class="bi bi-trash"></i></span>
+                        <span class="menu-text"> Thùng rác </span>
+                        <!-- <span class="menu-arrow"></span> -->
+                    </a>
+                    <div class="collapse" id="menuTrush">
+                        <ul class="sub-menu">
+                            <li class="menu-item">
+                                <a href="{{route('route.brands.trash')}}" class="menu-link">
+                                    <span class="menu-text">Thương hiệu</span>
+                                </a>
+                            </li>
+                            <li class="menu-item">
+                                <a href="#" class="menu-link">
+                                    <span class="menu-text">Sản phẩm</span>
+                                </a>
+                            </li>
+                            <li class="menu-item">
+                                <a href="#" class="menu-link">
+                                    <span class="menu-text">Thuộc tính</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
             </ul>
             <!--- End Menu -->
             <div class="clearfix"></div>

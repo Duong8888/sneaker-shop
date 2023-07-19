@@ -1,3 +1,4 @@
+
 @extends('admin.templatesAdmin.layoutAdmin')
 @section('link')
     <!-- third party css -->
@@ -50,7 +51,7 @@
                                     </tr>
                                     </thead>
                                     <tbody>
-{{--                                    <img src="{{asset('images/1689686688images.jpg')}}" alt="">--}}
+
                                     @foreach($data as $value)
                                         <tr class="odd">
                                             <td>{{$value->id}}</td>
@@ -59,12 +60,20 @@
                                                 <img src="{{asset($value->image)}}" width="100" height="100" style="border-radius: 50%" alt="">
                                             </td>
                                             <td>{{$value->slug}}</td>
-                                            <td>
-                                                <a href="{{route('route.brands.delete',['id' => $value->id])}}" class="btn btn-danger">Delete</a>
+                                            <td >
+                                                <div class="d-flex flex-row">
+                                                    <form class="me-2" action="{{ route('route.brands.delete', ['id' => $value->id]) }}" method="POST">
+                                                        @csrf
+                                                        @method('POST')
+                                                        <button type="submit" class="btn btn-danger">Xóa</button>
+                                                    </form>
+                                                    <form action="{{ route('route.brands.restore', ['id' => $value->id]) }}" method="POST">
+                                                        @csrf
+                                                        @method('POST')
+                                                        <button type="submit" class="btn btn-primary">Khôi phục</button>
+                                                    </form>
+                                                </div>
 
-                                                <a href="{{route('route.brands.edit',['id' => $value->id])}}">
-                                                    <button class="btn btn-primary">Update</button>
-                                                </a>
                                             </td>
                                         </tr>
                                     @endforeach

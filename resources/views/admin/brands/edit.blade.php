@@ -5,8 +5,7 @@
             <div class="card-body">
                 <div class="row">
                     <form action="{{route('route.brands.edit',['id'=>$data->id])}}" method="post" class="dropzone dz-clickable d-flex justify-content-between flex-wrap"
-                          id="myAwesomeDropzone" data-plugin="dropzone" data-previews-container="#file-previews"
-                          data-upload-preview-template="#uploadPreviewTemplate">
+                         enctype="multipart/form-data" >
                         @csrf
                         <div class="col-xl-6">
 
@@ -35,44 +34,20 @@
                         </div>
 
                         <div class="col-xl-6">
-                            <div class="my-3 mt-xl-0">
-                                <label for="projectname" class="mb-0 form-label">Avatar</label>
+                            <div class="form-group text-center" >
+                                <div class="col-md-9 col-sm-8">
+                                    <div class="row">
+                                        <div class="col-xs-6">
+                                            <input type="file" name="files" accept="image/*"
+                                                   class="form-control-file @error('image') is-invalid @enderror" id="cmt_truoc" style="display: none" >
+                                            <label for="cmt_truoc" class="font-48">Click để chọn ảnh</label>
+                                            <br>
 
-                                <div class="dz-message needsclick">
-                                    <i class="bi bi-cloud-upload font-22"></i>
-                                    <h4>Thả tập tin ở đây hoặc bấm vào để tải tệp lên.</h4>
-                                </div>
-
-
-                                <!-- Preview -->
-                                <div class="dropzone-previews mt-3" id="file-previews"></div>
-
-                                <!-- mẫu xem trước tập tin -->
-                                <div class="d-none" id="uploadPreviewTemplate">
-                                    <div class="card mt-1 mb-0 shadow-none border">
-                                        <div class="p-2">
-                                            <div class="row align-items-center">
-                                                <div class="col-auto">
-                                                    <img data-dz-thumbnail="" src="#" class="avatar-sm rounded bg-light"
-                                                         alt="">
-                                                </div>
-                                                <div class="col ps-0">
-                                                    <a href="javascript:void(0);" class="text-muted fw-bold"
-                                                       data-dz-name=""></a>
-                                                    <p class="mb-0" data-dz-size=""></p>
-                                                </div>
-                                                <div class="col-auto">
-                                                    <!-- Button -->
-                                                    <a href="#" class="btn btn-link btn-lg text-muted"
-                                                       data-dz-remove="">
-                                                        <i class="bi bi-x"></i>
-                                                    </a>
-                                                </div>
-                                            </div>
+                                            <img id="mat_truoc_preview" src="{{asset($data->image)}}" alt="your image"
+                                                 style="max-width: 200px; height:100px; margin-bottom: 10px;" class="img-fluid"/>
                                         </div>
                                     </div>
                                 </div>
-                                <!-- end mẫu xem trước tập tin -->
                             </div>
 
                         </div>
@@ -97,6 +72,24 @@
         </div>
         @endsection
         @section('js')
+            <script>
+                $(function(){
+                    function readURL(input, selector) {
+                        if (input.files && input.files[0]) {
+                            let reader = new FileReader();
+
+                            reader.onload = function (e) {
+                                $(selector).attr('src', e.target.result);
+                            };
+
+                            reader.readAsDataURL(input.files[0]);
+                        }
+                    }
+                    $("#cmt_truoc").change(function () {
+                        readURL(this, '#mat_truoc_preview');
+                    });
+                });
+            </script>
             <!-- plugin js -->
             <script src="{{asset('assets/libs/dropzone/min/dropzone.min.js')}}"></script>
             <script src="{{asset('assets/libs/select2/js/select2.min.js')}}"></script>

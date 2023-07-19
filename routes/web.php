@@ -10,6 +10,7 @@ use App\Http\Controllers\Admin\AuthenController;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\Admin\BrandsController;
+use App\Http\Controllers\Admin\TrashBrandController;
 use App\Http\Controllers\Admin\color\ColorController;
 use App\Http\Controllers\Admin\size\SizeController;
 
@@ -46,10 +47,13 @@ Route::get('/', [ProductController::class, 'index'])->name('admin');
 Route::get('/brands/list', [BrandsController::class, 'list'])->name('route.brands.list');
 Route::match(['GET', 'POST'], '/brands/add', [BrandsController::class, 'add'])->name('route.brands.add');
 Route::match(['GET', 'POST'], '/brands/edit/{id}', [BrandsController::class, 'edit'])->name('route.brands.edit');
+Route::get('/brands/delete/{id}', [BrandsController::class, 'delete'])->name('route.brands.delete');
 
 
 Route::match(['GET','POST'],'/auth/login',[AuthenController::class,'login'])->name('route.auth.login');
 Route::match(['GET','POST'],'/auth/register',[AuthenController::class,'register'])->name('route.auth.register');
 
 
-
+Route::get('/trash/list', [TrashBrandController::class, 'list'])->name('route.brands.trash');
+Route::post('/brands/restore/{id}', [TrashBrandController::class, 'restore'])->name('route.brands.restore');
+Route::post('/brands/delete/{id}', [TrashBrandController::class, 'delete'])->name('route.brands.delete');
