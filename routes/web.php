@@ -1,11 +1,17 @@
 <?php
 
 
+
+use App\Http\Controllers\Admin\product\ProductController;
+
+use App\Http\Controllers\Admin\AuthenController;
+
+
+use Illuminate\Support\Facades\Route;
+
 use App\Http\Controllers\Admin\BrandsController;
 use App\Http\Controllers\Admin\color\ColorController;
-use App\Http\Controllers\Admin\product\ProductController;
 use App\Http\Controllers\Admin\size\SizeController;
-use Illuminate\Support\Facades\Route;
 
 
 /*
@@ -18,7 +24,6 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-
 
 Route::group(['prefix' => 'product', 'as' => 'product.'], function () {
     Route::get('/', [ProductController::class, 'index'])->name('index');
@@ -34,7 +39,9 @@ Route::group(['prefix' => 'size', 'as' => 'size.'], function () {
     Route::match(['GET', 'POST'], 'add', [SizeController::class, 'add'])->name('add');
 });
 
+
 Route::get('/', function (){return view('admin.index');})->name('admin');
+
 
 
 Route::get('/brands/list', [BrandsController::class, 'list'])->name('route.brands.list');
@@ -42,7 +49,8 @@ Route::match(['GET', 'POST'], '/brands/add', [BrandsController::class, 'add'])->
 Route::match(['GET', 'POST'], '/brands/edit/{id}', [BrandsController::class, 'edit'])->name('route.brands.edit');
 
 
-
+Route::match(['GET','POST'],'/auth/login',[AuthenController::class,'login'])->name('route.auth.login');
+Route::match(['GET','POST'],'/auth/register',[AuthenController::class,'register'])->name('route.auth.register');
 
 
 

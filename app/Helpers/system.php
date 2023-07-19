@@ -1,4 +1,5 @@
 <?php
+
 function uploadFile($folder,$files,$multiple = false){
     $result = '';
     if($multiple){

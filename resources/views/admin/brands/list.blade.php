@@ -12,6 +12,18 @@
     <!-- third party css end -->
 @endsection
 @section('content')
+    @if ( Session::has('success') )
+
+        <div class="alert alert-success alert-dismissible" role="alert">
+
+            <strong>{{ Session::get('success') }}</strong>
+
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+
+
+        </div>
+
+    @endif
     <style>
 
     </style>
@@ -38,12 +50,13 @@
                                     </tr>
                                     </thead>
                                     <tbody>
+{{--                                    <img src="{{asset('images/1689686688images.jpg')}}" alt="">--}}
                                     @foreach($data as $value)
                                         <tr class="odd">
                                             <td>{{$value->id}}</td>
                                             <td>{{$value->name_brand}}</td>
                                             <td>
-                                                <img src="{{$value->image}}" width="100" height="100" style="border-radius: 50%" alt="">
+                                                <img src="{{asset($value->image)}}" width="100" height="100" style="border-radius: 50%" alt="">
                                             </td>
                                             <td>{{$value->slug}}</td>
                                             <td>

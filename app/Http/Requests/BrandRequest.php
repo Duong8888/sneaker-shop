@@ -21,8 +21,27 @@ class BrandRequest extends FormRequest
      */
     public function rules(): array
     {
+        $rules = [];
+        $currentAction =$this->route()->getActionMethod();
+//        dd($currentAction);
+        switch ($this->method()):
+            case 'POST':
+                switch ($currentAction):
+                    case 'add':
+                        $rules = [
+                            'name_brand' => 'required',
+                            'slug' => 'unique:brands',
+                        ];
+                endswitch;
+                break;
+        endswitch;
+        return $rules;
+    }
+    public function messages()
+    {
         return [
-            //
+          'name_brand.required' => 'không được bỏ trống tên',
+            'slug.unique' => 'slug đang bị trùng lặp! hãy đổi tên khác :)))',
         ];
     }
 }

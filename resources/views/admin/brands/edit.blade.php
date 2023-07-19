@@ -4,14 +4,20 @@
         <div class="card">
             <div class="card-body">
                 <div class="row">
-                    <form action="https://coderthemes.com/" method="post" class="dropzone dz-clickable d-flex justify-content-between flex-wrap"
+                    <form action="{{route('route.brands.edit',['id'=>$data->id])}}" method="post" class="dropzone dz-clickable d-flex justify-content-between flex-wrap"
                           id="myAwesomeDropzone" data-plugin="dropzone" data-previews-container="#file-previews"
                           data-upload-preview-template="#uploadPreviewTemplate">
+                        @csrf
                         <div class="col-xl-6">
 
                             <div class="mb-3">
                                 <label class="form-label">Tên thương hiệu</label>
-                                <input type="text" class="form-control">
+                                <input type="text" class="form-control" name="name_brand" value="{{$data->name_brand}}">
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="form-label">slug</label>
+                                <input type="text" class="form-control" value="{{$data->slug}}">
                             </div>
 
                             <div class="row">
@@ -22,8 +28,7 @@
                                         <input type="hidden" class="form-control flatpickr-input"
                                                data-toggle="flatpicker"
                                                placeholder="October 9, 2019">
-                                        <input class="form-control flatpickr-input input" placeholder="October 9, 2019"
-                                               tabindex="0" type="text" readonly="readonly">
+
                                     </div>
                                 </div>
                             </div>
@@ -75,10 +80,10 @@
 
                         <div class="row mt-3 col-xl-12">
                             <div class="col-12 text-center">
-                                <button type="button" class="btn btn-success waves-effect waves-light m-1">
+                                <button type="submit" class="btn btn-success waves-effect waves-light m-1">
                                     <i class="bi bi-check-circle"></i> Create
                                 </button>
-                                <a href="{{route('route_product_list')}}">
+                                <a href="{{route('route.brands.list')}}">
                                     <button type="button" class="btn btn-light waves-effect waves-light m-1">
                                         <i class="bi bi-x"></i> Cancel
                                     </button>
