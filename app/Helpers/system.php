@@ -16,6 +16,7 @@ function uploadFile($folder, $files, $multiple)
                 $result = $uploadFile;
             }
         }else{
+
             $file = $files[0];
             $fileName = time().$file->getClientOriginalName();
             $file->move(public_path($folder).'/', $fileName);
