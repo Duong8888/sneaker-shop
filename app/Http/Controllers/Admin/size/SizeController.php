@@ -19,7 +19,7 @@ class SizeController extends Controller
                 'size_value' => $request->value,
             ]);
 
-            return response()->json(['message' => 'Thêm mới thành công','id'=> $size->id,'name' => 'size']);
+            return response()->json(['message' => 'Thêm mới thành công','id'=> $size->id,'value'=>$size->size_value,'name' => 'size']);
         }else{
             return response()->json(['message' => 'Lỗi khi thêm mới'], 500);
         }

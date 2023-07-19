@@ -13,8 +13,8 @@ function uploadFile($folder, $files, $multiple)
                 $uploadFile[] = [
                   'url' => $folder.'/'.$fileName,
                 ];
-                $result = $uploadFile;
             }
+          $result = $uploadFile;
         }else{
 
             $file = $files[0];
