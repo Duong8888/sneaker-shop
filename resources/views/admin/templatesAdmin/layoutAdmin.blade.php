@@ -471,7 +471,7 @@
                             <img src="{{asset('assets/images/flags/spain.jpg')}}" alt="user-image"
                                  class="rounded-circle">
                             <span class="ms-1 d-none d-md-inline-block">
-                                        Geneva <i class="bi bi-chevron-bar-down"></i>
+                                        {{ Auth::user()->name }} <i class="bi bi-chevron-bar-down"></i>
                                     </span>
                         </a>
                         <div class="dropdown-menu dropdown-menu-end profile-dropdown ">
@@ -499,10 +499,19 @@
                             <div class="dropdown-divider"></div>
 
                             <!-- item-->
-                            <a href="javascript:void(0);" class="dropdown-item notify-item">
-                                <i class="bi bi-box-arrow-right"></i>
-                                <span>Logout</span>
-                            </a>
+{{--                            <a href="javascript:void(0);" class="dropdown-item notify-item">--}}
+{{--                                <i class="bi bi-box-arrow-right"></i>--}}
+{{--                                <span>Logout</span>--}}
+{{--                            </a>--}}
+                            <form method="POST" action="{{ route('logout') }}">
+                                @csrf
+
+                                <x-responsive-nav-link :href="route('logout')"
+                                                       onclick="event.preventDefault();
+                                        this.closest('form').submit();">
+                                    {{ __('Log Out') }}
+                                </x-responsive-nav-link>
+                            </form>
 
                         </div>
                     </li>

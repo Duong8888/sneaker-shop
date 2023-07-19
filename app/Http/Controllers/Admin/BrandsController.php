@@ -25,7 +25,6 @@ class BrandsController extends Controller
         if ($request->isMethod('POST')){
             // lấy ra mảng các file đã chọn
             $files = $request->file('files');
-
             $count = count($files) > 1 ? 'true' : 'false';
 
             // tạo slug
