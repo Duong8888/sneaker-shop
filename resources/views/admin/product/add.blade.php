@@ -28,18 +28,12 @@
                                 <div class="mb-3">
                                     <label class="form-label">Thương hiệu</label> <br>
                                     <select class="brand" name="brand">
+                                        <option value=""></option>
                                         @foreach($brand as $value)
                                             <option value="{{$value->id}}">{{$value->name_brand}}</option>
                                         @endforeach
                                     </select>
                                 </div>
-
-                                {{-- Mô tả sản phẩm --}}
-                                <div class="mb-3">
-                                    <label for="project-overview" class="form-label">Mô tả sản phẩm</label>
-                                    <textarea class="form-control" name="description" rows="5"></textarea>
-                                </div>
-
 
                                 {{-- kích cỡ và màu sắc --}}
                                 <div class="mb-3">
@@ -59,6 +53,11 @@
                                             <option value="{{$value->id}}">{{$value->size_value}}</option>
                                         @endforeach
                                     </select>
+                                </div>
+                                {{-- Mô tả sản phẩm --}}
+                                <div class="mb-3">
+                                    <label for="project-overview" class="form-label">Mô tả sản phẩm</label>
+                                    <textarea class="form-control" name="description" rows="5"></textarea>
                                 </div>
                             </div>
 
@@ -120,7 +119,7 @@
 
                             <div class="row mt-3 col-xl-12">
                                 <div class="col-12 text-center">
-                                    <button type="submit" data-bs-dismiss="modal" class="btn btn-success waves-effect waves-light m-1" id="btn-create">
+                                    <button type="submit" class="btn btn-success waves-effect waves-light m-1" id="btn-create">
                                         <i class="bi bi-check-circle"></i> Create
                                     </button>
 

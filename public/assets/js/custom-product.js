@@ -13,13 +13,13 @@ $('document').ready(function () {
                 }
                 dataTable = $('#product__admin').DataTable({
                     'pagingType': 'numbers',
-                    "data": data.products,
+                    "data":  data.products,
                     "columns": [
                         { "data": "id" },
                         { "data": "product_name" },
                         { "data": "description" },
                         { "data": "slug" },
-                        { "data": "brand_id" },
+                        { "data": "brand.name_brand" },
                         { "data": '' },
                     ],
                     "columnDefs": [
@@ -53,6 +53,10 @@ $('document').ready(function () {
 // ajax thêm mới color và size cho sản phẩm
     let arrayColor = [];
     let arraySize = [];
+    let arrayColorText;
+    let arraySizeText;
+    let color = $('select[name="color"]');
+    let size =$('select[name="sizes"]');
     let btn = $('#variable').slideUp();
     let table = $('#table-variable').slideUp();
     let tableMain = $('.main-tab');
@@ -101,20 +105,30 @@ $('document').ready(function () {
             table.slideDown();
             btn.text(`Rollback`);
             // lấy ra mảng các thuộc tính được chọn để tiến hành tạo ra biến thể
-            arrayColor = $('select[name="color"]').val();
-            arraySize = $('select[name="sizes"]').val();
-            console.log(arrayColor)
-            console.log(arraySize)
+            arrayColor = color.select2('data');
+            arraySize = size.select2('data');
             $.each(arrayColor, function (index, color) {
                 $.each(arraySize, function (index, size) {
                     count++;
                     tableMain.append(`
                 <tr>
                    <th scope="row">${count}</th>
-                   <td><input class="form-control" name="color-variable-${count}" value="${color}" tabindex="0" type="text" readonly="readonly"></td>
-                   <td><input class="form-control" name="size-variable-${count}" value="${size}" tabindex="0" type="text" readonly="readonly"></td>
-                   <td><input class="form-control quantity-input" name="quantity-variable-${count}" value="" tabindex="0" type="number" min="0"></td>
-                   <td><input class="form-control price-input" name="price-variable-${count}" value="" tabindex="0" type="number" min="0"></td>
+                   <td>
+                       <input hidden name="color-variable-${count}" value="${color.id}" tabindex="0" type="text">
+                       <input class="form-control" value="${color.text}" tabindex="0" type="text" readonly="readonly">
+                   </td>
+
+                   <td>
+                       <input hidden name="size-variable-${count}" value="${size.id}"type="text">
+                       <input class="form-control" value="${size.text}" tabindex="0" type="text" readonly="readonly">
+                   </td>
+
+                   <td>
+                        <input class="form-control quantity-input" name="quantity-variable-${count}" value="" tabindex="0" type="number" min="0">
+                   </td>
+                   <td>
+                        <input class="form-control price-input" name="price-variable-${count}" value="" tabindex="0" type="number" min="0">
+                   </td>
                 </tr>
                 `);
                 })
