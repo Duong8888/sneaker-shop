@@ -22,7 +22,7 @@ use App\Http\Controllers\Admin\size\SizeController;
 
 Route::get('/', function () {
     return view('welcome');
-});
+})->name('admin');
 
 //Route::get('/', function () {
 //    return view('admin.authen.login');
@@ -44,7 +44,7 @@ Route::middleware('auth')->group(function () {
 
 
 
-Route::group(['prefix' => 'product', 'as' => 'product.'], function () {
+Route::group(['prefix' => 'product', 'as' => 'product.','auth', 'verified'], function () {
     Route::get('/', [ProductController::class, 'index'])->name('index');
     Route::get('list', [ProductController::class, 'list'])->name('list');
     Route::match(['GET', 'POST'], 'add', [ProductController::class, 'add'])->name('add');
@@ -59,9 +59,6 @@ Route::group(['prefix' => 'size', 'as' => 'size.'], function () {
     Route::match(['GET', 'POST'], 'add', [SizeController::class, 'add'])->name('add');
 });
 
-
-
-Route::get('/', function (){return view('admin.index');})->name('admin');
 
 
 
