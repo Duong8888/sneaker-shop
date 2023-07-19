@@ -1,0 +1,29 @@
+.selected-images{
+    width: 100%;
+}
+
+.item-image{
+    width: 100%;
+    height: 30vh;
+    margin: 10px 0 10px 0;
+    border-radius: 5px;
+    overflow: hidden;
+}
+.item-image>img{
+    width:100%;
+    height: 100%;
+    object-fit: cover;
+}
+.custom-table{
+    max-height: 80vh;
+    overflow: scroll;
+}
+
+.custom-table::-webkit-scrollbar{
+    width: 5px;
+
+}
+.custom-table::-webkit-scrollbar-thumb{
+    background:#5d7186;
+    border-radius: 5px;
+}

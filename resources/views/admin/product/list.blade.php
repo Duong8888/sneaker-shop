@@ -11,7 +11,8 @@
           type="text/css"/>
     <link href="{{asset('assets/libs/datatables.net-select-bs5/css/select.bootstrap5.min.css')}}" rel="stylesheet"
           type="text/css"/>
-    <!-- third party css end -->
+    <link href="{{asset('assets/css/css-product.css')}}" rel="stylesheet"
+          type="text/css"/>
 @endsection
 @section('content')
     <style>
@@ -54,27 +55,8 @@
                                         <th>Action</th>
                                     </tr>
                                     </thead>
-                                    <tbody>
-                                    @foreach($data as $value)
-                                        <tr class="odd">
-                                            <td>{{$value->id}}</td>
-                                            <td>{{$value->product_name}}</td>
-                                            <td>{{$value->description}}</td>
-                                            <td>{{$value->slug}}</td>
-                                            <td>{{$value->brand_id}}</td>
-                                            <td>
-                                                <form action="" method="get" style="display: none">
-                                                    @csrf
-                                                </form>
-                                                <button class="btn btn-danger">Delete</button>
-
-                                                <a href="{{route('product.edit',['id' => $value->id])}}">
-                                                    <button class="btn btn-primary">Update</button>
-                                                </a>
-
-                                            </td>
-                                        </tr>
-                                    @endforeach
+                                    <tbody class="table-main" data-route="{{route('product.list')}}">
+                                    {{--         load ajax                          --}}
                                     </tbody>
                                 </table>
                             </div>
@@ -99,4 +81,5 @@
     <script src="{{asset('assets/pages/create-project.init.js')}}"></script>
 
     <script src="{{asset('assets/js/custom-product.js')}}"></script>
+
 @endsection
