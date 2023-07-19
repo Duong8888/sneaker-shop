@@ -19,7 +19,7 @@ class ColorController extends Controller
                 'color_value' => $request->value,
             ]);
 
-            return response()->json(['message' => 'Thêm mới thành công','id'=> $color->id,'name' => 'color']);
+            return response()->json(['message' => 'Thêm mới thành công','id'=> $color->id,'value'=>$color->color_value,'name' => 'color']);
         }
 
         return response()->json(['message' => 'Lỗi khi thêm mới'], 500);
