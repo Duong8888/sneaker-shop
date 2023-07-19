@@ -36,9 +36,7 @@ class BrandsController extends Controller
             $brands = Brand::create($data);
 //            dd($brands->id);
             if ($brands->id){
-//                $brand = Brand::find($brands->id);
-//                $brand->image = 'images/' . $request->file('image');;
-//                $brand->save();
+//
                 Session::flash('success','Thêm thương hiệu thành công');
                 return redirect()->route('route.brands.list');
             }
