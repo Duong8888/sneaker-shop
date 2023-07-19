@@ -26,11 +26,12 @@ class ProductController extends Controller
 
     public function list()
     {
-        $data = Product::all();
-        $color = Color::all();
-        $size = Size::all();
-        $brand = Brand::all();
-        return response()->json(['products' => $data, 'color' => $color, 'size' => $size,'brand' => $brand]);
+        $products = Product::all();
+        $data = [];
+        foreach ($products as $value){
+            $data = Product::with('brand')->get();
+        }
+        return response()->json(['products' => $data]);
     }
 
     public function add(Request $request)
