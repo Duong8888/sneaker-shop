@@ -9,7 +9,7 @@
                 <div class="card-body">
 
                     <div class="row">
-                        <form method="post" action="{{route('product.test')}}"
+                        <form method="post" data-route="{{route('product.add')}}"
                               id="form-add"
                               class="dz-clickable d-flex justify-content-between flex-wrap"
                               enctype="multipart/form-data">
@@ -27,8 +27,7 @@
 
                                 <div class="mb-3">
                                     <label class="form-label">Thương hiệu</label> <br>
-                                    <select class="brand">
-                                        <option value="one"></option>
+                                    <select class="brand" name="brand">
                                         @foreach($brand as $value)
                                             <option value="{{$value->id}}">{{$value->name_brand}}</option>
                                         @endforeach
@@ -121,7 +120,7 @@
 
                             <div class="row mt-3 col-xl-12">
                                 <div class="col-12 text-center">
-                                    <button type="submit" class="btn btn-success waves-effect waves-light m-1">
+                                    <button type="submit" data-bs-dismiss="modal" class="btn btn-success waves-effect waves-light m-1" id="btn-create">
                                         <i class="bi bi-check-circle"></i> Create
                                     </button>
 

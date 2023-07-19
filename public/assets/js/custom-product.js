@@ -1,8 +1,46 @@
 $('document').ready(function () {
     var csrf_token = $('meta[name="csrf-token"]').attr('content')
-    $('#product__admin').DataTable({
-        "pagingType": "numbers", // Loại phân trang
-    });
+    var dataTable;
+    // ajax load dữ liệu
+    function loadTable() {
+        var url = $('.table-main').attr('data-route');
+        $.ajax({
+            url: url,
+            method: "GET",
+            success: function (data) {
+                if (dataTable) {
+                    dataTable.destroy();
+                }
+                dataTable = $('#product__admin').DataTable({
+                    'pagingType': 'numbers',
+                    "data": data.products,
+                    "columns": [
+                        { "data": "id" },
+                        { "data": "product_name" },
+                        { "data": "description" },
+                        { "data": "slug" },
+                        { "data": "brand_id" },
+                        { "data": '' },
+                    ],
+                    "columnDefs": [
+                        {
+                            "targets": -1, // Cột cuối cùng (brand_id)
+                            "data": null,
+                            "defaultContent": "" +
+                                "<button class='btn btn-blue btn-update'>Cập nhật</button>  " +
+                                "   <button class='btn btn-danger btn-delete'>Xóa</button>"
+                        }
+                    ]
+                });
+            },
+            error: function (error) {
+                console.log(error);
+            }
+        });
+    }
+    loadTable();
+
+
     $('.select2').select2({
         tags: true,
         multiple: true,
@@ -19,7 +57,7 @@ $('document').ready(function () {
     let table = $('#table-variable').slideUp();
     let tableMain = $('.main-tab');
     let btnTable = $('.btn-table').slideUp();
-    let count = 1;
+    let count = 0;
     $(document).on('select2:selecting', '.select2', function (e) {
         var selectedOption = e.params.args.data;
         var url = $(this).data('route');
@@ -38,10 +76,12 @@ $('document').ready(function () {
                     },
                     success: function (response) {
                         // gán giá trị value bằng với id của bạn gi vừa thêm vào
+                        var newOption = new Option(newValue, response.id, true, true);
+                        console.log(newOption);
                         if (response.name === 'color') {
-                            var option = $('select[name="color"]').find('option').last().val(response.id);
+                            var option = $('select[name="color"]').find('option[value="'+newValue+'"]').replaceWith(newOption);
                         } else if (response.name === 'size') {
-                            var option = $('select[name="sizes"]').find('option').last().val(response.id);
+                            var option = $('select[name="sizes"]').find('option[value="'+newValue+'"]').replaceWith(newOption);
                         }
                     },
                     error: function (error) {
@@ -56,7 +96,7 @@ $('document').ready(function () {
     let status = 0;
     btn.on('click', function () {
         if (status % 2 === 0) {
-            count = 1;
+            count = 0;
             btnTable.slideDown();
             table.slideDown();
             btn.text(`Rollback`);
@@ -132,31 +172,30 @@ $('document').ready(function () {
     });
     // ajax save dữ liệu
 
-    $('#form-add').on('submit',function(e){
+    $('#form-add').on('submit', function (e) {
         e.preventDefault();
-        var action = $(this).attr('action');
-        var formData = new FormData();
-        var files = $("#product-image")[0].files;
-        // Xử lý từng tệp trong danh sách
-        for (var i = 0; i < files.length; i++) {
-            formData.append('files[]', files[i]);
-        }
+        var action = $(this).attr('data-route');
+        var formData = new FormData($('#form-add')[0]); // Tạo đối tượng FormData từ biểu mẫu
+        var countVariable = $('th[scope="row"]').length;
+        formData.append('lengthFor', countVariable) // số lượng biến thể và cho vào đối tượng FormData để gửi đi
         $.ajax({
-            url:action,
+            url: action,
             method: 'POST',
             data: formData,
-            processData: false,
-            contentType: false,
+            processData: false, // Set false để ngăn jQuery xử lý dữ liệu FormData
+            contentType: false, // Set false để không thiết lập Header 'Content-Type'
             headers: {
                 'X-CSRF-TOKEN': csrf_token
             },
-            success: function(response){
-                console.log('11111111111');
-                console.log(response.files);
+            success: function (response) {
+                loadTable();
+                console.log(response.message);
             },
-            error:function (error){
+            error: function (error) {
                 console.log(error)
             }
-        })
+        });
     });
+
+    // Tùy chỉnh giao diện nút bằng CSS
 });
