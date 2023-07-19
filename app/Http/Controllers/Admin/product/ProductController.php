@@ -21,14 +21,14 @@ class ProductController extends Controller
         $color = Color::all();
         $size = Size::all();
         $brand = Brand::all();
-        return view('admin.product.list',compact('color', 'size', 'brand'));
+        return view('admin.product.list', compact('color', 'size', 'brand'));
     }
 
     public function list()
     {
         $products = Product::all();
         $data = [];
-        foreach ($products as $value){
+        foreach ($products as $value) {
             $data = Product::with('brand')->get();
         }
         return response()->json(['products' => $data]);
@@ -73,5 +73,14 @@ class ProductController extends Controller
     public function edit(ProductRequest $request, $id)
     {
 
+    }
+
+    public function delete(Request $request, $id)
+    {
+        if($request->isMethod('DELETE')){
+            Product::destroy($id);
+            return response(['message' => 'Xóa thành công']);
+        }
+        return response(['message' => 'Không thể xóa']);
     }
 }

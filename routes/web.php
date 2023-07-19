@@ -48,6 +48,7 @@ Route::group(['prefix' => 'product', 'as' => 'product.'], function () {
     Route::get('/', [ProductController::class, 'index'])->name('index');
     Route::get('list', [ProductController::class, 'list'])->name('list');
     Route::match(['GET', 'POST'], 'add', [ProductController::class, 'add'])->name('add');
+    Route::delete('/delete/{id}', [ProductController::class, 'delete'])->name('delete');
     Route::match(['GET', 'POST'], 'edit/{id}', [ProductController::class, 'edit'])->name('edit');
 });
 
