@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('name_brand');
             $table->string('image');
             $table->string('slug')->unique();
+            $table->softDeletes();
         });
     }
 

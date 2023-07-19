@@ -50,23 +50,25 @@
 
                 <!-- title-->
                 <h4 class="mt-0">Sign In</h4>
-                <p class="text-muted mb-4">Enter your email address and password to access account.</p>
+                <p class="text-muted mb-4">Nhập địa chỉ email và mật khẩu của bạn để truy cập tài khoản.</p>
 
                 <!-- form -->
-                <form action="#">
-                    <div class="mb-3">
-                        <label for="emailaddress" class="form-label">Email address</label>
-                        <input class="form-control" type="email" id="emailaddress" required="" placeholder="Enter your email">
+                <form method="POST" action="{{ route('login') }}">
+                    <div>
+                        <x-input-label for="email" :value="__('Email')" />
+                        <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus autocomplete="username" />
+                        <x-input-error :messages="$errors->get('email')" class="mt-2" />
                     </div>
-                    <div class="mb-3">
-                        <a href="auth-recoverpw-2.html" class="text-muted float-end"><small>Forgot your password?</small></a>
-                        <label for="password" class="form-label">Password</label>
-                        <div class="input-group input-group-merge">
-                            <input type="password" id="password" class="form-control" placeholder="Enter your password">
-                            <div class="input-group-text" data-password="false">
-                                <span class="password-eye"></span>
-                            </div>
-                        </div>
+
+                    <div class="mt-4">
+                        <x-input-label for="password" :value="__('Password')" />
+
+                        <x-text-input id="password" class="block mt-1 w-full"
+                                      type="password"
+                                      name="password"
+                                      required autocomplete="current-password" />
+
+                        <x-input-error :messages="$errors->get('password')" class="mt-2" />
                     </div>
 
                     <div class="mb-3">
@@ -75,33 +77,25 @@
                             <label class="form-check-label" for="checkbox-signin">Remember me</label>
                         </div>
                     </div>
-                    <div class="text-center d-grid">
-                        <button class="btn btn-primary" type="submit">Log In </button>
-                    </div>
-                    <!-- social-->
-                    <div class="text-center mt-4">
-                        <p class="text-muted font-16">Sign in with</p>
-                        <ul class="social-list list-inline mt-3">
-                            <li class="list-inline-item">
-                                <a href="javascript: void(0);" class="social-list-item border-primary text-primary"><i class="mdi mdi-facebook"></i></a>
-                            </li>
-                            <li class="list-inline-item">
-                                <a href="javascript: void(0);" class="social-list-item border-danger text-danger"><i class="mdi mdi-google"></i></a>
-                            </li>
-                            <li class="list-inline-item">
-                                <a href="javascript: void(0);" class="social-list-item border-info text-info"><i class="mdi mdi-twitter"></i></a>
-                            </li>
-                            <li class="list-inline-item">
-                                <a href="javascript: void(0);" class="social-list-item border-secondary text-secondary"><i class="mdi mdi-github"></i></a>
-                            </li>
-                        </ul>
+
+                    <div class="flex items-center justify-end mt-4">
+                        @if (Route::has('password.request'))
+                            <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('password.request') }}">
+                                {{ __('Forgot your password?') }}
+                            </a>
+                        @endif
+
+                            <button type="submit" class="inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 focus:bg-gray-700 active:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition ease-in-out duration-150 ml-3">
+                                Log in
+                            </button>
                     </div>
                 </form>
                 <!-- end form-->
 
                 <!-- Footer-->
                 <footer class="footer footer-alt">
-                    <p class="text-muted">Don't have an account? <a href="{{route('route.auth.register')}}" class="text-muted ms-1"><b>Sign Up</b></a></p>
+{{--                    <p class="text-muted">Don't have an account? <a href="" class="text-muted ms-1"><b>Sign Up</b></a></p>--}}
+                    <a href="{{ route('register') }}" class="ml-4 font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">Register</a>
                 </footer>
 
             </div> <!-- end .card-body -->

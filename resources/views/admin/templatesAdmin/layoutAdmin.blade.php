@@ -199,6 +199,32 @@
                         </ul>
                     </div>
                 </li>
+                <li class="menu-item">
+                    <a href="#menuTrush" data-bs-toggle="collapse" class="menu-link">
+                        <span class="menu-icon"><i class="bi bi-trash"></i></span>
+                        <span class="menu-text"> Thùng rác </span>
+                        <!-- <span class="menu-arrow"></span> -->
+                    </a>
+                    <div class="collapse" id="menuTrush">
+                        <ul class="sub-menu">
+                            <li class="menu-item">
+                                <a href="{{route('route.brands.trash')}}" class="menu-link">
+                                    <span class="menu-text">Thương hiệu</span>
+                                </a>
+                            </li>
+                            <li class="menu-item">
+                                <a href="#" class="menu-link">
+                                    <span class="menu-text">Sản phẩm</span>
+                                </a>
+                            </li>
+                            <li class="menu-item">
+                                <a href="#" class="menu-link">
+                                    <span class="menu-text">Thuộc tính</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
             </ul>
             <!--- End Menu -->
             <div class="clearfix"></div>
@@ -445,7 +471,7 @@
                             <img src="{{asset('assets/images/flags/spain.jpg')}}" alt="user-image"
                                  class="rounded-circle">
                             <span class="ms-1 d-none d-md-inline-block">
-                                        Geneva <i class="bi bi-chevron-bar-down"></i>
+                                        {{ Auth::user()->name }} <i class="bi bi-chevron-bar-down"></i>
                                     </span>
                         </a>
                         <div class="dropdown-menu dropdown-menu-end profile-dropdown ">
@@ -473,10 +499,19 @@
                             <div class="dropdown-divider"></div>
 
                             <!-- item-->
-                            <a href="javascript:void(0);" class="dropdown-item notify-item">
-                                <i class="bi bi-box-arrow-right"></i>
-                                <span>Logout</span>
-                            </a>
+{{--                            <a href="javascript:void(0);" class="dropdown-item notify-item">--}}
+{{--                                <i class="bi bi-box-arrow-right"></i>--}}
+{{--                                <span>Logout</span>--}}
+{{--                            </a>--}}
+                            <form method="POST" action="{{ route('logout') }}">
+                                @csrf
+
+                                <x-responsive-nav-link :href="route('logout')"
+                                                       onclick="event.preventDefault();
+                                        this.closest('form').submit();">
+                                    {{ __('Log Out') }}
+                                </x-responsive-nav-link>
+                            </form>
 
                         </div>
                     </li>

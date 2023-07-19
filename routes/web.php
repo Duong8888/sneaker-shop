@@ -1,18 +1,13 @@
 <?php
 
-
-
-use App\Http\Controllers\Admin\product\ProductController;
-
-use App\Http\Controllers\Admin\AuthenController;
-
-
+use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
+use App\Http\Controllers\Admin\product\ProductController;
 use App\Http\Controllers\Admin\BrandsController;
+use App\Http\Controllers\Admin\TrashBrandController;
 use App\Http\Controllers\Admin\color\ColorController;
 use App\Http\Controllers\Admin\size\SizeController;
-
 
 /*
 |--------------------------------------------------------------------------
@@ -24,6 +19,30 @@ use App\Http\Controllers\Admin\size\SizeController;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+
+Route::get('/', function () {
+    return view('welcome');
+});
+
+//Route::get('/', function () {
+//    return view('admin.authen.login');
+//});
+
+
+
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth', 'verified'])->name('dashboard');
+
+Route::middleware('auth')->group(function () {
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+});
+
+
+
+
 
 Route::group(['prefix' => 'product', 'as' => 'product.'], function () {
     Route::get('/', [ProductController::class, 'index'])->name('index');
@@ -40,6 +59,7 @@ Route::group(['prefix' => 'size', 'as' => 'size.'], function () {
 });
 
 
+
 Route::get('/', function (){return view('admin.index');})->name('admin');
 
 
@@ -47,10 +67,20 @@ Route::get('/', function (){return view('admin.index');})->name('admin');
 Route::get('/brands/list', [BrandsController::class, 'list'])->name('route.brands.list');
 Route::match(['GET', 'POST'], '/brands/add', [BrandsController::class, 'add'])->name('route.brands.add');
 Route::match(['GET', 'POST'], '/brands/edit/{id}', [BrandsController::class, 'edit'])->name('route.brands.edit');
+Route::get('/brands/delete/{id}', [BrandsController::class, 'delete'])->name('route.brands.delete');
 
 
-Route::match(['GET','POST'],'/auth/login',[AuthenController::class,'login'])->name('route.auth.login');
-Route::match(['GET','POST'],'/auth/register',[AuthenController::class,'register'])->name('route.auth.register');
+//Route::match(['GET','POST'],'/auth/login',[AuthenController::class,'login'])->name('route.auth.login');
+//Route::match(['GET','POST'],'/auth/register',[AuthenController::class,'register'])->name('route.auth.register');
+
+
+Route::get('/trash/list', [TrashBrandController::class, 'list'])->name('route.brands.trash');
+Route::post('/brands/restore/{id}', [TrashBrandController::class, 'restore'])->name('route.brands.restore');
+Route::post('/brands/delete/{id}', [TrashBrandController::class, 'delete'])->name('route.brands.delete');
 
 
 
+
+
+
+//require __DIR__.'/auth.php';

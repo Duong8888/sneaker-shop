@@ -60,15 +60,11 @@
                                             </td>
                                             <td>{{$value->slug}}</td>
                                             <td>
-                                                <form action="" method="get" style="display: none">
-                                                    @csrf
-                                                </form>
-                                                <button class="btn btn-danger">Delete</button>
+                                                <a href="{{route('route.brands.delete',['id' => $value->id])}}" class="btn btn-danger">Delete</a>
 
                                                 <a href="{{route('route.brands.edit',['id' => $value->id])}}">
                                                     <button class="btn btn-primary">Update</button>
                                                 </a>
-
                                             </td>
                                         </tr>
                                     @endforeach

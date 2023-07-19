@@ -2,7 +2,9 @@
 
 namespace App\Http\Requests;
 
+use App\Models\Brand;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class BrandRequest extends FormRequest
 {
@@ -23,6 +25,8 @@ class BrandRequest extends FormRequest
     {
         $rules = [];
         $currentAction =$this->route()->getActionMethod();
+        $tableName = (new Brand())->getTable();
+        $id = request()->segment('2');
 //        dd($currentAction);
         switch ($this->method()):
             case 'POST':
@@ -32,8 +36,15 @@ class BrandRequest extends FormRequest
                             'name_brand' => 'required',
                             'slug' => 'unique:brands',
                         ];
+                        break;
+                    case 'edit':
+                        $rules = [
+                            'name_brand' => 'required',
+                            Rule::unique($tableName)->ignore(request($id)),
+                        ];
                 endswitch;
                 break;
+
         endswitch;
         return $rules;
     }
