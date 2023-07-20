@@ -109,7 +109,7 @@
                                 </a>
                             </li>
                             <li class="menu-item">
-                                <a href="#" class="menu-link">
+                                <a href="{{route('color.index')}}" class="menu-link">
                                     <span class="menu-text">Các thuộc tính</span>
                                 </a>
                             </li>
