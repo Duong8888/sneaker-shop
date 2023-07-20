@@ -25,4 +25,9 @@ class SizeController extends Controller
         }
 
     }
+
+    public function delete($id){
+        Size::destroy($id);
+        return back();
+    }
 }
