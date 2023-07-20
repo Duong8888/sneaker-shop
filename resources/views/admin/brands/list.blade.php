@@ -31,7 +31,7 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-body">
-                    <h4 class="header-title">Bảng Thương hiệu</h4>
+                    <h4 class="header-title">Basic Data Table</h4>
 
                     <div id="basic-datatable_wrapper" class="dataTables_wrapper dt-bootstrap5 no-footer">
 
@@ -50,6 +50,7 @@
                                     </tr>
                                     </thead>
                                     <tbody>
+{{--                                    <img src="{{asset('images/1689686688images.jpg')}}" alt="">--}}
                                     @foreach($data as $value)
                                         <tr class="odd">
                                             <td>{{$value->id}}</td>
