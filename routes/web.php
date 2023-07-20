@@ -52,10 +52,13 @@ Route::group(['prefix' => 'product', 'as' => 'product.','auth', 'verified'], fun
     Route::match(['GET', 'POST'], 'edit/{id}', [ProductController::class, 'edit'])->name('edit');
 });
 
-Route::group(['prefix' => 'color', 'as' => 'color.'], function () {
+Route::group(['prefix' => 'color', 'as' => 'color.','auth', 'verified'], function () {
+    Route::get('/', [ColorController::class, 'index'])->name('index');
+    Route::get('/delete/{id}', [ColorController::class, 'delete'])->name('delete');
     Route::match(['GET', 'POST'], 'add', [ColorController::class, 'add'])->name('add');
 });
 Route::group(['prefix' => 'size', 'as' => 'size.'], function () {
+    Route::get('/delete/{id}', [SizeController::class, 'delete'])->name('delete');
     Route::match(['GET', 'POST'], 'add', [SizeController::class, 'add'])->name('add');
 });
 
@@ -75,8 +78,6 @@ Route::get('/brands/delete/{id}', [BrandsController::class, 'delete'])->name('ro
 Route::get('/trash/list', [TrashBrandController::class, 'list'])->name('route.brands.trash');
 Route::post('/brands/restore/{id}', [TrashBrandController::class, 'restore'])->name('route.brands.restore');
 Route::post('/brands/delete/{id}', [TrashBrandController::class, 'delete'])->name('route.brands.delete');
-
-
 
 
 
