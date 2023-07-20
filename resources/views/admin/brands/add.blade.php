@@ -33,10 +33,7 @@
                                 <label class="form-label">Tên thương hiệu</label>
                                 <input type="text" class="form-control" name="name_brand">
                             </div>
-{{--                            <div class="mb-3">--}}
-{{--                                <label class="form-label">slug</label>--}}
-{{--                                <input type="text" class="form-control" name="slug" value="">--}}
-{{--                            </div>--}}
+
 
                             <div class="row">
                                 <div class="col-lg-6">
@@ -45,7 +42,7 @@
                                         <label class="form-label">Ngày nhập</label>
                                         <input type="hidden" class="form-control flatpickr-input"
                                                data-toggle="flatpicker" placeholder="October 9, 2019" name="created_at">
-                                        {{--                                        <input class="form-control flatpickr-input input" placeholder="October 9, 2019" tabindex="0" type="date" readonly="readonly">--}}
+
                                     </div>
                                 </div>
                             </div>
