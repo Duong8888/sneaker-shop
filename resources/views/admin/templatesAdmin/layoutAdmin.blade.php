@@ -469,11 +469,14 @@
                     <li class="dropdown">
                         <a class="nav-link dropdown-toggle nav-user me-0 waves-effect waves-light"
                            data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
-                            <img src="{{asset('assets/images/flags/spain.jpg')}}" alt="user-image"
-                                 class="rounded-circle">
+                            @if(session('user_avatar'))
+                                <img src="{{session('user_avatar')}}" alt="user-image" class="rounded-circle">
+                            @else
+                                <img src="{{asset('assets/images/flags/spain.jpg')}}" alt="user-image" class="rounded-circle">
+                            @endif
                             <span class="ms-1 d-none d-md-inline-block">
-                                        {{ Auth::user()->name }} <i class="bi bi-chevron-bar-down"></i>
-                                    </span>
+                                {{ Auth::user()->name }} <i class="bi bi-chevron-bar-down"></i>
+                            </span>
                         </a>
                         <div class="dropdown-menu dropdown-menu-end profile-dropdown ">
                             <!-- item-->

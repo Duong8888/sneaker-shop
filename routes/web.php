@@ -44,7 +44,7 @@ Route::middleware('auth')->group(function () {
 
 
 
-Route::group(['prefix' => 'product', 'as' => 'product.','auth', 'verified'], function () {
+Route::group(['prefix' => 'product', 'as' => 'product.','middleware' => ['auth', 'verified']], function () {
     Route::get('/', [ProductController::class, 'index'])->name('index');
     Route::get('list', [ProductController::class, 'list'])->name('list');
     Route::match(['GET', 'POST'], 'add', [ProductController::class, 'add'])->name('add');
