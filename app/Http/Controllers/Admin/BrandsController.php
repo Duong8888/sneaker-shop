@@ -8,6 +8,7 @@ use App\Models\Brand;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
 class BrandsController extends Controller
@@ -19,6 +20,8 @@ class BrandsController extends Controller
       $data = Brand::all();
     return view(self::OBJECT . self::DOT . self::BRANDS . self::DOT . __FUNCTION__,compact('data'));
   }
+
+
     public function add(BrandRequest $request){
 
 
@@ -57,23 +60,26 @@ class BrandsController extends Controller
         }
         return view(self::OBJECT . self::DOT . self::BRANDS . self::DOT . __FUNCTION__);
     }
+
+
     public function edit(BrandRequest $request,$id){
         $data = DB::table('brands')->where('id',$id)->first();
 //        dd($data);
-
+//            dd($data->image);
         if ($request->isMethod('POST')){
             $dataNew = $request->except('_token','files');
             $files = $request->file('files');
+//            dd($files);
 
-            $count = is_array($files) ? 'true' : 'false';
 
             $slug = Str::slug($request->input('name_brand'));
 
 
             if ($request->hasFile('files')){
-
+                    $count = count($files) > 1 ? 'true' : 'false';
                 // có file mới upload lên sẽ link vào để xóa ảnh cũ đi
-                $resultDL = File::delete(public_path('images').'/'.$data->image);
+                $resultDL = Storage::delete('/public/'.$data->image);
+
                 if ($resultDL){
                     $dataNew['image'] = uploadFile('images',$files,$count);
                 }else{
@@ -93,9 +99,14 @@ class BrandsController extends Controller
         return view(self::OBJECT . self::DOT . self::BRANDS . self::DOT . __FUNCTION__,compact('data'));
     }
 
+//    public function delete($id){
+//        Brand::where('id',$id)->delete();
+//        Session::flash('success','Đã chuyển thương hiệu id là: '.$id.' đến thùng rác. bạn có thể khôi phục tại đó');
+//        return redirect()->route('route.brands.list');
+//    }
     public function delete($id){
-        Brand::where('id',$id)->delete();
-        Session::flash('success','Đã chuyển thương hiệu id là: '.$id.' đến thùng rác. bạn có thể khôi phục tại đó');
-        return redirect()->route('route.brands.list');
+        $brand = Brand::withTrashed()->findOrFail($id);
+        $brand -> delete();
+        return response()->json(['message' => 'xóa dữ liệu thành công']);
     }
 }
