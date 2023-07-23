@@ -16,9 +16,17 @@ class BrandsController extends Controller
     const OBJECT = 'admin';
     const DOT = '.';
     const BRANDS = 'brands';
-  public function list(){
+  public function list(Request $request){
       $data = Brand::all();
-    return view(self::OBJECT . self::DOT . self::BRANDS . self::DOT . __FUNCTION__,compact('data'));
+
+      // Kiểm tra nếu yêu cầu JSON, trả về JSON data
+      if ($request->wantsJson()) {
+          return response()->json($data);
+      }
+//      $data_json = response()->json($data);
+//      dd($data_json);
+    return view(self::OBJECT . self::DOT .
+        self::BRANDS . self::DOT . __FUNCTION__,['data' => $data]);
   }
 
 
@@ -87,8 +95,6 @@ class BrandsController extends Controller
                 }
             }
 
-
-//            $data['image'] = $image;
             $dataNew['slug'] = $slug;
             $brands = Brand::where('id',$id)->update($dataNew);
             if ($brands){
@@ -107,6 +113,6 @@ class BrandsController extends Controller
     public function delete($id){
         $brand = Brand::withTrashed()->findOrFail($id);
         $brand -> delete();
-        return response()->json(['message' => 'xóa dữ liệu thành công']);
+        return response()->json();
     }
 }

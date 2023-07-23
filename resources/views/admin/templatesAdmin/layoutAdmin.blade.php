@@ -28,7 +28,7 @@
     <link href="{{asset('assets/css/app.css')}}" rel="stylesheet" type="text/css" id="app-style"/>
 
     <!-- Icons css -->
-    <link href="{{asset('assets/css/icons.min.css')}}" rel="stylesheet" type="text/css" id="app-style"/>
+{{--    <link href="{{asset('assets/css/icons.min.css')}}" rel="stylesheet" type="text/css" id="app-style"/>--}}
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
 </head>
 <style>
@@ -57,7 +57,7 @@
         <div class="scrollbar">
             <!-- User box -->
             <div class="user-box text-center">
-                <img src="{{asset('assets/images/logo-light.png')}}images/users/user-1.jpg" alt="user-img"
+                <img src="{{asset('assets/images/logo-light.png')}}" alt="user-img"
                      title="Mat Helme" class="rounded-circle avatar-md">
                 <div class="dropdown">
                     <a href="javascript: void(0);" class="dropdown-toggle h5 mb-1 d-block" data-bs-toggle="dropdown">Geneva

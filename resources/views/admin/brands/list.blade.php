@@ -54,7 +54,7 @@
 
                         <div class="row">
                             <div class="col-sm-12">
-                                <table id="product__admin"
+                                <table id="product_admin"
                                        class="table dt-responsive nowrap w-100 dataTable no-footer dtr-inline"
                                        style="width: 1180px;">
                                     <thead>
@@ -66,24 +66,25 @@
                                         <th>Action</th>
                                     </tr>
                                     </thead>
-                                    <tbody>
-                                    @foreach($data as $value)
-                                        <tr class="odd">
-                                            <td>{{$value->id}}</td>
-                                            <td>{{$value->name_brand}}</td>
-                                            <td>
-                                                <img src="{{''.Storage::url($value->image)}}" width="100" height="100" style="border-radius: 50%" alt="">
-                                            </td>
-                                            <td>{{$value->slug}}</td>
-                                            <td>
-{{--                                                <a href="{{route('route.brands.delete',['id' => $value->id])}}" class="btn btn-danger">Delete</a>--}}
-                                                <button class="btn btn-danger delete_brand" data-id="{{$value->id}}">Delete</button>
-                                                <a href="{{route('route.brands.edit',['id' => $value->id])}}">
-                                                    <button class="btn btn-primary">Update</button>
-                                                </a>
-                                            </td>
-                                        </tr>
-                                    @endforeach
+                                    <tbody id="brandList">
+
+{{--                                    @foreach($data as $value)--}}
+{{--                                        <tr class="odd">--}}
+{{--                                            <td>{{$value->id}}</td>--}}
+{{--                                            <td>{{$value->name_brand}}</td>--}}
+{{--                                            <td>--}}
+{{--                                                <img src="{{''.Storage::url($value->image)}}" width="100" height="100" style="border-radius: 50%" alt="">--}}
+{{--                                            </td>--}}
+{{--                                            <td>{{$value->slug}}</td>--}}
+{{--                                            <td>--}}
+{{--                                                --}}
+{{--                                                <button class="btn btn-danger delete_brand" data-id="{{$value->id}}">Delete</button>--}}
+{{--                                                <a href="{{route('route.brands.edit',['id' => $value->id])}}">--}}
+{{--                                                    <button class="btn btn-primary">Update</button>--}}
+{{--                                                </a>--}}
+{{--                                            </td>--}}
+{{--                                        </tr>--}}
+{{--                                    @endforeach--}}
                                     </tbody>
                                 </table>
                             </div>
@@ -95,21 +96,24 @@
     </div>
 @endsection
 @section('js')
+{{--    <script>--}}
+{{--        var jsonData = @json($data);--}}
+{{--        console.log(jsonData); // Kiểm tra dữ liệu JSON trong console--}}
+{{--    </script>--}}
 
 
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+    <script src="https://cdn.datatables.net/1.13.5/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.5/js/dataTables.bootstrap5.min.js"></script>
     <script>
-
-    </script>
-    <script>
-        new DataTable('#product__admin');
+        new DataTable('#product_admin');
     </script>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
 
-    <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
-    <script src="https://cdn.datatables.net/1.13.5/js/jquery.dataTables.min.js"></script>
-    <script src="https://cdn.datatables.net/1.13.5/js/dataTables.bootstrap5.min.js"></script>
+
     <!-- Bootstrap JS -->
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 
@@ -119,4 +123,5 @@
     <!-- Init js-->
 {{--    <script src="{{asset('assets/pages/create-project.init.js')}}"></script>--}}
     <script src="{{asset('assets/js/custom-brand.js')}}"></script>
+<script src="{{asset('assets/js/toast.js')}}"></script>
 @endsection
