@@ -51,7 +51,7 @@ class ProductController extends Controller
         // Kiểm tra xem có tệp được tải lên hay không
         if ($request->hasFile('files')) {
             // thêm ảnh vào folder public/uploads
-            $result = uploadFile('uploads', $files, true);
+            $result = uploadFile('images', $files, true);
 //            dd($result);
             foreach ($result as $value) {
                 ImagesProduct::create([
