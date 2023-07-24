@@ -4,22 +4,29 @@ use App\Models\Brand;
 
 function uploadFile($folder, $files, $multiple)
 {
+
         $result = '';
         if ($multiple == 'true'){
             $uploadFile = [];
             foreach ($files as $file){
                 $fileName = time().$file->getClientOriginalName();
-                $file->move(public_path($folder).'/', $fileName);
                 $uploadFile[] = [
-                  'url' => $folder.'/'.$fileName,
+                  'url' => $file->storeAs($folder, $fileName, 'public'),
                 ];
             }
           $result = $uploadFile;
         }else{
-            $file = $files[0];
+
+            if (is_array($files)){
+                $file = $files[0];
+            }else{
+                $file = $files;
+            }
+
             $fileName = time().$file->getClientOriginalName();
-            $file->move(public_path($folder).'/', $fileName);
-            $result = $folder.'/'.$fileName;
+
+             $result = $file->storeAs($folder, $fileName, 'public');
+
         }
         return $result;
 }

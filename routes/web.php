@@ -63,7 +63,7 @@ Route::group(['prefix' => 'size', 'as' => 'size.'], function () {
 Route::get('/brands/list', [BrandsController::class, 'list'])->name('route.brands.list');
 Route::match(['GET', 'POST'], '/brands/add', [BrandsController::class, 'add'])->name('route.brands.add');
 Route::match(['GET', 'POST'], '/brands/edit/{id}', [BrandsController::class, 'edit'])->name('route.brands.edit');
-Route::get('/brands/delete/{id}', [BrandsController::class, 'delete'])->name('route.brands.delete');
+Route::delete('/brands/delete/{id}', [BrandsController::class, 'delete'])->name('route.brands.delete');
 
 
 //Route::match(['GET','POST'],'/auth/login',[AuthenController::class,'login'])->name('route.auth.login');
