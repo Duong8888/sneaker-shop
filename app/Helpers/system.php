@@ -14,16 +14,14 @@ function uploadFile($folder, $files, $multiple)
                   'url' => $file->storeAs($folder, $fileName, 'public'),
                 ];
             }
-
           $result = $uploadFile;
         }else{
-//            dd(is_array($files));
+
             if (is_array($files)){
                 $file = $files[0];
             }else{
                 $file = $files;
             }
-
 
             $fileName = time().$file->getClientOriginalName();
 

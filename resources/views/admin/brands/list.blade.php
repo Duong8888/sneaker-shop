@@ -46,9 +46,11 @@
                     </div>
                 </div>
                 <div class="card-body">
+
                     <button type="button" class="btn btn-primary mb-3 add" data-bs-toggle="modal" data-bs-target="#exampleModal">
                         Thêm Thương hiệu
                     </button>
+
 
                     <div id="basic-datatable_wrapper" class="dataTables_wrapper dt-bootstrap5 no-footer">
 
@@ -66,25 +68,9 @@
                                         <th>Action</th>
                                     </tr>
                                     </thead>
+
                                     <tbody id="brandList">
 
-{{--                                    @foreach($data as $value)--}}
-{{--                                        <tr class="odd">--}}
-{{--                                            <td>{{$value->id}}</td>--}}
-{{--                                            <td>{{$value->name_brand}}</td>--}}
-{{--                                            <td>--}}
-{{--                                                <img src="{{''.Storage::url($value->image)}}" width="100" height="100" style="border-radius: 50%" alt="">--}}
-{{--                                            </td>--}}
-{{--                                            <td>{{$value->slug}}</td>--}}
-{{--                                            <td>--}}
-{{--                                                --}}
-{{--                                                <button class="btn btn-danger delete_brand" data-id="{{$value->id}}">Delete</button>--}}
-{{--                                                <a href="{{route('route.brands.edit',['id' => $value->id])}}">--}}
-{{--                                                    <button class="btn btn-primary">Update</button>--}}
-{{--                                                </a>--}}
-{{--                                            </td>--}}
-{{--                                        </tr>--}}
-{{--                                    @endforeach--}}
                                     </tbody>
                                 </table>
                             </div>
