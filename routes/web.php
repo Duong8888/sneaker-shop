@@ -29,7 +29,6 @@ Route::get('/', function () {
 //});
 
 
-
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
@@ -41,18 +40,16 @@ Route::middleware('auth')->group(function () {
 });
 
 
-
-
-
-Route::group(['prefix' => 'product', 'as' => 'product.','middleware' => ['auth', 'verified']], function () {
+Route::group(['prefix' => 'product', 'as' => 'product.', 'middleware' => ['auth', 'verified']], function () {
     Route::get('/', [ProductController::class, 'index'])->name('index');
     Route::get('list', [ProductController::class, 'list'])->name('list');
     Route::match(['GET', 'POST'], 'add', [ProductController::class, 'add'])->name('add');
     Route::delete('/delete/{id}', [ProductController::class, 'delete'])->name('delete');
-    Route::match(['GET', 'POST'], 'edit/{id}', [ProductController::class, 'edit'])->name('edit');
+    Route::get('edit/{id}', [ProductController::class, 'showEdit'])->name('show.edit');
+    Route::post('edit/{id}', [ProductController::class, 'saveEdit'])->name('edit');
 });
 
-Route::group(['prefix' => 'color', 'as' => 'color.','auth', 'verified'], function () {
+Route::group(['prefix' => 'color', 'as' => 'color.', 'auth', 'verified'], function () {
     Route::get('/', [ColorController::class, 'index'])->name('index');
     Route::get('/delete/{id}', [ColorController::class, 'delete'])->name('delete');
     Route::match(['GET', 'POST'], 'add', [ColorController::class, 'add'])->name('add');
@@ -61,8 +58,6 @@ Route::group(['prefix' => 'size', 'as' => 'size.'], function () {
     Route::get('/delete/{id}', [SizeController::class, 'delete'])->name('delete');
     Route::match(['GET', 'POST'], 'add', [SizeController::class, 'add'])->name('add');
 });
-
-
 
 
 Route::get('/brands/list', [BrandsController::class, 'list'])->name('route.brands.list');

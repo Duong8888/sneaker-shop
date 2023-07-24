@@ -23,16 +23,15 @@
             <div class="card">
                 <div class="card-body">
                     <!-- Full width modal content -->
-                    <div id="full-width-modal" class="modal fade" tabindex="-1" aria-labelledby="fullWidthModalLabel"
-                         style="display: none;" aria-hidden="true">
+                    <div id="full-width-modal" class="modal fade show main-modal" tabindex="-1" aria-labelledby="fullWidthModalLabel"
+                         style="display: block;" aria-hidden="true">
                         <div class="modal-dialog modal-full-width">
                             @include('admin.product.add')
                         </div><!-- /.modal-dialog -->
                     </div><!-- /.modal -->
                     <div class="button-list">
                         <!-- Full width modal -->
-                        <button type="button" class="btn btn-primary" data-bs-toggle="modal"
-                                data-bs-target="#full-width-modal">Thêm mới sản phẩm
+                        <button type="button" class="btn btn-primary btn-show-modal">Thêm mới sản phẩm
                         </button>
                     </div>
                 </div> <!-- end card-body -->
