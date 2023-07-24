@@ -160,6 +160,7 @@ $('document').ready(function () {
             // lấy ra mảng các thuộc tính được chọn để tiến hành tạo ra biến thể
             arrayColor = color.select2('data');
             arraySize = size.select2('data');
+            console.log(arrayColor);
             $.each(arrayColor, function (index, color) {
                 $.each(arraySize, function (index, size) {
                     count++;
@@ -354,8 +355,8 @@ $('document').ready(function () {
         $('textarea[name="description"]').val(data.description);
         $('select[name="brand"]').val(data.brand_id).trigger('change');
         var imgArray = data.images;
-        var color = $('select[name="color"] option');
-        var size = $('select[name="sizes"] option');
+        var colorUpdate = $('select[name="color"] option');
+        var sizeUpdate = $('select[name="sizes"] option');
         var variationsArray = data.variations;
         var arraySize = [];
         var arrayColor = [];
@@ -366,7 +367,7 @@ $('document').ready(function () {
         arraySize = [...new Set(arraySize)];
         arrayColor = [...new Set(arrayColor)];
         $.each(arrayColor, function (indexColor, itemColor) {
-            $.each(color, function (index, item) {
+            $.each(colorUpdate, function (index, item) {
                 if (itemColor == $(item).val()) {
                     $(item).prop('selected', true);
                     $(item).trigger('change');
@@ -374,14 +375,14 @@ $('document').ready(function () {
             });
         });
         $.each(arraySize, function (indexColor, itemSize) {
-            $.each(size, function (index, item) {
+            $.each(sizeUpdate, function (index, item) {
                 if (itemSize == $(item).val()) {
                     $(item).prop('selected', true);
                     $(item).trigger('change');
                 }
             });
         });
-        $.each(imgArray, function (index,item) {
+        $.each(imgArray, function (index, item) {
             var img = `
                     <div class="item-image">
                         <img src="/storage/${item.url}" />
@@ -389,11 +390,62 @@ $('document').ready(function () {
                 `;
             imageContainer.append(img);
         });
+        table.slideDown();
+        btn.slideDown();
+        btnTable.slideDown();
+        var index = 0;
+        $.each(variationsArray, function (indexVariation, itemVariation) {
+            index++;
+            // Tìm đối tượng tương ứng trong mảng color dựa vào color_id
+            colorUpdate.each(function(index, item) {
+                if ($(item).val() == itemVariation.color_id) {
+                    selectedColor = item;
+                    return false; // Dừng vòng lặp khi tìm thấy phần tử phù hợp
+                }
+            });
 
+            // Tìm đối tượng tương ứng trong mảng size dựa vào size_id
+            sizeUpdate.each(function(index, item) {
+                if ($(item).val() == itemVariation.color_id) {
+                    selectedSize = item;
+                    return false; // Dừng vòng lặp khi tìm thấy phần tử phù hợp
+                }
+            });
+            tableMain.append(`
+                <tr>
+                   <th scope="row">${index}</th>
+                   <td>
+                       <input hidden name="color-variable-${count}" value="${itemVariation.color_id}" tabindex="0" type="text">
+                       <input class="form-control" value="${selectedColor.text}" tabindex="0" type="text" readonly="readonly">
+                   </td>
 
-        // table.slideDown();
-        // btn.slideUp();
+                   <td>
+                       <input hidden name="size-variable-${count}" value="${itemVariation.size_id}"type="text">
+                       <input class="form-control" value="${selectedSize.text}" tabindex="0" type="text" readonly="readonly">
+                   </td>
 
+                   <td>
+                        <input class="form-control quantity-input default-value" name="quantity-variable-${count}" value="${itemVariation.quantity}" tabindex="0" type="number" min="0">
+                   </td>
+                   <td>
+                        <input class="form-control price-input default-value"  name="price-variable-${count}" value="${itemVariation.price}" tabindex="0" type="number" min="0">
+                   </td>
+                </tr>
+                `);
+            $('.default-value').on("focus", function () {
+                // Xóa số 0 khi người dùng trỏ chuột vào ô input
+                if ($(this).val() === "0") {
+                    $(this).val("");
+                }
+                console.log('1');
+            });
+            $(".default-value").on("blur", function () {
+                // Kiểm tra nếu ô input trống
+                if ($(this).val() === "") {
+                    $(this).val(0); // Đặt giá trị mặc định là 0
+                }
+            });
+        });
     }
 
     // ajax update sản phẩm

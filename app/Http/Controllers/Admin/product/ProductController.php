@@ -83,7 +83,7 @@ class ProductController extends Controller
     {
         $product = Product::find($id);
         $requestAll = $request->all();
-        return response()->json(['data' => $requestAll]);
+//        return response()->json(['data' => $requestAll]);
         $countVariationsUpdate = (int)($request->input('lengthFor')); // lấy số lương biến thể đếm được ở bên giao diện
         if ($product->product_name !== $request->input('productName')) {
             $slug = Str::slug($request->input('productName'));// tạo slug thông qua name
