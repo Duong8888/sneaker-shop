@@ -57,7 +57,7 @@
                                             <td>{{$value->id}}</td>
                                             <td>{{$value->name_brand}}</td>
                                             <td>
-                                                <img src="{{asset($value->image)}}" width="100" height="100" style="border-radius: 50%" alt="">
+                                                <img src="{{''.Storage::url($value->image)}}" width="100" height="100" style="border-radius: 50%" alt="">
                                             </td>
                                             <td>{{$value->slug}}</td>
                                             <td >

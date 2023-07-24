@@ -38,12 +38,12 @@
                                 <div class="col-md-9 col-sm-8">
                                     <div class="row">
                                         <div class="col-xs-6">
-                                            <input type="file" name="files" accept="image/*"
+                                            <input type="file" name="files[]" accept="image/*"
                                                    class="form-control-file @error('image') is-invalid @enderror" id="cmt_truoc" style="display: none" >
                                             <label for="cmt_truoc" class="font-48">Click để chọn ảnh</label>
                                             <br>
 
-                                            <img id="mat_truoc_preview" src="{{asset($data->image)}}" alt="your image"
+                                            <img id="mat_truoc_preview" src="{{''.Storage::URL($data->image)}}" alt="your image"
                                                  style="max-width: 200px; height:100px; margin-bottom: 10px;" class="img-fluid"/>
                                         </div>
                                     </div>
@@ -72,24 +72,7 @@
         </div>
         @endsection
         @section('js')
-            <script>
-                $(function(){
-                    function readURL(input, selector) {
-                        if (input.files && input.files[0]) {
-                            let reader = new FileReader();
-
-                            reader.onload = function (e) {
-                                $(selector).attr('src', e.target.result);
-                            };
-
-                            reader.readAsDataURL(input.files[0]);
-                        }
-                    }
-                    $("#cmt_truoc").change(function () {
-                        readURL(this, '#mat_truoc_preview');
-                    });
-                });
-            </script>
+            <script src="{{asset('assets/js/custom-brand.js')}}"></script>
             <!-- plugin js -->
             <script src="{{asset('assets/libs/dropzone/min/dropzone.min.js')}}"></script>
             <script src="{{asset('assets/libs/select2/js/select2.min.js')}}"></script>
