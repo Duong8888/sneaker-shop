@@ -384,7 +384,7 @@ $('document').ready(function () {
         $.each(imgArray, function (index,item) {
             var img = `
                     <div class="item-image">
-                        <img src="${item.url}" />
+                        <img src="/storage/${item.url}" />
                     </div>
                 `;
             imageContainer.append(img);
