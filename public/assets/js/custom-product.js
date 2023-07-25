@@ -6,6 +6,8 @@ $('document').ready(function () {
     var idUpdate;
     var methodAction = $('input[name="actionMethod"]');
     var formAdd = $('#form-add');
+    var title =$('.tex-title');
+    var btnClick = $('.btn-create');
 
     // ajax load dữ liệu
     function loadTable() {
@@ -84,6 +86,8 @@ $('document').ready(function () {
 
     function showModal(action = true) {
         if (action) {
+            $('select[name="color"]').prop('disabled', false);
+            $('select[name="sizes"]').prop('disabled', false);
             modal.show();
         } else {
             $(".select2").val(null).trigger("change");
@@ -94,6 +98,8 @@ $('document').ready(function () {
             imageContainer.html('');
             ShowErrors([], false);
             methodAction.val('');
+            title.html('Thêm mới sản phẩm.');
+            btnClick.html(`<i class="bi bi-check-circle"></i>Create`);
         }
     }
 
@@ -168,20 +174,20 @@ $('document').ready(function () {
                 <tr>
                    <th scope="row">${count}</th>
                    <td>
-                       <input hidden name="color-variable-${count}" value="${color.id}" tabindex="0" type="text">
+                       <input hidden name="color-variations-${count}" value="${color.id}" tabindex="0" type="text">
                        <input class="form-control" value="${color.text}" tabindex="0" type="text" readonly="readonly">
                    </td>
 
                    <td>
-                       <input hidden name="size-variable-${count}" value="${size.id}"type="text">
+                       <input hidden name="size-variations-${count}" value="${size.id}"type="text">
                        <input class="form-control" value="${size.text}" tabindex="0" type="text" readonly="readonly">
                    </td>
 
                    <td>
-                        <input class="form-control quantity-input default-value" name="quantity-variable-${count}" value="0" tabindex="0" type="number" min="0">
+                        <input class="form-control quantity-input default-value" name="quantity-variations-${count}" value="0" tabindex="0" type="number" min="0">
                    </td>
                    <td>
-                        <input class="form-control price-input default-value"  name="price-variable-${count}" value="0" tabindex="0" type="number" min="0">
+                        <input class="form-control price-input default-value"  name="price-variations-${count}" value="0" tabindex="0" type="number" min="0">
                    </td>
                 </tr>
                 `);
@@ -332,6 +338,8 @@ $('document').ready(function () {
     function showDetail(id) {
         idUpdate = id;
         showModal(true)
+        title.html('Cập nhật sản phẩm.');
+        btnClick.html(`<i class="bi bi-check-circle"></i>Update`);
         methodAction.val('update');
         $.ajax({
             url: actionUpdate + id,
@@ -354,6 +362,8 @@ $('document').ready(function () {
         $('input[name="productName"]').val(data.product_name);
         $('textarea[name="description"]').val(data.description);
         $('select[name="brand"]').val(data.brand_id).trigger('change');
+        $('select[name="color"]').prop('disabled', true);
+        $('select[name="sizes"]').prop('disabled', true);
         var imgArray = data.images;
         var colorUpdate = $('select[name="color"] option');
         var sizeUpdate = $('select[name="sizes"] option');
@@ -391,7 +401,6 @@ $('document').ready(function () {
             imageContainer.append(img);
         });
         table.slideDown();
-        btn.slideDown();
         btnTable.slideDown();
         var index = 0;
         $.each(variationsArray, function (indexVariation, itemVariation) {
@@ -415,20 +424,20 @@ $('document').ready(function () {
                 <tr>
                    <th scope="row">${index}</th>
                    <td>
-                       <input hidden name="color-variable-${count}" value="${itemVariation.color_id}" tabindex="0" type="text">
+                       <input hidden name="color-variations-${itemVariation.id}" value="${itemVariation.color_id}" tabindex="0" type="text">
                        <input class="form-control" value="${selectedColor.text}" tabindex="0" type="text" readonly="readonly">
                    </td>
 
                    <td>
-                       <input hidden name="size-variable-${count}" value="${itemVariation.size_id}"type="text">
+                       <input hidden name="size-variations-${itemVariation.id}" value="${itemVariation.size_id}"type="text">
                        <input class="form-control" value="${selectedSize.text}" tabindex="0" type="text" readonly="readonly">
                    </td>
 
                    <td>
-                        <input class="form-control quantity-input default-value" name="quantity-variable-${count}" value="${itemVariation.quantity}" tabindex="0" type="number" min="0">
+                        <input class="form-control quantity-input default-value" name="quantity-variations-${itemVariation.id}" value="${itemVariation.quantity}" tabindex="0" type="number" min="0">
                    </td>
                    <td>
-                        <input class="form-control price-input default-value"  name="price-variable-${count}" value="${itemVariation.price}" tabindex="0" type="number" min="0">
+                        <input class="form-control price-input default-value"  name="price-variations-${itemVariation.id}" value="${itemVariation.price}" tabindex="0" type="number" min="0">
                    </td>
                 </tr>
                 `);
@@ -451,8 +460,6 @@ $('document').ready(function () {
     // ajax update sản phẩm
     function updateProduct() {
         var formData = new FormData(formAdd[0]); // Tạo đối tượng FormData từ biểu mẫu
-        var countVariable = $('th[scope="row"]').length;
-        formData.append('lengthFor', countVariable) // số lượng biến thể và cho vào đối tượng FormData để gửi đi
         $.ajax({
             url: actionUpdate + idUpdate,
             method: 'POST',
@@ -463,8 +470,10 @@ $('document').ready(function () {
                 'X-CSRF-TOKEN': csrf_token
             },
             success: function (response) {
-                // loadTable();
-                console.log(response.data);
+                loadTable();
+                showModal(false);
+                toastr["success"]("Cập nhật thành công!");
+                console.log(response.message);
             },
             error: function (error) {
                 console.log(error);
