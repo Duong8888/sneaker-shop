@@ -1,6 +1,6 @@
 <div class="modal-content w-100">
     <div class="modal-header">
-        <p class="font-20">Thêm mới sản phẩm</p>
+        <p class="font-20 tex-title">Thêm mới sản phẩm</p>
         <button type="button" class="btn-close btn-cancel" data-bs-dismiss="modal" aria-label="Close"></button>
     </div>
     <div class="modal-body">
@@ -129,7 +129,7 @@
 
                             <div class="row mt-3 col-xl-12">
                                 <div class="col-12 text-center">
-                                    <button type="submit" class="btn btn-success waves-effect waves-light m-1"
+                                    <button type="submit" class="btn-create btn btn-success waves-effect waves-light m-1"
                                             id="btn-create">
                                         <i class="bi bi-check-circle"></i> Create
                                     </button>

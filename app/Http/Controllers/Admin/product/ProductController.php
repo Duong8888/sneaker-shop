@@ -64,10 +64,10 @@ class ProductController extends Controller
         for ($i = 1; $i <= $countVariations; $i++) {
             Variations::create([
                 'product_id' => $id,
-                'size_id' => (int)($request->input('size-variable-' . $i)),
-                'color_id' => (int)($request->input('color-variable-' . $i)),
-                'quantity' => $request->input('quantity-variable-' . $i),
-                'price' => $request->input('price-variable-' . $i),
+                'size_id' => (int)($request->input('size-variations-' . $i)),
+                'color_id' => (int)($request->input('color-variations-' . $i)),
+                'quantity' => $request->input('quantity-variations-' . $i),
+                'price' => $request->input('price-variations-' . $i),
             ]);
         }
         return response()->json(['message' => 'them moi thanh cong']);
@@ -83,10 +83,8 @@ class ProductController extends Controller
     {
         $product = Product::find($id);
         $requestAll = $request->all();
-        return response()->json(['data' => $requestAll]);
-        $countVariationsUpdate = (int)($request->input('lengthFor')); // lấy số lương biến thể đếm được ở bên giao diện
         if ($product->product_name !== $request->input('productName')) {
-            $slug = Str::slug($request->input('productName'));// tạo slug thông qua name
+            $slug = Str::slug($request->input('productName'));
             $product->product_name = $request->input('productName');
             $product->slug = $slug;
         }
@@ -102,7 +100,6 @@ class ProductController extends Controller
         if ($request->hasFile('files')) {
             // thêm ảnh vào folder public/uploads
             $result = uploadFile('uploads', $files, true);
-//            dd($result);
             ImagesProduct::where(['product_id' => $id])->delete();
             foreach ($result as $value) {
                 ImagesProduct::create([
@@ -111,34 +108,15 @@ class ProductController extends Controller
                 ]);
             }
         }
-        // thự hiện lưu các biến thể
-        /*
-         * lấy ra danh sách sản phẩm biến thể hiện tại
-         * vì phần color và size của mỗi biến thể là khác nhău không thể trùng lặp nên có thể dựa vào đó để lấy ra id của biến thể đó
-         * Lý do cần làm vậy vì phần update biến thể cần lấy id của nó để update
-         * Lý do nữa là do phần giao diện update khá là lằng nhằng vì có thể xóa biến thể tạo lại nên nó sẽ bị xáo trộn
-         * */
-//        $variationsOld = Variations::where('product_id',$id)->get();
-//        // sao lư lại dữ liệu trước khi update
-//        foreach ($variationsOld as $value){
-//            VariationsHistories::create([
-//                'id' => $value->id,
-//                'product_id' => $id,
-//                'size_id' => $value->size_id,
-//                'color_id' => $value->color_id,
-//                'quantity' => $value->quantity,
-//                'price' => $value->price,
-//            ]);
-//        }
-//        for ($i = 1; $i <= $countVariationsUpdate; $i++) {
-//            Variations::create([
-//                'product_id' => $id,
-//                'size_id' => (int)($request->input('size-variable-' . $i)),
-//                'color_id' => (int)($request->input('color-variable-' . $i)),
-//                'quantity' => $request->input('quantity-variable-' . $i),
-//                'price' => $request->input('price-variable-' . $i),
-//            ]);
-//        }
+        // thự hiện update các biến thể
+       foreach ($request->all() as $key => $value){
+           // Kiểm tra nếu khóa bắt đầu bằng "quantity-Variations-"
+           if(strpos($key, 'quantity-variations-') === 0 || strpos($key, 'price-variations-') === 0){
+               $variableId = explode('-', $key)[2]; // lấy id bản gi cần update
+               $variableIdColum = explode('-', $key)[0];
+               Variations::where('id', $variableId)->update([$variableIdColum => $value]);
+           }
+       }
         $product->save();
         return response()->json(['message' => 'updated thanh cong']);
     }
