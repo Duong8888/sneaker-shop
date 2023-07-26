@@ -110,7 +110,12 @@
                             </li>
                             <li class="menu-item">
                                 <a href="{{route('color.index')}}" class="menu-link">
-                                    <span class="menu-text">Các thuộc tính</span>
+                                    <span class="menu-text">Thuộc tính mằu sắc</span>
+                                </a>
+                            </li>
+                            <li class="menu-item">
+                                <a href="{{route('size.index')}}" class="menu-link">
+                                    <span class="menu-text">Thuộc tính kích cỡ</span>
                                 </a>
                             </li>
 
