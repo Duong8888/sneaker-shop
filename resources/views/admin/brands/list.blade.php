@@ -69,7 +69,7 @@
                                     </tr>
                                     </thead>
 
-                                    <tbody id="brandList">
+                                    <tbody id="brandList" data-route="{{route('route.brands.index')}}">
 
                                     </tbody>
                                 </table>

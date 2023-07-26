@@ -17,15 +17,19 @@ class BrandsController extends Controller
     const DOT = '.';
     const BRANDS = 'brands';
   public function list(Request $request){
-      $data = Brand::all();
+
 
       // Kiểm tra nếu yêu cầu JSON, trả về JSON data
-      if ($request->wantsJson()) {
-          return response()->json($data);
-      }
+//      if ($request->wantsJson()) {
+//          return response()->json($data);
+//      }
 
       return view(self::OBJECT . self::DOT .
           self::BRANDS . self::DOT . __FUNCTION__);
+  }
+  public function index(){
+      $data = Brand::all();
+      return response()->json($data);
   }
 
 
