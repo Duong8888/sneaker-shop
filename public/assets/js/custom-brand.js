@@ -31,6 +31,8 @@ $(document).ready(function (){
                 xhr.setRequestHeader('X-CSRF-TOKEN', csrf_token);
             },
             success: function (data){
+                console.log(data);
+                // sử dụng empty() để làm sạch dữ liệu cũ trong id=(brandList) trước khi hiển thị dữ liệu mới
                 $('#brandList').empty();
                 $.each(data,function (index, item){
                     $('#brandList').append(`
@@ -48,9 +50,7 @@ $(document).ready(function (){
                             </td>
                         </tr>
                     `);
-
                 });
-
             },
             error: function (){
                 console.log('error')
@@ -93,7 +93,6 @@ $(document).ready(function (){
                 $('tr[data-id="' + id + '"]').remove();
                 loadAll();
                 toastr["success"]("Dữ liệu đã được đưa vào thùng rác! bạn có thể khôi phục tại đó!")
-                console.log(data);
             },
             error: function (){
                 console.log('Có lỗi sảy ra');

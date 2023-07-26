@@ -35,6 +35,7 @@ class BrandRequest extends FormRequest
                         $rules = [
                             'name_brand' => 'required',
                             'slug' => 'unique:brands',
+                            'image' => 'required',
                         ];
                         break;
                     case 'edit':
@@ -53,6 +54,7 @@ class BrandRequest extends FormRequest
         return [
           'name_brand.required' => 'không được bỏ trống tên',
             'slug.unique' => 'slug đang bị trùng lặp! hãy đổi tên khác :)))',
+            'image.required' => 'bạn chưa chọn ảnh',
         ];
     }
 }

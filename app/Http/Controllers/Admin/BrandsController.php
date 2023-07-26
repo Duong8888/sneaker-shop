@@ -23,15 +23,13 @@ class BrandsController extends Controller
       if ($request->wantsJson()) {
           return response()->json($data);
       }
-//      $data_json = response()->json($data);
-//      dd($data_json);
-    return view(self::OBJECT . self::DOT .
-        self::BRANDS . self::DOT . __FUNCTION__,['data' => $data]);
+
+      return view(self::OBJECT . self::DOT .
+          self::BRANDS . self::DOT . __FUNCTION__);
   }
 
 
     public function add(BrandRequest $request){
-
 
         if ($request->isMethod('POST')){
             // lấy ra mảng các file đã chọn
