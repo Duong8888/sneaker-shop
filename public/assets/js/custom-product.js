@@ -1,7 +1,13 @@
 $('document').ready(function () {
     var csrf_token = $('meta[name="csrf-token"]').attr('content')
     var dataTable;
-    var actionDelete = 'product/delete/'
+    var actionDelete = 'product/delete/';
+    var actionUpdate = 'product/edit/'
+    var idUpdate;
+    var methodAction = $('input[name="actionMethod"]');
+    var formAdd = $('#form-add');
+    var title =$('.tex-title');
+    var btnClick = $('.btn-create');
 
     // ajax load dữ liệu
     function loadTable() {
@@ -31,17 +37,22 @@ $('document').ready(function () {
                             "render": function (data, type, row, meta) {
                                 var productId = row.id; // Lấy ID của sản phẩm từ dữ liệu hàng (data)
                                 return "" +
-                                    `<button class='btn btn-blue btn-update' data-id='${productId}'>Cập nhật</button>  ` +
+                                    `<button class='btn btn-blue btn-update' type='button' data-id='${productId}'>Cập nhật</button>  ` +
                                     `<button class='btn btn-danger btn-delete' data-id='${productId}'>Xóa</button>`;
                             }
                         }
                     ]
                 });
                 $(document).off('click', '.btn-delete');
+                $(document).off('click', '.btn-update');
                 $(document).on('click', '.btn-delete', function () {
                     if (confirm('Bạn có chắc chắn xóa không.')) {
                         deleteProduct($(this).data('id'));
                     }
+                });
+                $(document).on('click', '.btn-update', function (e) {
+                    e.preventDefault();
+                    showDetail($(this).data('id'));
                 });
             },
             error: function (error) {
@@ -58,26 +69,61 @@ $('document').ready(function () {
         multiple: true,
     });
 
-    $(".brand").select2({
+    let brand = $(".brand");
+    brand.select2({
         minimumResultsForSearch: -1, // Ẩn ô tìm kiếm
+        multiple: false,
     });
 
-// ajax thêm mới color và size cho sản phẩm
+    let btnShowModal = $('.btn-show-modal');
+    let btnCloseModal = $('.btn-cancel');
+    let modal = $('.main-modal');
+    let imageContainer = $('.selected-images');
+    let table = $('#table-variable').slideUp();
+    let btn = $('#variable').slideUp();
+
+    modal.hide();
+
+    function showModal(action = true) {
+        if (action) {
+            $('select[name="color"]').prop('disabled', false);
+            $('select[name="sizes"]').prop('disabled', false);
+            modal.show();
+        } else {
+            $(".select2").val(null).trigger("change");
+            formAdd[0].reset();
+            table.slideDown();
+            btn.slideUp();
+            modal.hide();
+            imageContainer.html('');
+            ShowErrors([], false);
+            methodAction.val('');
+            title.html('Thêm mới sản phẩm.');
+            btnClick.html(`<i class="bi bi-check-circle"></i>Create`);
+        }
+    }
+
+    btnCloseModal.on('click', function () {
+        showModal(false);
+    });
+    btnShowModal.on('click', showModal);
+
+
+    // ajax thêm mới color và size cho sản phẩm
     let arrayColor = [];
     let arraySize = [];
-    let arrayColorText;
-    let arraySizeText;
     let color = $('select[name="color"]');
     let size = $('select[name="sizes"]');
-    let btn = $('#variable').slideUp();
-    let table = $('#table-variable').slideUp();
     let tableMain = $('.main-tab');
     let btnTable = $('.btn-table').slideUp();
     let count = 0;
+    let statusCheck = $('#statusCheck'); // kiểm tra tạo biến thể chưa
+    statusCheck.slideUp();// ẩn ô input
     $(document).on('select2:selecting', '.select2', function (e) {
         var selectedOption = e.params.args.data;
         var url = $(this).data('route');
-        $('#variable').slideDown();
+        btn.slideDown();
+        $('#variable-box').slideDown();
         if (!selectedOption.hasOwnProperty('element')) {
             // Đây là một giá trị mới được nhập vào ô input
             var newValue = selectedOption.text;
@@ -110,8 +156,9 @@ $('document').ready(function () {
 
     // Tạo ra biến thể
     let status = 0;
-    btn.on('click', function () {
-        if (status % 2 === 0) {
+    btnCloseModal.add(btn).on('click', function () {
+        if (status % 2 === 0 && $(this).attr('id') === 'variable') {
+            statusCheck.prop('checked', true);
             count = 0;
             btnTable.slideDown();
             table.slideDown();
@@ -119,6 +166,7 @@ $('document').ready(function () {
             // lấy ra mảng các thuộc tính được chọn để tiến hành tạo ra biến thể
             arrayColor = color.select2('data');
             arraySize = size.select2('data');
+            console.log(arrayColor);
             $.each(arrayColor, function (index, color) {
                 $.each(arraySize, function (index, size) {
                     count++;
@@ -126,26 +174,41 @@ $('document').ready(function () {
                 <tr>
                    <th scope="row">${count}</th>
                    <td>
-                       <input hidden name="color-variable-${count}" value="${color.id}" tabindex="0" type="text">
+                       <input hidden name="color-variations-${count}" value="${color.id}" tabindex="0" type="text">
                        <input class="form-control" value="${color.text}" tabindex="0" type="text" readonly="readonly">
                    </td>
 
                    <td>
-                       <input hidden name="size-variable-${count}" value="${size.id}"type="text">
+                       <input hidden name="size-variations-${count}" value="${size.id}"type="text">
                        <input class="form-control" value="${size.text}" tabindex="0" type="text" readonly="readonly">
                    </td>
 
                    <td>
-                        <input class="form-control quantity-input" name="quantity-variable-${count}" value="" tabindex="0" type="number" min="0">
+                        <input class="form-control quantity-input default-value" name="quantity-variations-${count}" value="0" tabindex="0" type="number" min="0">
                    </td>
                    <td>
-                        <input class="form-control price-input"  name="price-variable-${count}" value="" tabindex="0" type="number" min="0">
+                        <input class="form-control price-input default-value"  name="price-variations-${count}" value="0" tabindex="0" type="number" min="0">
                    </td>
                 </tr>
                 `);
+                    $('.default-value').on("focus", function () {
+                        // Xóa số 0 khi người dùng trỏ chuột vào ô input
+                        if ($(this).val() === "0") {
+                            $(this).val("");
+                        }
+                        console.log('1');
+                    });
+                    $(".default-value").on("blur", function () {
+                        // Kiểm tra nếu ô input trống
+                        if ($(this).val() === "") {
+                            $(this).val(0); // Đặt giá trị mặc định là 0
+                        }
+                    });
                 })
             })
+
         } else {
+            statusCheck.prop('checked', false);
             btn.text(`Tạo ra biến thể`);
             table.slideUp();
             btnTable.slideUp();
@@ -180,7 +243,6 @@ $('document').ready(function () {
     fileInput.slideUp();
     fileInput.on('change', function () {
         var fileList = this.files;
-        var imageContainer = $('.selected-images');
         imageContainer.html('');
         for (var i = 0; i < fileList.length; i++) {
             var file = fileList[i];
@@ -197,11 +259,18 @@ $('document').ready(function () {
         }
     });
     // ajax save dữ liệu
-
-    $('#form-add').on('submit', function (e) {
+    formAdd.on('submit', function (e) {
         e.preventDefault();
-        var action = $(this).attr('data-route');
-        var formData = new FormData($('#form-add')[0]); // Tạo đối tượng FormData từ biểu mẫu
+        if (methodAction.val() === 'update') {
+            updateProduct();
+        } else {
+            addProduct();
+        }
+    });
+
+    function addProduct() {
+        var action = formAdd.attr('data-route');
+        var formData = new FormData(formAdd[0]); // Tạo đối tượng FormData từ biểu mẫu
         var countVariable = $('th[scope="row"]').length;
         formData.append('lengthFor', countVariable) // số lượng biến thể và cho vào đối tượng FormData để gửi đi
         $.ajax({
@@ -216,30 +285,199 @@ $('document').ready(function () {
             success: function (response) {
                 loadTable();
                 console.log(response.message);
-                toastr["success"]("Thêm mới thành công!")
+                toastr["success"]("Thêm mới thành công!");
+                showModal(false);
             },
             error: function (error) {
-                console.log(error)
+                console.log(error.responseJSON.errors);
+                ShowErrors(error.responseJSON.errors);
             }
         });
-    });
+    }
 
     // xóa sản phẩm sử dụng ajax
     function deleteProduct(id) {
         $.ajax({
             url: actionDelete + id,
             method: "DELETE",
+            headers: {
+                'X-CSRF-TOKEN': csrf_token
+            },
             success: function (data) {
                 loadTable();
                 toastr["success"]("Xóa thành công!");
                 console.log(data.message);
             },
-            headers: {
-                'X-CSRF-TOKEN': csrf_token
+
+            error: function (error) {
+                console.log(error)
+            }
+        })
+    }
+
+
+    // hiển thị message lỗi dữ liệu lỗi được gửi sang từ form request của laravel
+    function ShowErrors(data, status = true) {
+        var showErrorItem = $('.show-error');
+        if (status) {
+            $.each(showErrorItem, function (indexHtml, itemHtml) {
+                $.each(data, function (index, item) {
+                    if ($(itemHtml).attr('data-name') === index) {
+                        $(itemHtml).text(item);
+                    }
+                });
+            });
+        } else {
+            $.each(showErrorItem, function (indexHtml, itemHtml) {
+                $(itemHtml).text('');
+            });
+        }
+    }
+
+    // ajax show dữ liệu khi bấm cập nhật
+    function showDetail(id) {
+        idUpdate = id;
+        showModal(true)
+        title.html('Cập nhật sản phẩm.');
+        btnClick.html(`<i class="bi bi-check-circle"></i>Update`);
+        methodAction.val('update');
+        $.ajax({
+            url: actionUpdate + id,
+            method: 'GET',
+            data: {
+                _token: csrf_token,
+            },
+            success: function (data) {
+                console.log(data.data);
+                showModal();
+                showDataForm(data.data);
             },
             error: function (error) {
                 console.log(error)
             }
         })
+    }
+
+    function showDataForm(data) {
+        $('input[name="productName"]').val(data.product_name);
+        $('textarea[name="description"]').val(data.description);
+        $('select[name="brand"]').val(data.brand_id).trigger('change');
+        $('select[name="color"]').prop('disabled', true);
+        $('select[name="sizes"]').prop('disabled', true);
+        var imgArray = data.images;
+        var colorUpdate = $('select[name="color"] option');
+        var sizeUpdate = $('select[name="sizes"] option');
+        var variationsArray = data.variations;
+        var arraySize = [];
+        var arrayColor = [];
+        $.each(variationsArray, function (indexVariations, itemVariations) {
+            arrayColor.push(itemVariations.color_id);
+            arraySize.push(itemVariations.size_id);
+        });
+        arraySize = [...new Set(arraySize)];
+        arrayColor = [...new Set(arrayColor)];
+        $.each(arrayColor, function (indexColor, itemColor) {
+            $.each(colorUpdate, function (index, item) {
+                if (itemColor == $(item).val()) {
+                    $(item).prop('selected', true);
+                    $(item).trigger('change');
+                }
+            });
+        });
+        $.each(arraySize, function (indexColor, itemSize) {
+            $.each(sizeUpdate, function (index, item) {
+                if (itemSize == $(item).val()) {
+                    $(item).prop('selected', true);
+                    $(item).trigger('change');
+                }
+            });
+        });
+        $.each(imgArray, function (index, item) {
+            var img = `
+                    <div class="item-image">
+                        <img src="/storage/${item.url}" />
+                    </div>
+                `;
+            imageContainer.append(img);
+        });
+        table.slideDown();
+        btnTable.slideDown();
+        var index = 0;
+        $.each(variationsArray, function (indexVariation, itemVariation) {
+            index++;
+            // Tìm đối tượng tương ứng trong mảng color dựa vào color_id
+            colorUpdate.each(function(index, item) {
+                if ($(item).val() == itemVariation.color_id) {
+                    selectedColor = item;
+                    return false; // Dừng vòng lặp khi tìm thấy phần tử phù hợp
+                }
+            });
+
+            // Tìm đối tượng tương ứng trong mảng size dựa vào size_id
+            sizeUpdate.each(function(index, item) {
+                if ($(item).val() == itemVariation.color_id) {
+                    selectedSize = item;
+                    return false; // Dừng vòng lặp khi tìm thấy phần tử phù hợp
+                }
+            });
+            tableMain.append(`
+                <tr>
+                   <th scope="row">${index}</th>
+                   <td>
+                       <input hidden name="color-variations-${itemVariation.id}" value="${itemVariation.color_id}" tabindex="0" type="text">
+                       <input class="form-control" value="${selectedColor.text}" tabindex="0" type="text" readonly="readonly">
+                   </td>
+
+                   <td>
+                       <input hidden name="size-variations-${itemVariation.id}" value="${itemVariation.size_id}"type="text">
+                       <input class="form-control" value="${selectedSize.text}" tabindex="0" type="text" readonly="readonly">
+                   </td>
+
+                   <td>
+                        <input class="form-control quantity-input default-value" name="quantity-variations-${itemVariation.id}" value="${itemVariation.quantity}" tabindex="0" type="number" min="0">
+                   </td>
+                   <td>
+                        <input class="form-control price-input default-value"  name="price-variations-${itemVariation.id}" value="${itemVariation.price}" tabindex="0" type="number" min="0">
+                   </td>
+                </tr>
+                `);
+            $('.default-value').on("focus", function () {
+                // Xóa số 0 khi người dùng trỏ chuột vào ô input
+                if ($(this).val() === "0") {
+                    $(this).val("");
+                }
+                console.log('1');
+            });
+            $(".default-value").on("blur", function () {
+                // Kiểm tra nếu ô input trống
+                if ($(this).val() === "") {
+                    $(this).val(0); // Đặt giá trị mặc định là 0
+                }
+            });
+        });
+    }
+
+    // ajax update sản phẩm
+    function updateProduct() {
+        var formData = new FormData(formAdd[0]); // Tạo đối tượng FormData từ biểu mẫu
+        $.ajax({
+            url: actionUpdate + idUpdate,
+            method: 'POST',
+            data: formData,
+            processData: false, // Set false để ngăn jQuery xử lý dữ liệu FormData
+            contentType: false, // Set false để không thiết lập Header 'Content-Type'
+            headers: {
+                'X-CSRF-TOKEN': csrf_token
+            },
+            success: function (response) {
+                loadTable();
+                showModal(false);
+                toastr["success"]("Cập nhật thành công!");
+                console.log(response.message);
+            },
+            error: function (error) {
+                console.log(error);
+            }
+        });
     }
 });

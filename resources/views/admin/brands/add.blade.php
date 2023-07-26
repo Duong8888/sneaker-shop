@@ -21,6 +21,7 @@
                     <div class="col-xl-6">
 
 
+
                         <div class="mb-3">
                             <label class="form-label">Tên thương hiệu</label>
                             <input type="text" class="form-control" name="name_brand">

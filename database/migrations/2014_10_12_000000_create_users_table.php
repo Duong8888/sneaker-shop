@@ -16,9 +16,18 @@ return new class extends Migration
             $table->string('name');
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
-            $table->string('password');
+            $table->string('password')->nullable();;
             $table->rememberToken()->nullable();
             $table->string('address')->nullable();
+
+            $table->string('github_id')->nullable()->unique();
+            $table->string('github_username')->nullable();
+            $table->text('github_token')->nullable();
+
+            $table->string('google_id')->nullable()->unique();
+            $table->string('google_email')->nullable();
+            $table->text('google_token')->nullable();
+
             $table->unsignedBigInteger ('role_id')->nullable();
             $table->foreign('role_id')->references('id')->on('roles');
             $table->timestamps();
