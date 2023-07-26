@@ -415,7 +415,7 @@ $('document').ready(function () {
 
             // Tìm đối tượng tương ứng trong mảng size dựa vào size_id
             sizeUpdate.each(function(index, item) {
-                if ($(item).val() == itemVariation.color_id) {
+                if ($(item).val() == itemVariation.size_id) {
                     selectedSize = item;
                     return false; // Dừng vòng lặp khi tìm thấy phần tử phù hợp
                 }
