@@ -9,6 +9,8 @@ use App\Http\Controllers\Admin\TrashBrandController;
 use App\Http\Controllers\Admin\color\ColorController;
 use App\Http\Controllers\Admin\size\SizeController;
 
+use App\Http\Controllers\client\ProductClientController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -77,5 +79,5 @@ Route::post('/brands/delete/{id}', [TrashBrandController::class, 'delete'])->nam
 
 
 
-
+Route::get('/home-page', [ProductClientController::class, 'index'])->name('route.home-page.index');
 //require __DIR__.'/auth.php';

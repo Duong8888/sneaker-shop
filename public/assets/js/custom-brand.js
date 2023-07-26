@@ -46,7 +46,6 @@ $(document).ready(function () {
                             </td>
                             <td>${item.slug}</td>
                             <td>
-
                                 <button class="btn btn-danger delete_brand" data-id="${item.id}">Delete</button>
                                 <button class="btn btn-primary update_brand" data-id="${item.id}">Update</button>
                             </td>
