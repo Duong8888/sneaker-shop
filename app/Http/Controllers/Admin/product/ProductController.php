@@ -118,7 +118,8 @@ class ProductController extends Controller
            }
        }
         $product->save();
-        return response()->json(['message' => 'updated thanh cong']);
+       $data = $request->all();
+        return response()->json(['message' => $data]);
     }
 
     public function delete(Request $request, $id)

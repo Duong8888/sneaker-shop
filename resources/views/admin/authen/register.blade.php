@@ -2,7 +2,7 @@
 <html lang="en" data-topbar-color="dark">
 
 
-<!-- Mirrored from coderthemes.com/ubold/layouts/default/auth-login-2.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 12 Jul 2023 10:26:04 GMT -->
+<!-- Mirrored from coderthemes.com/ubold/layout/default/auth-login-2.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 12 Jul 2023 10:26:04 GMT -->
 <head>
     <meta charset="utf-8" />
     <title>Log In | Ubold - Responsive Bootstrap 5 Admin Dashboard</title>
@@ -131,5 +131,5 @@
 <script src="{{asset('assets/pages/authentication.init.js')}}"></script>
 </body>
 
-<!-- Mirrored from coderthemes.com/ubold/layouts/default/auth-login-2.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 12 Jul 2023 10:26:04 GMT -->
+<!-- Mirrored from coderthemes.com/ubold/layout/default/auth-login-2.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 12 Jul 2023 10:26:04 GMT -->
 </html>

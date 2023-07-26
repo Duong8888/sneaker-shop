@@ -2,7 +2,7 @@
 <html lang="en" data-topbar-color="dark">
 
 
-<!-- Mirrored from coderthemes.com/ubold/layouts/default/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 12 Jul 2023 10:24:12 GMT -->
+<!-- Mirrored from coderthemes.com/ubold/layout/default/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 12 Jul 2023 10:24:12 GMT -->
 <head>
     <meta charset="utf-8"/>
     <title>Dashboard | Ubold - Responsive Bootstrap 5 Admin Dashboard</title>
