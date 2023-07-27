@@ -12,47 +12,8 @@
     <!-- Favicon -->
     <link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.ico">
 
-    <!-- CSS
-   ========================= -->
-    <!--bootstrap min css-->
-{{--    <link rel="stylesheet" href="assets/css/bootstrap.min.css">--}}
-    <!--owl carousel min css-->
-    <link rel="stylesheet" href="{{asset('ui-client/assets/css/bootstrap.min.css')}}">
-{{--    <link rel="stylesheet" href="assets/css/owl.carousel.min.css">--}}
-    <!--slick min css-->
-    <link rel="stylesheet" href="{{asset('ui-client/assets/css/owl.carousel.min.css')}}">
-{{--    <link rel="stylesheet" href="assets/css/slick.css">--}}
-    <!--magnific popup min css-->
-    <link rel="stylesheet" href="{{asset('ui-client/assets/css/slick.css')}}">
-{{--    <link rel="stylesheet" href="assets/css/magnific-popup.css">--}}
-    <!--font awesome css-->
-    <link rel="stylesheet" href="{{asset('ui-client/assets/css/magnific-popup.css')}}">
-{{--    <link rel="stylesheet" href="assets/css/font.awesome.css">--}}
-    <!--ionicons min css-->
-    <link rel="stylesheet" href="{{asset('ui-client/assets/css/font.awesome.css')}}">
-{{--    <link rel="stylesheet" href="assets/css/ionicons.min.css">--}}
-    <!--animate css-->
-    <link rel="stylesheet" href="{{asset('ui-client/assets/css/ionicons.min.css')}}">
-{{--    <link rel="stylesheet" href="assets/css/animate.css">--}}
-    <!--jquery ui min css-->
-    <link rel="stylesheet" href="{{asset('ui-client/assets/css/animate.css')}}">
-{{--    <link rel="stylesheet" href="assets/css/jquery-ui.min.css">--}}
-    <!--slinky menu css-->
-    <link rel="stylesheet" href="{{asset('ui-client/assets/css/jquery-ui.min.css')}}">
-{{--    <link rel="stylesheet" href="assets/css/slinky.menu.css">--}}
-    <!-- Plugins CSS -->
-    <link rel="stylesheet" href="{{asset('ui-client/assets/css/slinky.menu.css')}}">
-{{--    <link rel="stylesheet" href="assets/css/plugins.css">--}}
-
-    <link rel="stylesheet" href="{{asset('ui-client/assets/css/plugins.css')}}">
-    <!-- Main Style CSS -->
-{{--    <link rel="stylesheet" href="assets/css/style.css">--}}
-
-    <link rel="stylesheet" href="{{asset('ui-client/assets/css/style.css')}}">
-    <!--modernizr min js here-->
-{{--    <script src="assets/js/vendor/modernizr-3.7.1.min.js"></script>--}}
-    <script src="{{asset('ui-client/assets/js/vendor/modernizr-3.7.1.min.js')}}"></script>
-
+    @include('client.templates.style')
+    @yield('style-page')
 </head>
 
 <body>
@@ -79,18 +40,51 @@
                     <div class="col-lg-6 col-md-6">
                         <div class="top_right text-end">
                             <ul>
-                                <li class="top_links"><a href="#"><i class="ion-android-person"></i> My Account<i class="ion-ios-arrow-down"></i></a>
+                                <li class="top_links"><a href="#"><i class="ion-android-person"></i> My Account<i
+                                            class="ion-ios-arrow-down"></i></a>
                                     <ul class="dropdown_links">
-                                        <li><a href="checkout.html">Checkout </a></li>
-                                        <li><a href="my-account.html">My Account </a></li>
-                                        <li><a href="cart.html">Shopping Cart</a></li>
-                                        <li><a href="wishlist.html">Wishlist</a></li>
+
+                                        @if (Route::has('login'))
+                                            <div class="sm:fixed sm:top-0 sm:right-0 p-6 text-right z-10">
+                                                @auth
+                                                    <li>
+                                                        <a href="{{ url('/dashboard') }}"
+                                                           class="font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">Dashboard</a>
+                                                    </li>
+                                                    <li>
+                                                        <form method="POST" action="{{ route('logout') }}">
+                                                            @csrf
+                                                            <button class="btn dropdown-item notify-item p-0 m-0">
+                                                                <a href="#">
+                                                                    <i class="bi bi-box-arrow-right"></i>
+                                                                    <span>Logout</span>
+                                                                </a>
+                                                            </button>
+                                                        </form>
+                                                    </li>
+                                                @else
+                                                    <li>
+                                                        <a href="{{ route('login') }}"
+                                                           class="font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">Log
+                                                            in</a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="{{ route('login') }}"
+                                                           class="font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">Register</a>
+                                                    </li>
+                                                @endauth
+                                            </div>
+                                        @endif
                                     </ul>
                                 </li>
-                                <li class="language"><a href="#"><img src="{{asset('ui-client/assets/img/logo/language.png')}}" alt="">en-gb<i class="ion-ios-arrow-down"></i></a>
+                                <li class="language"><a href="#"><img
+                                            src="{{asset('ui-client/assets/img/logo/language.png')}}" alt="">en-gb<i
+                                            class="ion-ios-arrow-down"></i></a>
                                     <ul class="dropdown_language">
-                                        <li><a href="#"><img src="{{asset('ui-client/assets/img/logo/language.png')}}" alt=""> English</a></li>
-                                        <li><a href="#"><img src="{{asset('ui-client/assets/img/logo/language2.png')}}" alt=""> Germany</a></li>
+                                        <li><a href="#"><img src="{{asset('ui-client/assets/img/logo/language.png')}}"
+                                                             alt=""> English</a></li>
+                                        <li><a href="#"><img src="{{asset('ui-client/assets/img/logo/language2.png')}}"
+                                                             alt=""> Germany</a></li>
                                     </ul>
                                 </li>
                                 <li class="currency"><a href="#">$ USD<i class="ion-ios-arrow-down"></i></a>
@@ -238,7 +232,8 @@
                                                     <li><a href="shop-fullwidth.html">Full Width</a></li>
                                                     <li><a href="shop-fullwidth-list.html">Full Width list</a></li>
                                                     <li><a href="shop-right-sidebar.html">Right Sidebar </a></li>
-                                                    <li><a href="shop-right-sidebar-list.html"> Right Sidebar list</a></li>
+                                                    <li><a href="shop-right-sidebar-list.html"> Right Sidebar list</a>
+                                                    </li>
                                                     <li><a href="shop-list.html">List View</a></li>
                                                 </ul>
                                             </li>
@@ -339,7 +334,8 @@
 
                     <div class="top_right text-end">
                         <ul>
-                            <li class="top_links"><a href="#"><i class="ion-android-person"></i> My Account<i class="ion-ios-arrow-down"></i></a>
+                            <li class="top_links"><a href="#"><i class="ion-android-person"></i> My Account<i
+                                        class="ion-ios-arrow-down"></i></a>
                                 <ul class="dropdown_links">
                                     <li><a href="checkout.html">Checkout </a></li>
                                     <li><a href="my-account.html">My Account </a></li>
@@ -347,7 +343,8 @@
                                     <li><a href="wishlist.html">Wishlist</a></li>
                                 </ul>
                             </li>
-                            <li class="language"><a href="#"><img src="assets/img/logo/language.png" alt="">en-gb<i class="ion-ios-arrow-down"></i></a>
+                            <li class="language"><a href="#"><img src="assets/img/logo/language.png" alt="">en-gb<i
+                                        class="ion-ios-arrow-down"></i></a>
                                 <ul class="dropdown_language">
                                     <li><a href="#"><img src="assets/img/logo/language.png" alt=""> English</a></li>
                                     <li><a href="#"><img src="assets/img/logo/language2.png" alt=""> Germany</a></li>
@@ -472,93 +469,10 @@
 <!--Offcanvas menu area end-->
 
 <!--slider area start-->
-<section class="slider_section slider_two mb-50">
-    <div class="slider_area owl-carousel">
-        <div class="single_slider d-flex align-items-center" data-bgimg="{{asset('ui-client/assets/img/slider/slider10.jpg')}}">
-            <div class="container">
-                <div class="row">
-                    <div class="col-12">
-                        <div class="slider_content">
-                            <h2>Hight Quality</h2>
-                            <h1>The Parts Of Shock Absorbers Assembly</h1>
-                            <a class="button" href="shop.html">shopping now</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-        <div class="single_slider d-flex align-items-center" data-bgimg="{{asset('ui-client/assets/img/slider/slider11.jpg')}}">
-            <div class="container">
-                <div class="row">
-                    <div class="col-12">
-                        <div class="slider_content">
-                            <h2>Special Offer</h2>
-                            <h1>Get &250 In Total Discount On A New Set Of Tries</h1>
-                            <a class="button" href="shop.html">shopping now</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-        <div class="single_slider d-flex align-items-center" data-bgimg="{{asset('ui-client/assets/img/slider/slider12.jpg')}}">
-            <div class="container">
-                <div class="row">
-                    <div class="col-12">
-                        <div class="slider_content">
-                            <h2>HP Racer Skutex</h2>
-                            <h1>Feel The Greatest Oil Power With Best One Oil</h1>
-                            <a class="button" href="shop.html">shopping now</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-    </div>
-</section>
+@include('client.templates.banner')
 <!--slider area end-->
 
-<!--banner area start-->
-{{--<section class="banner_area mb-50">--}}
-{{--    <div class="container">--}}
-{{--        <div class="row">--}}
-{{--            <div class="col-12">--}}
-{{--                <div class="banner_container">--}}
-{{--                    <div class="single_banner">--}}
-{{--                        <div class="banner_thumb">--}}
-{{--                            <a href="shop.html"><img src="assets/img/bg/banner3.jpg" alt=""></a>--}}
-{{--                            <div class="banner_text">--}}
-{{--                                <h3>Car Audio</h3>--}}
-{{--                                <h2>Super Natural Sound</h2>--}}
-{{--                                <a href="shop.html">Shop Now</a>--}}
-{{--                            </div>--}}
-{{--                        </div>--}}
-{{--                    </div>--}}
-{{--                    <div class="single_banner">--}}
-{{--                        <div class="banner_thumb">--}}
-{{--                            <a href="shop.html"><img src="assets/img/bg/banner4.jpg" alt=""></a>--}}
-{{--                            <div class="banner_text">--}}
-{{--                                <h3>All - New</h3>--}}
-{{--                                <h2>Perfomance Parts</h2>--}}
-{{--                                <a href="shop.html">Shop Now</a>--}}
-{{--                            </div>--}}
-{{--                        </div>--}}
-{{--                    </div>--}}
-{{--                </div>--}}
-{{--            </div>--}}
-{{--        </div>--}}
-{{--    </div>--}}
-{{--</section>--}}
-<!--banner area end-->
-
-
 @yield('content')
-
-
-
-
 
 <!--call to action start-->
 <section class="call_to_action">
@@ -643,7 +557,8 @@
                         <p>We’ll never share your email address with a third-party.</p>
                         <div class="subscribe_form">
                             <form id="mc-form" class="mc-form footer-newsletter">
-                                <input id="mc-email" type="email" autocomplete="off" placeholder="Enter you email address here..." />
+                                <input id="mc-email" type="email" autocomplete="off"
+                                       placeholder="Enter you email address here..."/>
                                 <button id="mc-submit">Subscribe</button>
                             </form>
                             <!-- mailchimp-alerts Start -->
@@ -713,16 +628,24 @@
                                 <div class="modal_tab_button">
                                     <ul class="nav product_navactive owl-carousel" role="tablist">
                                         <li>
-                                            <a class="nav-link active" data-toggle="tab" href="#tab1" role="tab" aria-controls="tab1" aria-selected="false"><img src="assets/img/product/product1.jpg" alt=""></a>
+                                            <a class="nav-link active" data-toggle="tab" href="#tab1" role="tab"
+                                               aria-controls="tab1" aria-selected="false"><img
+                                                    src="assets/img/product/product1.jpg" alt=""></a>
                                         </li>
                                         <li>
-                                            <a class="nav-link" data-toggle="tab" href="#tab2" role="tab" aria-controls="tab2" aria-selected="false"><img src="assets/img/product/product2.jpg" alt=""></a>
+                                            <a class="nav-link" data-toggle="tab" href="#tab2" role="tab"
+                                               aria-controls="tab2" aria-selected="false"><img
+                                                    src="assets/img/product/product2.jpg" alt=""></a>
                                         </li>
                                         <li>
-                                            <a class="nav-link button_three" data-toggle="tab" href="#tab3" role="tab" aria-controls="tab3" aria-selected="false"><img src="assets/img/product/product3.jpg" alt=""></a>
+                                            <a class="nav-link button_three" data-toggle="tab" href="#tab3" role="tab"
+                                               aria-controls="tab3" aria-selected="false"><img
+                                                    src="assets/img/product/product3.jpg" alt=""></a>
                                         </li>
                                         <li>
-                                            <a class="nav-link" data-toggle="tab" href="#tab4" role="tab" aria-controls="tab4" aria-selected="false"><img src="assets/img/product/product5.jpg" alt=""></a>
+                                            <a class="nav-link" data-toggle="tab" href="#tab4" role="tab"
+                                               aria-controls="tab4" aria-selected="false"><img
+                                                    src="assets/img/product/product5.jpg" alt=""></a>
                                         </li>
 
                                     </ul>
@@ -736,10 +659,12 @@
                                 </div>
                                 <div class="modal_price mb-10">
                                     <span class="new_price">$64.99</span>
-                                    <span class="old_price" >$78.99</span>
+                                    <span class="old_price">$78.99</span>
                                 </div>
                                 <div class="modal_description mb-15">
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Mollitia iste laborum ad impedit pariatur esse optio tempora sint ullam autem deleniti nam in quos qui nemo ipsum numquam, reiciendis maiores quidem aperiam, rerum vel recusandae </p>
+                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Mollitia iste laborum
+                                        ad impedit pariatur esse optio tempora sint ullam autem deleniti nam in quos qui
+                                        nemo ipsum numquam, reiciendis maiores quidem aperiam, rerum vel recusandae </p>
                                 </div>
                                 <div class="variants_selects">
                                     <div class="variants_size">
@@ -790,51 +715,8 @@
 
 <!-- modal area end-->
 
-
-<!-- JS
-============================================ -->
-<!--jquery min js-->
-{{--<script src="assets/js/vendor/jquery-3.4.1.min.js"></script>--}}
-<script src="{{asset('ui-client/assets/js/vendor/jquery-3.4.1.min.js')}}"></script>
-<!--popper min js-->
-{{--<script src="assets/js/popper.js"></script>--}}
-<script src="{{asset('ui-client/assets/js/popper.js')}}"></script>
-<!--bootstrap min js-->
-{{--<script src="assets/js/bootstrap.min.js"></script>--}}
-<script src="{{asset('ui-client/assets/js/bootstrap.min.js')}}"></script>
-<!--owl carousel min js-->
-{{--<script src="assets/js/owl.carousel.min.js"></script>--}}
-<script src="{{asset('ui-client/assets/js/owl.carousel.min.js')}}"></script>
-<!--slick min js-->
-{{--<script src="assets/js/slick.min.js"></script>--}}
-<script src="{{asset('ui-client/assets/js/slick.min.js')}}"></script>
-<!--magnific popup min js-->
-{{--<script src="assets/js/jquery.magnific-popup.min.js"></script>--}}
-<script src="{{asset('ui-client/assets/js/jquery.magnific-popup.min.js')}}"></script>
-<!--jquery countdown min js-->
-{{--<script src="assets/js/jquery.countdown.js"></script>--}}
-<script src="{{asset('ui-client/assets/js/jquery.countdown.js')}}"></script>
-<!--jquery ui min js-->
-{{--<script src="assets/js/jquery.ui.js"></script>--}}
-<script src="{{asset('ui-client/assets/js/jquery.ui.js')}}"></script>
-<!--jquery elevatezoom min js-->
-{{--<script src="assets/js/jquery.elevatezoom.js"></script>--}}
-<script src="{{asset('ui-client/assets/js/jquery.elevatezoom.js')}}"></script>
-<!--isotope packaged min js-->
-{{--<script src="assets/js/isotope.pkgd.min.js"></script>--}}
-<script src="{{asset('ui-client/assets/js/isotope.pkgd.min.js')}}"></script>
-<!--slinky menu js-->
-{{--<script src="assets/js/slinky.menu.js"></script>--}}
-<script src="{{asset('ui-client/assets/js/slinky.menu.js')}}"></script>
-<!-- Plugins JS -->
-{{--<script src="assets/js/plugins.js"></script>--}}
-<script src="{{asset('ui-client/assets/js/plugins.js')}}"></script>
-
-<!-- Main JS -->
-{{--<script src="assets/js/main.js"></script>--}}
-<script src="{{asset('ui-client/assets/js/main.js')}}"></script>
-
-
+@include('client.templates.script')
+@yield('script-page')
 
 </body>
 

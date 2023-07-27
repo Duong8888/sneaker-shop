@@ -22,7 +22,7 @@ use App\Http\Controllers\client\ProductClientController;
 |
 */
 
-Route::get('/', function () {
+Route::get('/admin', function () {
     return view('welcome');
 })->name('admin');
 
@@ -84,5 +84,4 @@ Route::post('/brands/delete/{id}', [TrashBrandController::class, 'delete'])->nam
 
 
 
-Route::get('/home-page', [ProductClientController::class, 'index'])->name('route.home-page.index');
 //require __DIR__.'/auth.php';
