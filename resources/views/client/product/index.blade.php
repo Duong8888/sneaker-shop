@@ -1,5 +1,7 @@
 @extends('client.templates.layout')
 @section('content')
+
+
     <!--product area start-->
     <section class="product_area mb-50">
         <div class="container">
