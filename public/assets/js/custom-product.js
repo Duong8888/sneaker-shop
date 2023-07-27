@@ -36,9 +36,23 @@ $('document').ready(function () {
                             "data": null,
                             "render": function (data, type, row, meta) {
                                 var productId = row.id; // Lấy ID của sản phẩm từ dữ liệu hàng (data)
-                                return "" +
-                                    `<button class='btn btn-blue btn-update' type='button' data-id='${productId}'>Cập nhật</button>  ` +
-                                    `<button class='btn btn-danger btn-delete' data-id='${productId}'>Xóa</button>`;
+                                return `
+                                            <div class="btn-group dropdown">
+                                                   <a href="javascript: void(0);" class="table-action-btn dropdown-toggle arrow-none" data-bs-toggle="dropdown" aria-expanded="false">
+                                                   <span class="svg-icon svg-icon-primary svg-icon-2x"><!--begin::Svg Icon | path:/var/www/preview.keenthemes.com/metronic/releases/2021-05-14-112058/theme/html/demo8/dist/../src/media/svg/icons/General/Settings-2.svg--><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                                                        <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                                            <rect x="0" y="0" width="24" height="24"/>
+                                                            <path d="M5,8.6862915 L5,5 L8.6862915,5 L11.5857864,2.10050506 L14.4852814,5 L19,5 L19,9.51471863 L21.4852814,12 L19,14.4852814 L19,19 L14.4852814,19 L11.5857864,21.8994949 L8.6862915,19 L5,19 L5,15.3137085 L1.6862915,12 L5,8.6862915 Z M12,15 C13.6568542,15 15,13.6568542 15,12 C15,10.3431458 13.6568542,9 12,9 C10.3431458,9 9,10.3431458 9,12 C9,13.6568542 10.3431458,15 12,15 Z" fill="#8950fc"/>
+                                                        </g>
+                                                        </svg>
+                                                    </span>
+                                                   </a>
+                                                   <div class="dropdown-menu dropdown-menu-end">
+                                                        <a class="dropdown-item btn-update" href="#" data-id='${productId}'><i class="mdi mdi-pencil me-2 text-muted font-18 vertical-middle"></i>Cập nhật</a>
+                                                        <a class="dropdown-item btn-delete" href="#" data-id='${productId}'><i class="mdi mdi-pencil me-2 text-muted font-18 vertical-middle"></i>Xóa</a>
+                                                  </div>
+                                            </div>
+                                `;
                             }
                         }
                     ]
@@ -403,6 +417,8 @@ $('document').ready(function () {
         table.slideDown();
         btnTable.slideDown();
         var index = 0;
+        console.log(variationsArray);
+        tableMain.html('');
         $.each(variationsArray, function (indexVariation, itemVariation) {
             index++;
             // Tìm đối tượng tương ứng trong mảng color dựa vào color_id
@@ -415,7 +431,7 @@ $('document').ready(function () {
 
             // Tìm đối tượng tương ứng trong mảng size dựa vào size_id
             sizeUpdate.each(function(index, item) {
-                if ($(item).val() == itemVariation.color_id) {
+                if ($(item).val() == itemVariation.size_id) {
                     selectedSize = item;
                     return false; // Dừng vòng lặp khi tìm thấy phần tử phù hợp
                 }

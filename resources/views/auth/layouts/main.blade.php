@@ -2,7 +2,7 @@
 <html lang="en" data-topbar-color="dark">
 
 
-<!-- Mirrored from coderthemes.com/ubold/layouts/default/auth-signin-signup-2.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 12 Jul 2023 10:26:04 GMT -->
+<!-- Mirrored from coderthemes.com/ubold/layout/default/auth-signin-signup-2.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 12 Jul 2023 10:26:04 GMT -->
 <head>
     <meta charset="utf-8" />
     <title>Auth Pages | Create Account | Sign In | Ubold - Responsive Bootstrap 5 Admin Dashboard</title>
@@ -39,5 +39,5 @@
 @yield('scripts')
 </body>
 
-<!-- Mirrored from coderthemes.com/ubold/layouts/default/auth-signin-signup-2.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 12 Jul 2023 10:26:04 GMT -->
+<!-- Mirrored from coderthemes.com/ubold/layout/default/auth-signin-signup-2.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 12 Jul 2023 10:26:04 GMT -->
 </html>

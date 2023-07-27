@@ -22,7 +22,7 @@ use App\Http\Controllers\client\ProductClientController;
 |
 */
 
-Route::get('/', function () {
+Route::get('/admin', function () {
     return view('welcome');
 })->name('admin');
 
@@ -51,14 +51,19 @@ Route::group(['prefix' => 'product', 'as' => 'product.', 'middleware' => ['auth'
     Route::post('edit/{id}', [ProductController::class, 'saveEdit'])->name('edit');
 });
 
-Route::group(['prefix' => 'color', 'as' => 'color.', 'auth', 'verified'], function () {
-    Route::get('/', [ColorController::class, 'index'])->name('index');
-    Route::get('/delete/{id}', [ColorController::class, 'delete'])->name('delete');
+Route::group(['prefix' => 'color', 'as' => 'color.', 'middleware' => ['auth', 'verified']], function () {
+    Route::get('/list', [ColorController::class, 'index'])->name('index');
+    Route::get('/', [ColorController::class, 'list'])->name('list');
+    Route::delete('/delete/{id}', [ColorController::class, 'delete'])->name('delete');
     Route::match(['GET', 'POST'], 'add', [ColorController::class, 'add'])->name('add');
+    Route::match(['GET', 'POST'], '/edit/{id}', [ColorController::class, 'update'])->name('edit');
 });
-Route::group(['prefix' => 'size', 'as' => 'size.'], function () {
-    Route::get('/delete/{id}', [SizeController::class, 'delete'])->name('delete');
+Route::group(['prefix' => 'size', 'as' => 'size.', 'middleware' => ['auth', 'verified']], function () {
+    Route::get('/list', [SizeController::class, 'index'])->name('index');
+    Route::get('/', [SizeController::class, 'list'])->name('list');
+    Route::delete('/delete/{id}', [SizeController::class, 'delete'])->name('delete');
     Route::match(['GET', 'POST'], 'add', [SizeController::class, 'add'])->name('add');
+    Route::match(['GET', 'POST'], '/edit/{id}', [SizeController::class, 'update'])->name('edit');
 });
 
 
@@ -79,5 +84,4 @@ Route::post('/brands/delete/{id}', [TrashBrandController::class, 'delete'])->nam
 
 
 
-Route::get('/home-page', [ProductClientController::class, 'index'])->name('route.home-page.index');
 //require __DIR__.'/auth.php';
