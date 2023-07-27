@@ -17,21 +17,16 @@ class BrandsController extends Controller
     const DOT = '.';
     const BRANDS = 'brands';
   public function list(Request $request){
+      return view(self::OBJECT . self::DOT .
+          self::BRANDS . self::DOT . __FUNCTION__);
+  }
+  public function index(){
       $data = Brand::all();
-
-      // Kiểm tra nếu yêu cầu JSON, trả về JSON data
-      if ($request->wantsJson()) {
-          return response()->json($data);
-      }
-//      $data_json = response()->json($data);
-//      dd($data_json);
-    return view(self::OBJECT . self::DOT .
-        self::BRANDS . self::DOT . __FUNCTION__,['data' => $data]);
+      return response()->json($data);
   }
 
 
     public function add(BrandRequest $request){
-
 
         if ($request->isMethod('POST')){
             // lấy ra mảng các file đã chọn

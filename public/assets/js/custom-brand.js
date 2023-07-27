@@ -1,6 +1,6 @@
-
-$(document).ready(function (){
+$(document).ready(function () {
     var csrf_token = $('meta[name="csrf-token"]').attr('content');
+    var url = $('#brandList').attr('data-route');
 
     // hiện ảnh khi sửa
     function readURL(input, selector) {
@@ -14,26 +14,30 @@ $(document).ready(function (){
             reader.readAsDataURL(input.files[0]);
         }
     }
+
     $("#cmt_truoc").change(function () {
         readURL(this, '#mat_truoc_preview');
     });
     //------------------------------------------------
 
     // loadAll
-    function loadAll(){
+    function loadAll() {
         // gửi yêu cầu ajax để lấy danh sách san phẩm
         $.ajax({
-            url: '/brands/list',
+            url: url,
             method: 'GET',
             dataType: 'json',
-            beforeSend: function(xhr) {
+            beforeSend: function (xhr) {
                 // Thiết lập tiêu đề X-CSRF-TOKEN với giá trị token CSRF
                 xhr.setRequestHeader('X-CSRF-TOKEN', csrf_token);
             },
-            success: function (data){
+            success: function (data) {
+                // console.log(data);
+                // sử dụng empty() để làm sạch dữ liệu cũ trong id=(brandList) trước khi hiển thị dữ liệu mới
                 $('#brandList').empty();
-                $.each(data,function (index, item){
-                    $('#brandList').append(`
+                $.each(data, function (index, item) {
+                    // console.log(item)
+                        $('#brandList').append(`
                         <tr class="odd">
                             <td>${item.id}</td>
                             <td>${item.name_brand}</td>
@@ -42,21 +46,19 @@ $(document).ready(function (){
                             </td>
                             <td>${item.slug}</td>
                             <td>
-
                                 <button class="btn btn-danger delete_brand" data-id="${item.id}">Delete</button>
                                 <button class="btn btn-primary update_brand" data-id="${item.id}">Update</button>
                             </td>
                         </tr>
                     `);
-
                 });
-
             },
-            error: function (){
+            error: function () {
                 console.log('error')
             }
         });
     }
+
     loadAll();
 
 
@@ -68,24 +70,22 @@ $(document).ready(function (){
     });
 
 
-
-
     // --------------------------------------------------------
     // chỉ chuyển hướng đến view update thôi vì logic dùng php mất rồi :))))
-    $(document).on('click','.update_brand',function (){
+    $(document).on('click', '.update_brand', function () {
         let brandID = $(this).data("id");
         window.location.href = "/brands/edit/" + brandID;
     })
     // --------------------------------------------------------
     // delete
-    function Delete(id){
+    function Delete(id) {
         // gửi yêu cầu xóa sản phẩm bằng ajax
         $.ajax({
             url: '/brands/delete/' + id,
             type: 'DELETE',
             dataType: 'json',
             // sử dụng hàm beforeSend của jQuery để thiết lập tiêu đề của yêu cầu.
-            beforeSend: function(xhr) {
+            beforeSend: function (xhr) {
                 // Thiết lập tiêu đề X-CSRF-TOKEN với giá trị token CSRF
                 xhr.setRequestHeader('X-CSRF-TOKEN', csrf_token);
             },
@@ -93,9 +93,8 @@ $(document).ready(function (){
                 $('tr[data-id="' + id + '"]').remove();
                 loadAll();
                 toastr["success"]("Dữ liệu đã được đưa vào thùng rác! bạn có thể khôi phục tại đó!")
-                console.log(data);
             },
-            error: function (){
+            error: function () {
                 console.log('Có lỗi sảy ra');
             }
         });
