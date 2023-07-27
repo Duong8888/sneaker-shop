@@ -1,4 +1,15 @@
+{{--@if ( Session::has('error') )--}}
 
+{{--    <div class="alert alert-danger alert-dismissible" role="alert">--}}
+
+{{--        <strong>{{ Session::get('error') }}</strong>--}}
+
+{{--        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>--}}
+
+
+{{--    </div>--}}
+
+{{--@endif--}}
 <div class="col-12">
     <div class="card">
         <div class="card-body">

@@ -28,7 +28,7 @@
     <link href="{{asset('assets/css/app.css')}}" rel="stylesheet" type="text/css" id="app-style"/>
 
     <!-- Icons css -->
-{{--    <link href="{{asset('assets/css/icons.min.css')}}" rel="stylesheet" type="text/css" id="app-style"/>--}}
+    {{--    <link href="{{asset('assets/css/icons.min.css')}}" rel="stylesheet" type="text/css" id="app-style"/>--}}
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
 </head>
 <style>
@@ -372,10 +372,10 @@
                         </a>
                         <div class="dropdown-menu dropdown-menu-end dropdown-menu-animated">
                             <!-- item-->
-{{--                            <a href="javascript:void(0);" class="dropdown-item">--}}
-{{--                                <img src="{{asset('assets/images/flags/germany.jpg')}}" alt="user-image" class="me-1"--}}
-{{--                                     height="12"> <span class="align-middle">German</span>--}}
-{{--                            </a>--}}
+                            {{--                            <a href="javascript:void(0);" class="dropdown-item">--}}
+                            {{--                                <img src="{{asset('assets/images/flags/germany.jpg')}}" alt="user-image" class="me-1"--}}
+                            {{--                                     height="12"> <span class="align-middle">German</span>--}}
+                            {{--                            </a>--}}
                         </div>
                     </li>
 
@@ -456,7 +456,8 @@
                             @if(session('user_avatar'))
                                 <img src="{{session('user_avatar')}}" alt="user-image" class="rounded-circle">
                             @else
-                                <img src="{{asset('assets/images/flags/spain.jpg')}}" alt="user-image" class="rounded-circle">
+                                <img src="{{asset('assets/images/flags/spain.jpg')}}" alt="user-image"
+                                     class="rounded-circle">
                             @endif
                             <span class="ms-1 d-none d-md-inline-block">
                                 {{ Auth::user()->name }} <i class="bi bi-chevron-bar-down"></i>
@@ -464,41 +465,25 @@
                         </a>
                         <div class="dropdown-menu dropdown-menu-end profile-dropdown ">
                             <!-- item-->
-                            <div class="dropdown-header noti-title">
-                                <h6 class="text-overflow m-0">Welcome !</h6>
-                            </div>
-                            <!-- item-->
                             <a href="javascript:void(0);" class="dropdown-item notify-item">
                                 <i class="bi bi-person"></i>
                                 <span>My Account</span>
                             </a>
 
                             <!-- item-->
-                            <a href="javascript:void(0);" class="dropdown-item notify-item">
+                            <a href="{{ route('user') }}" class="dropdown-item notify-item">
                                 <i class="bi bi-gear"></i>
-                                <span>Settings</span>
+                                <span>View Site</span>
                             </a>
-                            <!-- item-->
-                            <a href="javascript:void(0);" class="dropdown-item notify-item">
-                                <i class="bi bi-lock"></i>
-                                <span>Lock Screen</span>
-                            </a>
-
                             <div class="dropdown-divider"></div>
 
                             <!-- item-->
-{{--                            <a href="javascript:void(0);" class="dropdown-item notify-item">--}}
-{{--                                <i class="bi bi-box-arrow-right"></i>--}}
-{{--                                <span>Logout</span>--}}
-{{--                            </a>--}}
                             <form method="POST" action="{{ route('logout') }}">
                                 @csrf
-
-                                <x-responsive-nav-link :href="route('logout')"
-                                                       onclick="event.preventDefault();
-                                        this.closest('form').submit();">
-                                    {{ __('Log Out') }}
-                                </x-responsive-nav-link>
+                                <button class="btn dropdown-item notify-item">
+                                    <i class="bi bi-box-arrow-right"></i>
+                                    <span>Logout</span>
+                                </button>
                             </form>
 
                         </div>
@@ -536,7 +521,7 @@
                 <div class="row">
                     <div class="col-md-6">
                         <div>
-{{--                            <script>document.write(new Date().getFullYear())</script>--}}
+                            {{--                            <script>document.write(new Date().getFullYear())</script>--}}
                             © Ubold - <a href="https://coderthemes.com/" target="_blank">Coderthemes.com</a></div>
                     </div>
                     <div class="col-md-6">

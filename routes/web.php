@@ -9,6 +9,8 @@ use App\Http\Controllers\Admin\TrashBrandController;
 use App\Http\Controllers\Admin\color\ColorController;
 use App\Http\Controllers\Admin\size\SizeController;
 
+use App\Http\Controllers\client\ProductClientController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -20,7 +22,7 @@ use App\Http\Controllers\Admin\size\SizeController;
 |
 */
 
-Route::get('/', function () {
+Route::get('/admin', function () {
     return view('welcome');
 })->name('admin');
 
@@ -65,6 +67,7 @@ Route::group(['prefix' => 'size', 'as' => 'size.', 'middleware' => ['auth', 'ver
 });
 
 
+Route::get('/brand', [BrandsController::class, 'index'])->name('route.brands.index');
 Route::get('/brands/list', [BrandsController::class, 'list'])->name('route.brands.list');
 Route::match(['GET', 'POST'], '/brands/add', [BrandsController::class, 'add'])->name('route.brands.add');
 Route::match(['GET', 'POST'], '/brands/edit/{id}', [BrandsController::class, 'edit'])->name('route.brands.edit');
@@ -78,7 +81,6 @@ Route::delete('/brands/delete/{id}', [BrandsController::class, 'delete'])->name(
 Route::get('/trash/list', [TrashBrandController::class, 'list'])->name('route.brands.trash');
 Route::post('/brands/restore/{id}', [TrashBrandController::class, 'restore'])->name('route.brands.restore');
 Route::post('/brands/delete/{id}', [TrashBrandController::class, 'delete'])->name('route.brands.delete');
-
 
 
 
