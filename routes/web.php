@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CartController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -9,8 +10,10 @@ use App\Http\Controllers\Admin\TrashBrandController;
 use App\Http\Controllers\Admin\color\ColorController;
 use App\Http\Controllers\Admin\size\SizeController;
 
-use App\Http\Controllers\client\ProductClientController;
 
+
+use App\Http\Controllers\client\ProductClientController;
+use App\Http\Controllers\client\DetailController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -26,9 +29,6 @@ Route::get('/admin', function () {
     return view('welcome');
 })->name('admin');
 
-//Route::get('/', function () {
-//    return view('admin.authen.login');
-//});
 
 
 Route::get('/dashboard', function () {
@@ -70,9 +70,14 @@ Route::group(['prefix' => 'size', 'as' => 'size.', 'middleware' => ['auth', 'ver
 Route::get('/brand', [BrandsController::class, 'index'])->name('route.brands.index');
 Route::get('/brands/list', [BrandsController::class, 'list'])->name('route.brands.list');
 Route::match(['GET', 'POST'], '/brands/add', [BrandsController::class, 'add'])->name('route.brands.add');
+
+
+
+
+
 Route::match(['GET', 'POST'], '/brands/edit/{id}', [BrandsController::class, 'edit'])->name('route.brands.edit');
 Route::delete('/brands/delete/{id}', [BrandsController::class, 'delete'])->name('route.brands.delete');
-
+//Route::post('/brands/add', [BrandsController::class, 'add'])->name('route.brands.add');
 
 //Route::match(['GET','POST'],'/auth/login',[AuthenController::class,'login'])->name('route.auth.login');
 //Route::match(['GET','POST'],'/auth/register',[AuthenController::class,'register'])->name('route.auth.register');
@@ -84,4 +89,10 @@ Route::post('/brands/delete/{id}', [TrashBrandController::class, 'delete'])->nam
 
 
 
-//require __DIR__.'/auth.php';
+Route::get('/', [ProductClientController::class, 'index'])->name('route.home.page');
+Route::get('/product/detail/{id}',[DetailController::class, 'detail'])->name('route.detail');
+
+
+
+Route::get('/my-cart',[CartController::class,'index'])->name('route.myCart');
+Route::post('/save-cart', [CartController::class, 'saveCart'])->name('save.cart');

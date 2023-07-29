@@ -25,8 +25,10 @@ class BrandRequest extends FormRequest
     {
         $rules = [];
         $currentAction =$this->route()->getActionMethod();
+//        dd($currentAction);
         $tableName = (new Brand())->getTable();
-        $id = request()->segment('2');
+        $id = request()->segment('3');
+//        dd($id);
 //        dd($currentAction);
         switch ($this->method()):
             case 'POST':
@@ -35,7 +37,7 @@ class BrandRequest extends FormRequest
                         $rules = [
                             'name_brand' => 'required',
                             'slug' => 'unique:brands',
-                            'image' => 'required',
+                            'files' => 'required',
                         ];
                         break;
                     case 'edit':

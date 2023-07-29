@@ -32,13 +32,10 @@
 {{--<script src="assets/js/isotope.pkgd.min.js"></script>--}}
 <script src="{{asset('ui-client/assets/js/isotope.pkgd.min.js')}}"></script>
 <!--slinky menu js-->
-{{--<script src="assets/js/slinky.menu.js"></script>--}}
 <script src="{{asset('ui-client/assets/js/slinky.menu.js')}}"></script>
 <!-- Plugins JS -->
-{{--<script src="assets/js/plugins.js"></script>--}}
 <script src="{{asset('ui-client/assets/js/plugins.js')}}"></script>
-
 <!-- Main JS -->
-{{--<script src="assets/js/main.js"></script>--}}
 <script src="{{asset('ui-client/assets/js/main.js')}}"></script>
 
+<script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>

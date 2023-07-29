@@ -27,7 +27,7 @@ class BrandsController extends Controller
 
 
     public function add(BrandRequest $request){
-
+//            dd($request->isMethod('POST'));
         if ($request->isMethod('POST')){
             // lấy ra mảng các file đã chọn
             $files = $request->file('files');
@@ -61,7 +61,7 @@ class BrandsController extends Controller
                 return redirect()->route('route.brands.list');
             }
         }
-        return view(self::OBJECT . self::DOT . self::BRANDS . self::DOT . __FUNCTION__);
+//        return view(self::OBJECT . self::DOT . self::BRANDS . self::DOT . __FUNCTION__);
     }
 
 

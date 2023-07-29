@@ -3,15 +3,19 @@
 namespace App\Http\Controllers\client;
 
 use App\Http\Controllers\Controller;
+use App\Models\Brand;
 use App\Models\Product;
 use Illuminate\Http\Request;
 
 class ProductClientController extends Controller
 {
     public function index(){
-        $data = Product::query()->with('images')->get();
 
-
-        return view('client.product.index',compact('data'));
+        $data_products = Product::query()->with('images')->with('variations')->get();
+        $data_brands = Brand::query()->limit(8)->get();
+//        dd($data_products[2]->variations);
+        return view('client.product.index',compact('data_products','data_brands'));
     }
+
+
 }
