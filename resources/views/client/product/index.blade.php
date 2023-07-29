@@ -1,4 +1,8 @@
 @extends('client.templates.layout')
+@section('banner')
+    @include('client.templates.banner')
+@endsection
+
 @section('content')
     <!--product area start-->
     <section class="product_area mb-50">
