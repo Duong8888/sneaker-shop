@@ -35,7 +35,7 @@ class BrandRequest extends FormRequest
                         $rules = [
                             'name_brand' => 'required',
                             'slug' => 'unique:brands',
-                            'image' => 'required',
+                            'files' => 'required',
                         ];
                         break;
                     case 'edit':

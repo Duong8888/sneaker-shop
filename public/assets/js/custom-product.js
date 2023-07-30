@@ -148,7 +148,7 @@ $('document').ready(function () {
                     method: 'POST',
                     data: {
                         _token: csrf_token,
-                        value: newValue,
+                        data: newValue,
                     },
                     success: function (response) {
                         // gán giá trị value bằng với id của bạn gi vừa thêm vào
