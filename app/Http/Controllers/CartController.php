@@ -12,11 +12,25 @@ class CartController extends Controller
 }
     public function saveCart(Request $request)
     {
-        $data = $request->json()->all();
+//        return response()->json(['message'=> "Đẹp trai số 2"]);
+        try {
 
-        // Lưu giá trị vào session
-        Session::put('myCart', $data);
+            if ($request->session()->has('myCart')) {
+                Session::forget('myCart');
+            }
+            $data = $request->all();
+            $request->session()->put('myCart',$data);
 
-        return response()->json(['message' => 'Dữ liệu đã được lưu vào session']);
+            if ($request->session()->has('myCart')) {
+                return response()->json(['message' => 'Lưu giỏ hàng thành công']);
+            } else {
+                return response()->json(['error' => 'Không thể lưu giỏ hàng'], 500);
+            }
+
+        } catch (\Exception $e) {
+            return response()->json(['error' => 'Đã xảy ra lỗi khi lưu giỏ hàng'], 500);
+        }
+
+
     }
 }

@@ -89,10 +89,4 @@ Route::post('/brands/delete/{id}', [TrashBrandController::class, 'delete'])->nam
 
 
 
-Route::get('/', [ProductClientController::class, 'index'])->name('route.home.page');
-Route::get('/product/detail/{id}',[DetailController::class, 'detail'])->name('route.detail');
 
-
-
-Route::get('/my-cart',[CartController::class,'index'])->name('route.myCart');
-Route::post('/save-cart', [CartController::class, 'saveCart'])->name('save.cart');

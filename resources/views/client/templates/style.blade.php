@@ -36,6 +36,9 @@
 
 <link rel="stylesheet" href="{{asset('ui-client/assets/css/style.css')}}">
 
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+
+
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" /><!--modernizr min js here-->
 {{--    <script src="assets/js/vendor/modernizr-3.7.1.min.js"></script>--}}
 <script src="{{asset('ui-client/assets/js/vendor/modernizr-3.7.1.min.js')}}"></script>

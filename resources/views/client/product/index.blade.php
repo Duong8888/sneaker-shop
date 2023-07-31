@@ -1,6 +1,11 @@
 @extends('client.templates.layout')
 @section('content')
 
+
+
+
+
+
     <!--product area start-->
     <section class="product_area mb-50">
         <div class="container">
@@ -514,5 +519,6 @@
     <!--blog area end-->
 @endsection
 @section('script-page')
+    <script src="{{asset('assets/js-client/ajax/cart.js')}}"></script>
     <script src="{{asset('assets/js-client/ajax/detail.js')}}"></script>
 @endsection

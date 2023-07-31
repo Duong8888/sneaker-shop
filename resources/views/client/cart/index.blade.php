@@ -55,7 +55,7 @@
                                 </table>
                             </div>
                             <div class="cart_submit">
-                                <button type="submit">update cart</button>
+                                <button type="submit">Mua Hàng</button>
                             </div>
                         </div>
                     </div>

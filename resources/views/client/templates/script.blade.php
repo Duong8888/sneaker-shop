@@ -1,6 +1,7 @@
 
 <!-- JS
 ============================================ -->
+
 <!--jquery min js-->
 {{--<script src="assets/js/vendor/jquery-3.4.1.min.js"></script>--}}
 <script src="{{asset('ui-client/assets/js/vendor/jquery-3.4.1.min.js')}}"></script>
@@ -38,4 +39,7 @@
 <!-- Main JS -->
 <script src="{{asset('ui-client/assets/js/main.js')}}"></script>
 
+
+<script src="{{asset('assets/js/toast.js')}}"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>

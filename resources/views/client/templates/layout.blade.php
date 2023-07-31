@@ -471,7 +471,28 @@
 
 <!--slider area start-->
 @include('client.templates.banner')
+
+
 <!--slider area end-->
+@if(session()->has('myCart'))
+    @php
+        $myCartData = session('myCart');
+    @endphp
+
+    {{-- Hiển thị giá trị trong session --}}
+    @foreach($myCartData as $cartItem)
+{{--        @foreach($cartItem as $v)--}}
+{{--            <p>ProductId: {{ $v }}</p>--}}
+{{--        @endforeach--}}
+
+        <p>ColorId: hihi</p>
+{{--        <p>SizeId: {{ $cartItem['size_id'] }}</p>--}}
+{{--        <p>Quantity: {{ $cartItem['quantity'] }}</p>--}}
+{{--        <p>Quantity: {{ $cartItem['name'] }}</p>--}}
+        <hr>
+    @endforeach
+@endif
+
 
 @yield('content')
 
