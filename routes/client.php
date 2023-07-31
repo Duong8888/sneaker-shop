@@ -1,6 +1,10 @@
 <?php
 
 
+use App\Http\Controllers\client\OrderController;
+use App\Http\Controllers\client\PaymentController;
+
+
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\client\DetailController;
 
@@ -8,7 +12,9 @@ use App\Http\Controllers\PaymentController;
 
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+
 use App\Http\Controllers\client\ProductClientController;
+use Illuminate\Support\Facades\Route;
 
 
 
@@ -21,4 +27,10 @@ Route::post('/save-cart', [CartController::class, 'saveCart'])->name('save.cart'
 
 
 Route::get('/checkout', [PaymentController::class, 'showCheckout'])->name('checkout');
+
+
+Route::post('/payment', [PaymentController::class,'createPayment'])->name('payment.create');
+Route::get('/payment/callback', [PaymentController::class,'handlePaymentCallback'])->name('payment.callback');
+
+Route::get('/account',[OrderController::class,'index'])->name('account');
 

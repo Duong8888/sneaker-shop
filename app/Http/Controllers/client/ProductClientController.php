@@ -18,6 +18,7 @@ class ProductClientController extends Controller
 //        dd($data_products[2]->variations);
         return view('client.product.index',compact('data_products','data_brands'));
 
+
     }
 
 }

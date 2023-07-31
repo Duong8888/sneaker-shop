@@ -26,7 +26,7 @@ class ProductRequest extends FormRequest
             case 'POST':
                 $rules = [
                     'productName' => 'required|string|max:255',
-                    'brand' => 'required|exists:brands,id',
+                    'brand' => 'required',
                     'color' => 'required',
                     'sizes' => 'required',
                     'description' => 'required|string',
