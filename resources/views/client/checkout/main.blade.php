@@ -44,7 +44,7 @@
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    @foreach($data['my_cart'] as $key => $value)
+                                    @foreach($data['myCart'] as $key => $value)
                                         <tr>
                                             <td> {{$value->Product->product_name}} <strong>
                                                     × {{$value->quantity}}</strong></td>

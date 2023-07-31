@@ -20,6 +20,43 @@ $(document).ready(function () {
             success: function (data) {
                 console.log(data.mycart);
                 let productDetail = data.product_detail; // đây là thông tin chi tiết
+                console.log(productDetail);
+                // lọc ra các thuộc tính mà sản phẩm này sở hữu
+                var arrayVariations = productDetail.variations;
+                var arrayColor = [];
+                var arraySize = [];
+                $.each(arrayVariations, function (index, item) {
+                    var checkColor = arrayColor.indexOf(item.color_id);
+                    var checkSize = arraySize.indexOf(item.size_id);
+                    if (checkColor === -1) {
+                        arrayColor.push(item.color_id)
+                    }
+                    if (checkSize === -1) {
+                        arraySize.push(item.size_id)
+                    }
+                });
+                var selectSize = [];
+                var selectColor = [];
+                $.each(data.arrColor, function (index, item) {
+                    $.each(arrayColor, function (index2, item2) {
+                        if (item2 === item.id) {
+                            selectColor.push({
+                                'name': item.color_value,
+                                'value': item.id
+                            });
+                        }
+                    })
+                })
+                $.each(data.arrSize, function (index, item) {
+                    $.each(arraySize, function (index2, item2) {
+                        if (item2 === item.id) {
+                            selectSize.push({
+                                'name': item.size_value,
+                                'value': item.id
+                            });
+                        }
+                    })
+                })
                 $('.viewDetail_ajax').empty();
                 $('.viewDetail_ajax').append(`
                     <div class="col-lg-5 col-md-5 col-sm-12">
@@ -29,8 +66,7 @@ $(document).ready(function () {
                                         ${productDetail.images.map(item => `
                                                             <div class="swiper-slide">
                                                                 <img src="storage/${item.url}" />
-                                                            </div>`
-                )}
+                                                            </div>`)}
                                     </div>
                                         <div class="swiper-button-next"></div>
                                         <div class="swiper-button-prev"></div>
@@ -62,22 +98,20 @@ $(document).ready(function () {
                                 <div class="variants_selects">
                                     <div class="variants_size">
                                         <h2>size</h2>
-                                        <select id="variants_size" class="select_option">
-                                               ${productDetail.variations.map(item => `
-                                                    <option value="${item.size_id}">
-                                                        ${item.size_id == 1 ? 'L' : ''}
-                                                        ${item.size_id == 2 ? 'X' : ''}
+                                        <select id="variants_size" class="select_option form-control">
+                                                ${selectSize.map(item => `
+                                                    <option value="${item.value}">
+                                                        ${item.name}
                                                     </option>
                                                `).join('')}
                                         </select>
                                     </div>
                                     <div class="variants_color">
                                         <h2>color</h2>
-                                        <select id="variants_color" class="select_option">
-                                            ${productDetail.variations.map(item => `
-                                                    <option value="${item.color_id}">
-                                                        ${item.color_id == 1 ? 'Đỏ' : ''}
-                                                        ${item.color_id == 2 ? 'Xanh' : ''}
+                                        <select id="variants_color" class="select_option form-control">
+                                            ${selectColor.map(item => `
+                                                    <option value="${item.value}">
+                                                        ${item.name}
                                                     </option>
                                                `).join('')}
                                         </select>
@@ -87,7 +121,7 @@ $(document).ready(function () {
                                             <input id="variants_quantity" min="1" max="100" step="2" value="1" type="number">
 
 <!--                                            button event-->
-                                            <button type="button" id="add_to_cart">Thêm vào giỏ hàng</button>
+                                            <button type="button" data-bs-dismiss="modal" id="add_to_cart">Thêm vào giỏ hàng</button>
                                         </form>
                                     </div>
                                 </div>
@@ -149,15 +183,16 @@ $(document).ready(function () {
                                     found = true; // gán found bằng true
                                     break;
                                 }
-                            };
+                            }
+                            ;
 
-                            if (found){
+                            if (found) {
                                 // console.log('mảng đã sửa khi lặp')
                                 // console.log(data.mycart.data)
 
                                 // data.mycart.data.push(newItem);
                                 saveCart(newMyCart)
-                            }else {
+                            } else {
                                 data.mycart.data.push(newProduct);
                                 saveCart(data.mycart.data)
                             }
