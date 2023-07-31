@@ -17,22 +17,22 @@ class ProductClientController extends Controller
         Session::remove('my_cart');
         $data = [
             [
-                'product_id'=>25,
-                'color_id'=>29,
-                'size_id' => 14,
+                'product_id'=>1,
+                'color_id'=>1,
+                'size_id' => 1,
                 'quantity'=>10,
             ],
             [
-                'product_id'=>28,
-                'color_id'=>31,
-                'size_id' => 15,
+                'product_id'=>2,
+                'color_id'=>5,
+                'size_id' => 1,
                 'quantity'=>1,
             ],
             [
-                'product_id'=>29,
-                'color_id'=>42,
-                'size_id' => 15,
-                'quantity'=>19,
+                'product_id'=>2,
+                'color_id'=>6,
+                'size_id' => 1,
+                'quantity'=>100,
             ],
         ];
         Session::put('my_cart',$data);

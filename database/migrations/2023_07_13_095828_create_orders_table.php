@@ -16,7 +16,9 @@ return new class extends Migration
             $table->double('total');
             $table->unsignedBigInteger('user_id')->nullable();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('SET NULL');
-            $table->string('status')->default('pending');
+            $table->string('payment_method')->default('COD'); // mặc định là thanh toán trực tiếp Cash on delivery
+            $table->string('payment_status');
+            $table->string('delivery_status');
             $table->timestamps();
         });
     }
