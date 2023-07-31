@@ -301,17 +301,6 @@
         </div>
     </div>
     <!--header bottom end-->
-    <div class="discount_area">
-        <div class="container">
-            <div class="row">
-                <div class="col-12">
-                    <div class="discount_text">
-                        <p>Save Up To 30% On AUTIMA Brand Products <a href="#">Shop Now!</a></p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
 </header>
 <!--header area end-->
 
@@ -470,8 +459,8 @@
 <!--Offcanvas menu area end-->
 
 <!--slider area start-->
-@include('client.templates.banner')
 
+@yield('banner')
 
 <!--slider area end-->
 
