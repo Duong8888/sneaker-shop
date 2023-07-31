@@ -19,7 +19,7 @@ class CheckRole
         if(Auth::check() && $request->user()->role_id == 1){
             return $next($request);
         }else{
-            return redirect()->route('user');
+            return redirect()->route('route.home.page');
         }
     }
 }

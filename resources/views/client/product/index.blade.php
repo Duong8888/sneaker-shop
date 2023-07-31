@@ -5,11 +5,6 @@
 
 @section('content')
 
-
-
-
-
-
     <!--product area start-->
     <section class="product_area mb-50">
         <div class="container">
@@ -26,9 +21,13 @@
                                     <p class="manufacture_product"><a href="#">Accessories</a></p>
                                 </div>
                                 <div class="product_thumb">
-                                    <a class="primary_img" href=""><img src="storage/{{$v->images[0]->url}}" alt=""></a>
-                                    <a class="secondary_img" href=""><img src="storage/{{$v->images[1]->url}}"
-                                                                          alt=""></a>
+                                    @if(count($v->images) > 1)
+                                        <a class="primary_img" href=""><img src="storage/{{$v->images[0]->url}}" alt=""></a>
+                                        <a class="secondary_img" href=""><img src="storage/{{$v->images[1]->url}}" alt=""></a>
+                                    @else
+                                        <a class="primary_img" href=""><img src="storage/{{$v->images[0]->url}}" alt=""></a>
+                                    @endif
+
                                     <div class="label_product">
                                         <span class="label_sale">-57%</span>
                                     </div>
@@ -37,8 +36,9 @@
                                         <ul>
                                             <li class="quick_button">
                                                 <a data-bs-toggle="modal" data-bs-target="#modal_box"
-                                                   title="quick view" class="product_detail productDetail_route" data-product-id="{{$v->id}}">
-                                                    <span class="lnr lnr-magnifier" ></span>
+                                                   title="quick view" class="product_detail productDetail_route"
+                                                   data-product-id="{{$v->id}}">
+                                                    <span class="lnr lnr-magnifier"></span>
                                                 </a>
                                             </li>
                                             <li class="wishlist">
@@ -162,9 +162,12 @@
                                     <p class="manufacture_product"><a href="#">Accessories</a></p>
                                 </div>
                                 <div class="product_thumb">
-                                    <a class="primary_img" href=""><img src="storage/{{$v->images[0]->url}}" alt=""></a>
-                                    <a class="secondary_img" href=""><img src="storage/{{$v->images[1]->url}}"
-                                                                          alt=""></a>
+                                    @if(count($v->images) > 1)
+                                        <a class="primary_img" href=""><img src="storage/{{$v->images[0]->url}}" alt=""></a>
+                                        <a class="secondary_img" href=""><img src="storage/{{$v->images[1]->url}}" alt=""></a>
+                                    @else
+                                        <a class="primary_img" href=""><img src="storage/{{$v->images[0]->url}}" alt=""></a>
+                                    @endif
                                     <div class="label_product">
                                         <span class="label_sale">-57%</span>
                                     </div>
@@ -263,9 +266,12 @@
                                     <p class="manufacture_product"><a href="#">Accessories</a></p>
                                 </div>
                                 <div class="product_thumb">
-                                    <a class="primary_img" href=""><img src="storage/{{$v->images[0]->url}}" alt=""></a>
-                                    <a class="secondary_img" href=""><img src="storage/{{$v->images[1]->url}}"
-                                                                          alt=""></a>
+                                    @if(count($v->images) > 1)
+                                        <a class="primary_img" href=""><img src="storage/{{$v->images[0]->url}}" alt=""></a>
+                                        <a class="secondary_img" href=""><img src="storage/{{$v->images[1]->url}}" alt=""></a>
+                                    @else
+                                        <a class="primary_img" href=""><img src="storage/{{$v->images[0]->url}}" alt=""></a>
+                                    @endif
                                     <div class="label_product">
                                         <span class="label_sale">-57%</span>
                                     </div>

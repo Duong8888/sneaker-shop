@@ -10,8 +10,11 @@ class OrderController extends Controller
 {
     public function index()
     {
-        $orderList = Order::query()->orderBy('id', 'DESC')->get();
         $user = Auth::user();
+        $orderList = Order::query()
+            ->where('user_id',$user->id)
+            ->orderBy('id', 'DESC')
+            ->get();
         $data = [
             'orderList' => $orderList,
             'user' => $user,

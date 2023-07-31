@@ -106,7 +106,7 @@ class PaymentController extends Controller
                 'status' => 'success'
             ]);
             Session::forget('arrayVariations');
-            Session::put('my_cart',[]);
+            Session::put('myCart',[]);
             return redirect()->route('account');
         }
         return redirect()->route('checkout');
@@ -118,10 +118,10 @@ class PaymentController extends Controller
     public function showCheckout(Request $request)
     {
         $user = Auth::user();
-        $myCart = Session::get('my_cart');
+        $myCart = Session::get('myCart');
         $arrayVariations = new Collection();
         $totalCart = 0;
-        foreach ($myCart as $value) {
+        foreach ($myCart['data'] as $value) {
             $query = Variations::query();
             $variations = $query->where('product_id', $value['product_id'])
                 ->where('color_id', $value['color_id'])
@@ -144,7 +144,7 @@ class PaymentController extends Controller
             'name' => $user->name,
             'email' => $user->email,
             'address' => $user->address,
-            'my_cart' => $arrayVariations,
+            'myCart' => $arrayVariations,
             'total_cart' => $totalCart,
         ];
         Session::put('arrayVariations',$arrayVariations);

@@ -471,7 +471,7 @@
                             </a>
 
                             <!-- item-->
-                            <a href="{{ route('user') }}" class="dropdown-item notify-item">
+                            <a href="{{ route('route.home.page') }}" class="dropdown-item notify-item">
                                 <i class="bi bi-gear"></i>
                                 <span>View Site</span>
                             </a>
