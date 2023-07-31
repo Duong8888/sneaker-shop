@@ -107,7 +107,7 @@ class PaymentController extends Controller
             ]);
             Session::forget('arrayVariations');
             Session::put('my_cart',[]);
-            return redirect()->route('checkout');
+            return redirect()->route('account');
         }
         return redirect()->route('checkout');
     }
