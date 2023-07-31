@@ -23,11 +23,11 @@ class SizeController extends Controller
         ]);
 
         if ($result) {
-            $color = Size::create([
+            $size = Size::create([
                 'size_value' => $request->input('data'),
             ]);
 
-            return response()->json(['message' => 'Thêm mới thành công','id'=> $color->id,'value'=>$color->color_value,'name' => 'color']);
+            return response()->json(['message' => 'Thêm mới thành công','id'=> $size->id,'value'=>$size->size_value,'name' => 'size']);
         }
 
         return response()->json(['message' => 'Lỗi khi thêm mới'], 500);
