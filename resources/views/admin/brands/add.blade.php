@@ -10,7 +10,9 @@
 {{--    </div>--}}
 
 {{--@endif--}}
+
 <div class="col-12">
+    <h1>sdfbwelfghew;atiuyewgh;ewou</h1>
     <div class="card">
         <div class="card-body">
             <div class="row">
@@ -19,16 +21,11 @@
                       class=" d-flex justify-content-between flex-wrap h-100" enctype="multipart/form-data">
                     @csrf
                     <div class="col-xl-6">
-
-
-
                         <div class="mb-3">
                             <label class="form-label">Tên thương hiệu</label>
                             <input type="text" class="form-control" name="name_brand">
                         </div>
-
                     </div>
-
                     <div class="col-xl-6">
                         <div class="form-group text-center">
                             <div class="col-md-9 col-sm-8">
@@ -39,7 +36,6 @@
                                                id="cmt_truoc" style="display: none" multiple>
                                         <label for="cmt_truoc" class="font-48">Click để chọn ảnh</label>
                                         <br>
-
                                         <img id="mat_truoc_preview"
                                              src="https://png.pngtree.com/element_our/png/20181206/users-vector-icon-png_260862.jpg"
                                              alt="your image"
@@ -51,7 +47,6 @@
                         </div>
                     </div>
                     <!-- end row -->
-
 
                     <div class="row mt-3 col-xl-12">
                         <div class="col-12 text-center">

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\client;
 
 use App\Http\Controllers\Controller;
+use App\Models\Brand;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
@@ -11,32 +12,13 @@ class ProductClientController extends Controller
 {
     public function index(){
 
-        $this->cartProduct();
-        return view('client.product.index');
+
+        $data_products = Product::query()->with('images')->with('variations')->get();
+        $data_brands = Brand::query()->limit(8)->get();
+//        dd($data_products[2]->variations);
+        return view('client.product.index',compact('data_products','data_brands'));
+
+
     }
 
-    public function cartProduct(){
-        Session::remove('my_cart');
-        $data = [
-            [
-                'product_id'=>1,
-                'color_id'=>1,
-                'size_id' => 1,
-                'quantity'=>10,
-            ],
-            [
-                'product_id'=>2,
-                'color_id'=>5,
-                'size_id' => 1,
-                'quantity'=>1,
-            ],
-            [
-                'product_id'=>2,
-                'color_id'=>6,
-                'size_id' => 1,
-                'quantity'=>100,
-            ],
-        ];
-        Session::put('my_cart',$data);
-    }
 }
