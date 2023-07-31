@@ -3,12 +3,14 @@
 namespace App\Http\Controllers\client;
 
 use App\Http\Controllers\Controller;
+use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 
 class ProductClientController extends Controller
 {
     public function index(){
+
         $this->cartProduct();
         return view('client.product.index');
     }
