@@ -55,7 +55,13 @@
                                                             class="success">{{$value->delivery_status == 1 ? 'Chờ sử lý' : ($value->delivery_status == 2? 'Đang giao hàng' : 'Giao hàng thành công')}}</span>
                                                     </td>
                                                     <td>{{number_format($value->total)}} VND</td>
-                                                    <td><a href="" class="view">view</a></td>
+                                                    <td>
+                                                        <form action="{{route('checkout.order.detail')}}" method="POST">
+                                                            @csrf
+                                                            <input hidden name="id" value="{{$value->id}}">
+                                                            <button class="btn">View</button>
+                                                        </form>
+                                                    </td>
                                                 </tr>
                                             @endforeach
 

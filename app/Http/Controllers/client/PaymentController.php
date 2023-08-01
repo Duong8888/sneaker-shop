@@ -18,7 +18,7 @@ class PaymentController extends Controller
     public function createPayment(Request $request)
     {
         $vnp_Url = env('VNP_URL');
-        $vnp_Returnurl = route('payment.callback');
+        $vnp_Returnurl = route('checkout.payment.callback');
         $vnp_TmnCode = env('VNP_TMNCODE');//Mã website tại VNPAY
         $vnp_HashSecret = env('VNP_HASHSECRET'); //Chuỗi bí mật
         $vnp_TxnRef = time(); //Mã đơn hàng. Trong thực tế Merchant cần insert đơn hàng vào DB và gửi mã này sang VNPAY
@@ -79,9 +79,7 @@ class PaymentController extends Controller
 
     public function handlePaymentCallback(Request $request)
     {
-//        dd($request->all());
         if ($request->vnp_ResponseCode == '00' && $request->vnp_TransactionStatus == '00') { // trạng thái giao dịch thành công
-
             // tạo đơ hàng
             $order = new Order([
                 'total' => $request->vnp_Amount,
@@ -96,6 +94,7 @@ class PaymentController extends Controller
                 OrderDetail::create([
                     'variations_id' => $value->id,
                     'order_id' => $order->id,
+                    'quantity' => $value->quantity,
                 ]);
             }
             Payment::create([
@@ -110,6 +109,71 @@ class PaymentController extends Controller
             return redirect()->route('account');
         }
         return redirect()->route('checkout');
+    }
+
+    public function refund(Request $request)
+    {
+        // Lấy thông tin cần thiết từ request
+        $order_id = $request->input('order_id');
+        // Xử lý logic để kiểm tra và thực hiện hoàn tiền
+        // Kiểm tra xem đơn hàng có tồn tại và chưa được hoàn tiền
+        $order = Order::find($order_id);
+        if (!$order) {
+            return response()->json(['code' => 'error', 'message' => 'Đơn hàng không tồn tại'], 400);
+        }
+        if ($order->payment_status == 'refund') {
+            return response()->json(['code' => 'error', 'message' => 'Đơn hàng đã được hoàn tiền'], 400);
+        }
+        if($order->payment_status == 'online'){
+            $this->handleRefund($order->id);
+        }
+    }
+    public function handleRefund($order_id){
+        // Thực hiện hoàn tiền với VNPAY
+        // Sử dụng thư viện HTTP client của Laravel để gửi yêu cầu hoàn tiền đến VNPAY
+        $order = Order::find($order_id);
+        $amount_to_refund = $order->total;
+        $vnp_RefundUrl = env('VNP_REFUND_URL');
+        $vnp_HashSecret = env('VNP_HASHSECRET'); // Chuỗi bí mật
+
+        $vnp_TxnRef = time(); // Mã đơn hàng hoàn tiền
+        $vnp_Amount = $amount_to_refund * 100;
+
+        // Tạo dữ liệu để gửi yêu cầu hoàn tiền
+        $inputData = [
+            "vnp_Version" => "2.1.0",
+            "vnp_Command" => "refund",
+            "vnp_TmnCode" => env('VNP_TMNCODE'), // Mã website tại VNPAY
+            "vnp_TxnRef" => $vnp_TxnRef,
+            "vnp_OrderInfo" => "refund_order",
+            "vnp_Amount" => $vnp_Amount,
+        ];
+
+        ksort($inputData);
+        $hashdata = "";
+        foreach ($inputData as $key => $value) {
+            $hashdata .= urlencode($key) . "=" . urlencode($value) . '&';
+        }
+
+        // Tính chuỗi hash
+        $vnpSecureHash = hash_hmac('sha512', $hashdata, $vnp_HashSecret);
+        $vnp_Url = $vnp_RefundUrl . "?" . $hashdata . 'vnp_SecureHash=' . $vnpSecureHash;
+
+        // Gửi yêu cầu hoàn tiền đến VNPAY
+        $client = new \GuzzleHttp\Client();
+        $response = $client->get($vnp_Url);
+        $response_body = $response->getBody();
+        // Xử lý kết quả trả về từ VNPAY
+        if ($response_body == 'Refund Success') {
+            // Cập nhật trạng thái hoàn tiền cho đơn hàng
+            $order->payment_status = 'refund';
+            $order->save();
+            // Hoàn tiền thành công
+            return response()->json(['code' => 'success', 'message' => 'Yêu cầu hoàn tiền thành công']);
+        } else {
+            // Hoàn tiền thất bại
+            return response()->json(['code' => 'error', 'message' => 'Yêu cầu hoàn tiền thất bại']);
+        }
     }
 
 

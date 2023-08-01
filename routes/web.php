@@ -13,7 +13,7 @@ use App\Http\Controllers\Admin\size\SizeController;
 
 
 use App\Http\Controllers\client\ProductClientController;
-use App\Http\Controllers\client\DetailController;
+use App\Http\Controllers\client\DetailProductController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes

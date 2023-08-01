@@ -16,6 +16,7 @@ return new class extends Migration
             $table->unsignedBigInteger('variations_id');
             $table->foreign('variations_id')->references('id')->on('variations')->onDelete('CASCADE');
             $table->unsignedBigInteger('order_id');
+            $table->integer('quantity')->default('1');
             $table->foreign('order_id')->references('id')->on('orders')->onDelete('CASCADE');
             $table->timestamps();
         });
