@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\client;
 
 use App\Http\Controllers\Controller;
+use App\Jobs\MailJobs;
 use App\Models\Order;
 use App\Models\OrderDetail;
 use App\Models\Payment;
@@ -82,7 +83,7 @@ class PaymentController extends Controller
         if ($request->vnp_ResponseCode == '00' && $request->vnp_TransactionStatus == '00') { // trạng thái giao dịch thành công
             // tạo đơ hàng
             $order = new Order([
-                'total' => $request->vnp_Amount,
+                'total' => ($request->vnp_Amount) / 100,
                 'user_id' => Auth::user()->id,
                 'payment_method' => 'online',
                 'payment_status' => 'success',
@@ -106,6 +107,8 @@ class PaymentController extends Controller
             ]);
             Session::forget('arrayVariations');
             Session::put('myCart',[]);
+            // đẩy việc send mail vào queue
+            MailJobs::dispatch(Auth::user()->email)->delay(now()->addSecond(20));
             return redirect()->route('account');
         }
         return redirect()->route('checkout');
