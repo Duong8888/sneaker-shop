@@ -35,39 +35,144 @@
                             <div class="tab-pane fade active show" id="orders" role="tabpanel">
                                 <h3>Orders</h3>
                                 <div class="table-responsive">
-                                    @if(count($data['orderList']) > 0)
-                                        <table class="table">
-                                            <thead>
-                                            <tr>
-                                                <th>Order</th>
-                                                <th>Date</th>
-                                                <th>Status</th>
-                                                <th>Total</th>
-                                                <th>Actions</th>
-                                            </tr>
-                                            </thead>
-                                            <tbody>
-                                            @foreach($data['orderList'] as $key => $value)
-                                                <tr>
-                                                    <td>{{$key+1}}</td>
-                                                    <td>{{$value->created_at}}</td>
-                                                    <td><span
-                                                            class="success">{{$value->delivery_status == 1 ? 'Chờ sử lý' : ($value->delivery_status == 2? 'Đang giao hàng' : 'Giao hàng thành công')}}</span>
-                                                    </td>
-                                                    <td>{{number_format($value->total)}} VND</td>
-                                                    <td>
-                                                        <form action="{{route('checkout.order.detail')}}" method="POST">
-                                                            @csrf
-                                                            <input hidden name="id" value="{{$value->id}}">
-                                                            <button class="btn">View</button>
-                                                        </form>
-                                                    </td>
-                                                </tr>
-                                            @endforeach
+                                    <nav>
+                                        <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                                            <button class="nav-link active" id="nav-home-tab" data-bs-toggle="tab"
+                                                    data-bs-target="#nav-home" type="button" role="tab"
+                                                    aria-controls="nav-home" aria-selected="true">Chờ sử lý
+                                            </button>
+                                            <button class="nav-link" id="nav-profile-tab" data-bs-toggle="tab"
+                                                    data-bs-target="#nav-profile" type="button" role="tab"
+                                                    aria-controls="nav-profile" aria-selected="false">Đang giao hàng
+                                            </button>
+                                            <button class="nav-link" id="nav-contact-tab" data-bs-toggle="tab"
+                                                    data-bs-target="#nav-contact" type="button" role="tab"
+                                                    aria-controls="nav-contact" aria-selected="false">Đã nhận hàng
+                                            </button>
+                                        </div>
+                                    </nav>
+                                    <div class="tab-content" id="nav-tabContent">
+                                        <div class="tab-pane fade show active" id="nav-home" role="tabpanel"
+                                             aria-labelledby="nav-home-tab" tabindex="0">
+                                            @if(count($data['orderList']) > 0)
+                                                <table class="table">
+                                                    <thead>
+                                                    <tr>
 
-                                            </tbody>
-                                        </table>
-                                    @endif
+                                                        <th>Date</th>
+                                                        <th>Status</th>
+                                                        <th>Total</th>
+                                                        <th>Actions</th>
+                                                    </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                    @foreach($data['orderList'] as $key => $value)
+                                                        @if($value->delivery_status == 1)
+                                                            <tr>
+
+                                                                <td>{{$value->created_at}}</td>
+                                                                <td>
+                                                                    <span class="success">Chờ sử lý</span>
+                                                                </td>
+                                                                <td>{{number_format($value->total)}} VND</td>
+                                                                <td>
+                                                                    <form action="{{route('checkout.order.detail')}}"
+                                                                          method="POST">
+                                                                        @csrf
+                                                                        <input hidden name="id" value="{{$value->id}}">
+                                                                        <button class="btn">View</button>
+                                                                    </form>
+                                                                </td>
+                                                            </tr>
+                                                        @endif
+                                                    @endforeach
+                                                    </tbody>
+                                                </table>
+                                            @else
+                                                <p>Chưa có đơn hàng nào</p>
+                                            @endif
+                                        </div>
+                                        <div class="tab-pane fade" id="nav-profile" role="tabpanel"
+                                             aria-labelledby="nav-profile-tab" tabindex="0">
+                                            @if(count($data['orderList']) > 0)
+                                                <table class="table">
+                                                    <thead>
+                                                    <tr>
+
+                                                        <th>Date</th>
+                                                        <th>Status</th>
+                                                        <th>Total</th>
+                                                        <th>Actions</th>
+                                                    </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                    @foreach($data['orderList'] as $key => $value)
+                                                        @if($value->delivery_status == 2)
+                                                            <tr>
+
+                                                                <td>{{$value->created_at}}</td>
+                                                                <td><span
+                                                                        class="success">Đang giao hàng</span>
+                                                                </td>
+                                                                <td>{{number_format($value->total)}} VND</td>
+                                                                <td>
+                                                                    <form action="{{route('checkout.order.detail')}}"
+                                                                          method="POST">
+                                                                        @csrf
+                                                                        <input hidden name="id" value="{{$value->id}}">
+                                                                        <button class="btn">View</button>
+                                                                    </form>
+                                                                </td>
+                                                            </tr>
+                                                        @endif
+                                                    @endforeach
+                                                    </tbody>
+                                                </table>
+                                            @else
+                                                <p>Chưa có đơn hàng nào</p>
+                                            @endif
+                                        </div>
+                                        <div class="tab-pane fade" id="nav-contact" role="tabpanel"
+                                             aria-labelledby="nav-contact-tab" tabindex="0">
+                                            @if(count($data['orderList']) > 0)
+                                                <table class="table">
+                                                    <thead>
+                                                    <tr>
+
+                                                        <th>Date</th>
+                                                        <th>Status</th>
+                                                        <th>Total</th>
+                                                        <th>Actions</th>
+                                                    </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                    @foreach($data['orderList'] as $key => $value)
+                                                        @if($value->delivery_status == 3)
+                                                            <tr>
+
+                                                                <td>{{$value->created_at}}</td>
+                                                                <td><span
+                                                                        class="success">Giao hàng thành công</span>
+                                                                </td>
+                                                                <td>{{number_format($value->total)}} VND</td>
+                                                                <td>
+                                                                    <form action="{{route('checkout.order.detail')}}"
+                                                                          method="POST">
+                                                                        @csrf
+                                                                        <input hidden name="id" value="{{$value->id}}">
+                                                                        <button class="btn">View</button>
+                                                                    </form>
+                                                                </td>
+                                                            </tr>
+                                                        @endif
+                                                    @endforeach
+                                                    </tbody>
+                                                </table>
+                                            @else
+                                                <p>Chưa có đơn hàng nào</p>
+                                            @endif
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                             <div class="tab-pane fade" id="downloads" role="tabpanel">

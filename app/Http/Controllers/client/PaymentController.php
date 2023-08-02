@@ -101,14 +101,20 @@ class PaymentController extends Controller
             Payment::create([
                 'order_id' => $order->id,
                 'payment_method' => 'online',
-                'transaction_id'=>$request->vnp_TransactionNo,
-                'amount'=>($request->vnp_Amount) / 100,
+                'transaction_id' => $request->vnp_TransactionNo,
+                'amount' => ($request->vnp_Amount) / 100,
                 'status' => 'success'
             ]);
             Session::forget('arrayVariations');
-            Session::put('myCart',[]);
+            Session::put('myCart', []);
             // đẩy việc send mail vào queue
-            MailJobs::dispatch(Auth::user()->email)->delay(now()->addSecond(20));
+            $dataSendMail = [
+                'time' => date("Y-m-d H:i:s"),
+                'user_name' => Auth::user()->name,
+                'total' => $order->total,
+                'status' => $order->payment_status,
+            ];
+            MailJobs::dispatch(Auth::user()->email,$dataSendMail)->delay(now()->addSecond(20));
             return redirect()->route('account');
         }
         return redirect()->route('checkout');
@@ -127,11 +133,13 @@ class PaymentController extends Controller
         if ($order->payment_status == 'refund') {
             return response()->json(['code' => 'error', 'message' => 'Đơn hàng đã được hoàn tiền'], 400);
         }
-        if($order->payment_status == 'online'){
+        if ($order->payment_status == 'online') {
             $this->handleRefund($order->id);
         }
     }
-    public function handleRefund($order_id){
+
+    public function handleRefund($order_id)
+    {
         // Thực hiện hoàn tiền với VNPAY
         // Sử dụng thư viện HTTP client của Laravel để gửi yêu cầu hoàn tiền đến VNPAY
         $order = Order::find($order_id);
@@ -180,10 +188,11 @@ class PaymentController extends Controller
     }
 
 
-
-
     public function showCheckout(Request $request)
     {
+        if (Session::get('myCart') == null) {
+            return back();
+        }
         $user = Auth::user();
         $myCart = Session::get('myCart');
         $arrayVariations = new Collection();
@@ -214,7 +223,7 @@ class PaymentController extends Controller
             'myCart' => $arrayVariations,
             'total_cart' => $totalCart,
         ];
-        Session::put('arrayVariations',$arrayVariations);
+        Session::put('arrayVariations', $arrayVariations);
         return view('client.checkout.main', compact(['data']));
     }
 }

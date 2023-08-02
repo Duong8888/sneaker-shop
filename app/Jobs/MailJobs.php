@@ -19,9 +19,11 @@ class MailJobs implements ShouldQueue
      * Create a new job instance.
      */
     protected $email;
-    public function __construct($email)
+    protected $data;
+    public function __construct($email,$data)
     {
         $this->email = $email;
+        $this->data = $data;
     }
 
     /**
@@ -29,6 +31,6 @@ class MailJobs implements ShouldQueue
      */
     public function handle(): void
     {
-        Mail::to($this->email)->send(new TemplateMail('10000'));
+        Mail::to($this->email)->send(new TemplateMail($this->data));
     }
 }

@@ -16,10 +16,10 @@ class TemplateMail extends Mailable
     /**
      * Create a new message instance.
      */
-
-    public function __construct()
+    public $data;
+    public function __construct($data)
     {
-        //
+        $this->data = $data;
     }
 
     /**
@@ -28,7 +28,7 @@ class TemplateMail extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'Template Mail',
+            subject: 'Thong bao giao dich thanh cong',
         );
     }
 
@@ -39,6 +39,9 @@ class TemplateMail extends Mailable
     {
         return new Content(
             view: 'mail.template',
+            with: [
+                'data' => $this->data
+            ],
         );
     }
 
