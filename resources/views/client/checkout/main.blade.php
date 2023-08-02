@@ -66,7 +66,7 @@
                                 <button type="submit">Thanh toán său</button>
                             </div>
 
-                            <form action="{{route('payment.create')}}" method="POST">
+                            <form action="{{route('checkout.payment.create')}}" method="POST">
                                 @csrf
                                 <input hidden type="number" name="total_amount" value="{{$data['total_cart']}}">
                                 <div class="order_button">
