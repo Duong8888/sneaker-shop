@@ -3,7 +3,6 @@
 
 use App\Http\Controllers\client\OrderController;
 use App\Http\Controllers\client\PaymentController;
-use App\Http\Controllers\client\DetailProductController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\client\ProductClientController;

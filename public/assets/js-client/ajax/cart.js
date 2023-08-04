@@ -1,7 +1,7 @@
 $(document).ready(function () {
     const action = $('.loadTable');
     const url = action.attr('data-route');
-    const urlMinicart = $('.miniCart').attr('data-view-miniCart');
+    const urlMinicart = $('.mini_cart').attr('data-view-miniCart');
 
 
     function loadTable() {
@@ -52,7 +52,7 @@ $(document).ready(function () {
                                             <td class="product_thumb"><a href="#"><img src="storage/${getPropertiesNameById(item.product_id, data.arrProduct, 'img')}" alt=""></a></td>
                                             <td class="product_name"><a href="#">${getPropertiesNameById(item.product_id, data.arrProduct, 'product_name')}</a></td>
                                             <td class="product_name"><a href="#">${getPropertiesNameById(item.size_id, data.size, 'size')}</a></td>
-                                            <td class="product_name"><a href="#">${getPropertiesNameById(item.color_id, data.color, 'color')}</a></td>
+<td class="product_name"><a href="#">${getPropertiesNameById(item.color_id, data.color, 'color')}</a></td>
                                             <td class="product-price">${
                         formatCurrency(getPropertiesNameById(item.product_id, data.arrProduct, 'price'))
                     }
@@ -100,7 +100,7 @@ $(document).ready(function () {
                                 if (+cartSession[i].product_id === properties.id) {
                                     for (let j = 0; j < properties.variations.length; j++) {
                                         if (properties.variations[j].color_id === +cartSession[i].color_id && properties.variations[j].size_id === +cartSession[i].size_id) {
-                                            // console.log(properties.variations[j].price)
+// console.log(properties.variations[j].price)
                                             return properties.variations[j].price;
                                         }
                                     }
@@ -142,14 +142,11 @@ $(document).ready(function () {
             dataType: 'json',
             success: function (data) {
                 console.log(data);
-                $('.miniCart').empty();
-                $('.miniCart').append(`
+                $('.mini_cart_item').empty();
+                $('.mini_cart_item').append(`
                    <div class="cart_close">
                         <div class="cart_text">
                             <h3>cart</h3>
-                        </div>
-                        <div class="mini_cart_close">
-                            <a href="javascript:void(0)"><i class="ion-android-close"></i></a>
                         </div>
                     </div>
 
@@ -170,19 +167,18 @@ $(document).ready(function () {
 
             </div>
             `)}
+<!--            <div class="mini_cart_table">-->
+<!--                <div class="cart_total">-->
+<!--                    <span>Sub total:</span>-->
+<!--                    <span class="price">$138.00</span>-->
+<!--                </div>-->
 
-            <div class="mini_cart_table">
-                <div class="cart_total">
-                    <span>Sub total:</span>
-                    <span class="price">$138.00</span>
-                </div>
-
-            </div>
+<!--            </div>-->
                 `);
 
 
                 // function totalPrice(){
-                //     let countPrice = 0;
+//     let countPrice = 0;
                 //     // đầu tiên phải lấy ra từng giá trị trong mảng sản phẩm trên session
                 //     for (let i = 0; i < data.mycart.data.length; i++){
                 //         // tiếp tục ta phải lặp ra từng obj product
