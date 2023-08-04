@@ -127,6 +127,12 @@
 
 
                 <li class="menu-item">
+                    <a href="{{url('https://sandbox.vnpayment.vn/merchantv2/')}}" target="_blank" class="menu-link">
+                        <span class="menu-icon"><i class="bi bi-gear"></i></span>
+                        <span class="menu-text"> Merchant Admin </span>
+                    </a>
+                </li>
+                <li class="menu-item">
                     <a href="#menuProjects" data-bs-toggle="collapse" class="menu-link">
                         <span class="menu-icon"><i data-feather="briefcase"></i></span>
                         <span class="menu-text"> Thương hiệu </span>
