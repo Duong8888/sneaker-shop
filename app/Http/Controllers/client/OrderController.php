@@ -36,7 +36,7 @@ class OrderController extends Controller
         $data = [];
         foreach ($orderDetail as $value) {
             $product = Product::query()->where('id', $value->variations->product_id)->get();
-            $productImage = ImagesProduct::query()->where('id', $value->variations->product_id)->first();
+            $productImage = ImagesProduct::query()->where('product_id', $value->variations->product_id)->first();
             $color = Color::query()->where('id', $value->variations->color_id)->get();
             $size = Size::query()->where('id', $value->variations->size_id)->get();
             $data[] = [
