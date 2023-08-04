@@ -12,7 +12,6 @@
 {{--@endif--}}
 
 <div class="col-12">
-    <h1>sdfbwelfghew;atiuyewgh;ewou</h1>
     <div class="card">
         <div class="card-body">
             <div class="row">

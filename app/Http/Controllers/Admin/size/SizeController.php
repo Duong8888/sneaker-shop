@@ -38,7 +38,7 @@ class SizeController extends Controller
             $request->validate([
                 'data' => 'required'
             ]);
-            $data = Size::where('id', $id)->update(['color_value' => $request->data]);
+            $data = Size::where('id', $id)->update(['size_value' => $request->data]);
             return response()->json(['message' =>'Cập nhật thành công.']);
         }else{
             $data = Size::where('id', $id)->first();

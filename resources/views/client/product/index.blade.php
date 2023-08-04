@@ -22,10 +22,13 @@
                                 </div>
                                 <div class="product_thumb">
                                     @if(count($v->images) > 1)
-                                        <a class="primary_img" href=""><img src="storage/{{$v->images[0]->url}}" alt=""></a>
-                                        <a class="secondary_img" href=""><img src="storage/{{$v->images[1]->url}}" alt=""></a>
+
+                                        <a class="primary_img" href="{{route('route.viewDetail',$v->id)}}"><img src="storage/{{$v->images[0]->url}}" alt=""></a>
+                                        <a class="secondary_img" href="{{route('route.viewDetail',$v->id)}}"><img src="storage/{{$v->images[1]->url}}"
+                                                                                                                  alt=""></a>
                                     @else
-                                        <a class="primary_img" href=""><img src="storage/{{$v->images[0]->url}}" alt=""></a>
+                                        <a class="primary_img" href="{{route('route.viewDetail',$v->id)}}"><img src="storage/{{$v->images[0]->url}}" alt=""></a>
+
                                     @endif
 
                                     <div class="label_product">
@@ -119,6 +122,7 @@
                     <div class="section_title">
                         <h2><span> <strong>Thương hiệu</strong>đặc trưng</span></h2>
                     </div>
+
                     <!--brand area start-->
                     <div class="brand_area mb-42">
                         <div class="container">
@@ -126,9 +130,9 @@
                                 <div class="col-12">
                                     <div class="brand_container owl-carousel">
                                         @foreach($data_brands as $v)
-                                        <div class="single_brand">
-                                            <a href="#"><img src="storage/{{$v->image}}" alt=""></a>
-                                        </div>
+                                            <div class="single_brand">
+                                                <a href="#"><img src="storage/{{$v->image}}" alt=""></a>
+                                            </div>
                                         @endforeach
                                     </div>
                                 </div>
@@ -136,6 +140,7 @@
                         </div>
                     </div>
                     <!--brand area end-->
+
                 </div>
             </div>
         </div>
@@ -159,10 +164,13 @@
                                 </div>
                                 <div class="product_thumb">
                                     @if(count($v->images) > 1)
-                                        <a class="primary_img" href=""><img src="storage/{{$v->images[0]->url}}" alt=""></a>
-                                        <a class="secondary_img" href=""><img src="storage/{{$v->images[1]->url}}" alt=""></a>
+
+                                        <a class="primary_img" href="{{route('route.viewDetail',$v->slug)}}"><img src="storage/{{$v->images[0]->url}}" alt=""></a>
+                                        <a class="secondary_img" href="{{route('route.viewDetail',$v->slug)}}"><img src="storage/{{$v->images[1]->url}}"
+                                                                                                                    alt=""></a>
                                     @else
-                                        <a class="primary_img" href=""><img src="storage/{{$v->images[0]->url}}" alt=""></a>
+                                        <a class="primary_img" href="{{route('route.viewDetail',$v->slug)}}"><img src="storage/{{$v->images[0]->url}}" alt=""></a>
+
                                     @endif
                                     <div class="label_product">
                                         <span class="label_sale">-57%</span>
@@ -171,7 +179,11 @@
                                     <div class="action_links">
                                         <ul>
                                             <li class="quick_button"><a href="#" data-bs-toggle="modal"
-                                                                        data-bs-target="#modal_box" title="quick view">
+
+                                                                        data-bs-target="#modal_box" title="quick view"
+                                                                        class="product_detail productDetail_route"
+                                                                        data-product-id="{{$v->id}}">
+
                                                     <span class="lnr lnr-magnifier"></span></a></li>
                                             <li class="wishlist"><a href="wishlist.html" title="Add to Wishlist"><span
                                                         class="lnr lnr-heart"></span></a></li>
@@ -263,10 +275,12 @@
                                 </div>
                                 <div class="product_thumb">
                                     @if(count($v->images) > 1)
-                                        <a class="primary_img" href=""><img src="storage/{{$v->images[0]->url}}" alt=""></a>
-                                        <a class="secondary_img" href=""><img src="storage/{{$v->images[1]->url}}" alt=""></a>
+                                        <a class="primary_img" href="{{route('route.viewDetail',$v->id)}}"><img src="storage/{{$v->images[0]->url}}" alt=""></a>
+                                        <a class="secondary_img" href="{{route('route.viewDetail',$v->id)}}"><img src="storage/{{$v->images[1]->url}}"
+                                                                                                                  alt=""></a>
                                     @else
-                                        <a class="primary_img" href=""><img src="storage/{{$v->images[0]->url}}" alt=""></a>
+                                        <a class="primary_img" href="{{route('route.viewDetail',$v->id)}}"><img src="storage/{{$v->images[0]->url}}" alt=""></a>
+
                                     @endif
                                     <div class="label_product">
                                         <span class="label_sale">-57%</span>
@@ -275,7 +289,9 @@
                                     <div class="action_links">
                                         <ul>
                                             <li class="quick_button"><a href="#" data-bs-toggle="modal"
-                                                                        data-bs-target="#modal_box" title="quick view">
+                                                                        data-bs-target="#modal_box" title="quick view"
+                                                                        class="product_detail productDetail_route"
+                                                                        data-product-id="{{$v->id}}">
                                                     <span class="lnr lnr-magnifier"></span></a></li>
                                             <li class="wishlist"><a href="wishlist.html" title="Add to Wishlist"><span
                                                         class="lnr lnr-heart"></span></a></li>
@@ -379,6 +395,7 @@
         </div>
     </section>
     <!--product area end-->
+
 
 
 @endsection

@@ -1,0 +1,40 @@
+[33m218309e[m[33m ([m[1;36mHEAD -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m)[m HEAD@{0}: pull origin main: Fast-forward
+[33mc736e06[m HEAD@{1}: commit (merge): Merge remote-tracking branch 'origin/main'
+[33m85f017f[m HEAD@{2}: commit: chiều mưa
+[33m95b8ad9[m[33m ([m[1;31morigin/dtanhch127[m[33m)[m HEAD@{3}: checkout: moving from anhdt1207 to main
+[33m7ad2525[m[33m ([m[1;31morigin/anhdt1207[m[33m, [m[1;32manhdt1207[m[33m)[m HEAD@{4}: merge origin/anhdt1207: Merge made by the 'ort' strategy.
+[33me37b185[m HEAD@{5}: commit: a
+[33mab75303[m HEAD@{6}: commit: chiều buồn fix rất nhiều lỗi
+[33ma00003d[m HEAD@{7}: commit: chi tiết
+[33mcddfaee[m HEAD@{8}: pull origin duongna: Merge made by the 'ort' strategy.
+[33md9cb115[m HEAD@{9}: commit: query img
+[33mc5932f7[m HEAD@{10}: commit: giao diện product
+[33m42dd255[m HEAD@{11}: commit: mất điện
+[33m7fd7760[m HEAD@{12}: pull origin duongna1603: Merge made by the 'ort' strategy.
+[33maa06714[m HEAD@{13}: commit: mất điện
+[33m80ee28c[m HEAD@{14}: commit: một chút ajax
+[33m9221eeb[m HEAD@{15}: commit: fix storage
+[33mdc7ddec[m HEAD@{16}: checkout: moving from duongna1603 to anhdt1207
+[33m3e3b849[m[33m ([m[1;32mduongna1603[m[33m)[m HEAD@{17}: checkout: moving from anhdt1207 to duongna1603
+[33mdc7ddec[m HEAD@{18}: pull origin duongna1603: Merge made by the 'ort' strategy.
+[33mbd70f8a[m HEAD@{19}: pull origin duongna1603: Merge made by the 'ort' strategy.
+[33m64ba638[m HEAD@{20}: merge origin/anhdt1207: Merge made by the 'ort' strategy.
+[33m7eb9c37[m HEAD@{21}: commit: upload
+[33mec722b9[m HEAD@{22}: commit: authen
+[33m78befc8[m HEAD@{23}: commit: xóa mềm
+[33mfae8125[m HEAD@{24}: checkout: moving from duongna1603 to anhdt1207
+[33m3e3b849[m[33m ([m[1;32mduongna1603[m[33m)[m HEAD@{25}: checkout: moving from anhdt1207 to duongna1603
+[33mfae8125[m HEAD@{26}: commit: avatar
+[33m3bcf15f[m HEAD@{27}: commit: avatar
+[33m8eda5fc[m HEAD@{28}: commit (merge): variation
+[33mef2b70f[m HEAD@{29}: commit: Brands
+[33ma8d4429[m HEAD@{30}: commit: viewAll
+[33m68f3514[m HEAD@{31}: commit: b
+[33m8d409b7[m HEAD@{32}: commit (merge): a
+[33m6ffca79[m HEAD@{33}: commit: abc
+[33ma12ac71[m HEAD@{34}: pull origin duongna1603: Merge made by the 'ort' strategy.
+[33m5415d79[m HEAD@{35}: commit: view
+[33m5b44ae9[m HEAD@{36}: pull origin duongna1603: updating HEAD
+[33m5b44ae9[m HEAD@{37}: commit: test model
+[33m8155d60[m HEAD@{38}: checkout: moving from main to anhdt1207
+[33m7e46c24[m HEAD@{39}: clone: from https://github.com/Duong8888/sneaker-shop.git

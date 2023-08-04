@@ -41,11 +41,6 @@ class ProductController extends Controller
         $files = $request->file('files');// Lấy danh sách các tệp đã tải lên từ ô input file
         $countVariations = (int)($request->input('lengthFor')); // lấy số lương biến thể đếm được ở bên giao diện
         $slug = Str::slug($request->input('productName'));// tạo slug thông qua name
-        $count = 1;
-        while (Product::where('slug', $slug)->exists()) {
-            $slug = Str::slug($slug) . '-' . $count;
-            $count++;
-        }
         $product = Product::create([// lưu thôn tin sản phẩm
             'product_name' => $request->input('productName'),
             'description' => $request->input('description'),
@@ -90,11 +85,6 @@ class ProductController extends Controller
         $requestAll = $request->all();
         if ($product->product_name !== $request->input('productName')) {
             $slug = Str::slug($request->input('productName'));
-            $count = 1;
-            while (Product::where('slug', $slug)->exists()) {
-                $slug = Str::slug($slug) . '-' . $count;
-                $count++;
-            }
             $product->product_name = $request->input('productName');
             $product->slug = $slug;
         }
@@ -119,14 +109,14 @@ class ProductController extends Controller
             }
         }
         // thự hiện update các biến thể
-       foreach ($request->all() as $key => $value){
-           // Kiểm tra nếu khóa bắt đầu bằng "quantity-Variations-"
-           if(strpos($key, 'quantity-variations-') === 0 || strpos($key, 'price-variations-') === 0){
-               $variableId = explode('-', $key)[2]; // lấy id bản gi cần update
-               $variableIdColum = explode('-', $key)[0];
-               Variations::where('id', $variableId)->update([$variableIdColum => $value]);
-           }
-       }
+        foreach ($request->all() as $key => $value){
+            // Kiểm tra nếu khóa bắt đầu bằng "quantity-Variations-"
+            if(strpos($key, 'quantity-variations-') === 0 || strpos($key, 'price-variations-') === 0){
+                $variableId = explode('-', $key)[2]; // lấy id bản gi cần update
+                $variableIdColum = explode('-', $key)[0];
+                Variations::where('id', $variableId)->update([$variableIdColum => $value]);
+            }
+        }
         $product->save();
         return response()->json(['message' => 'updated thanh cong']);
     }
