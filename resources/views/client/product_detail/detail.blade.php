@@ -72,8 +72,7 @@
                                                     }
                                                 @endphp
                                                 {{number_format($min)}} - {{number_format($max)}}
-                                    @else
-                                        {{number_format($v->variations[0]->price)}}
+
                                     @endif
                                 </span>
 
