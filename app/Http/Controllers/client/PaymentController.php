@@ -7,17 +7,42 @@ use App\Jobs\MailJobs;
 use App\Models\Order;
 use App\Models\OrderDetail;
 use App\Models\Payment;
+use App\Models\User;
 use App\Models\Variations;
 use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\Rule;
 
 class PaymentController extends Controller
 {
 
     public function createPayment(Request $request)
     {
+        if ($request->has('address') && $request->has('phone')) {
+            $validate = Validator::make($request->all(), [
+                'phone' => [
+                    'required',
+                    function ($attribute, $value, $fail) {
+                        if (!preg_match('/^\d{10}$/', $value)) {
+                            $fail('Số điện thoại không hợp lệ.');
+                        }
+                    },
+                    Rule::unique(User::class)->ignore(Auth::user()->id),
+                ],
+            ], [
+                'phone.unique' => 'Số điện thoại đã được sử dụng.',
+            ]);
+            if ($validate->fails()) {
+                return redirect()->route('checkout.checkout')->with('error', ($validate->errors())->toArray());
+            }
+            User::where('id', Auth::user()->id)->update([
+                'address' => $request->input('address'),
+                'phone' => $request->input('phone'),
+            ]);
+        }
         $vnp_Url = env('VNP_URL');
         $vnp_Returnurl = route('checkout.payment.callback');
         $vnp_TmnCode = env('VNP_TMNCODE');//Mã website tại VNPAY
@@ -114,7 +139,7 @@ class PaymentController extends Controller
                 'total' => $order->total,
                 'status' => $order->payment_status,
             ];
-            MailJobs::dispatch(Auth::user()->email,$dataSendMail)->delay(now()->addSecond(20));
+            MailJobs::dispatch(Auth::user()->email, $dataSendMail)->delay(now()->addSecond(20));
             return redirect()->route('account');
         }
         return redirect()->route('checkout');
@@ -220,6 +245,7 @@ class PaymentController extends Controller
             'name' => $user->name,
             'email' => $user->email,
             'address' => $user->address,
+            'phone' => $user->phone,
             'myCart' => $arrayVariations,
             'total_cart' => $totalCart,
         ];

@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('password')->nullable();;
             $table->rememberToken()->nullable();
             $table->string('address')->nullable();
+            $table->string('phone')->nullable()->unique();
 
             $table->string('github_id')->nullable()->unique();
             $table->string('github_username')->nullable();
