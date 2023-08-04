@@ -126,14 +126,12 @@
                 <li class="menu-title">Apps</li>
 
 
-
                 <li class="menu-item">
                     <a href="{{url('https://sandbox.vnpayment.vn/merchantv2/')}}" target="_blank" class="menu-link">
                         <span class="menu-icon"><i class="bi bi-gear"></i></span>
                         <span class="menu-text"> Merchant Admin </span>
                     </a>
                 </li>
-
                 <li class="menu-item">
                     <a href="#menuProjects" data-bs-toggle="collapse" class="menu-link">
                         <span class="menu-icon"><i data-feather="briefcase"></i></span>
@@ -143,9 +141,7 @@
                         <ul class="sub-menu">
                             <li class="menu-item">
                                 <a href="{{route('route.brands.list')}}" class="menu-link">
-
                                     <span class="menu-text">Danh sách thương hiệu</span>
-
                                 </a>
                             </li>
                             <li class="menu-item">
@@ -160,18 +156,14 @@
                 <li class="menu-item">
                     <a href="#menuTasks" data-bs-toggle="collapse" class="menu-link">
                         <span class="menu-icon"><i data-feather="clipboard"></i></span>
-
                         <span class="menu-text"> Đơn hàng </span>
-
                         <!-- <span class="menu-arrow"></span> -->
                     </a>
                     <div class="collapse" id="menuTasks">
                         <ul class="sub-menu">
                             <li class="menu-item">
-
                                 <a href="{{route('order.index')}}" class="menu-link">
                                     <span class="menu-text">Danh sách đơn hàng</span>
-
                                 </a>
                             </li>
 

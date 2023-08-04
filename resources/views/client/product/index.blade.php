@@ -25,7 +25,7 @@
 
                                         <a class="primary_img" href="{{route('route.viewDetail',$v->id)}}"><img src="storage/{{$v->images[0]->url}}" alt=""></a>
                                         <a class="secondary_img" href="{{route('route.viewDetail',$v->id)}}"><img src="storage/{{$v->images[1]->url}}"
-                                                                              alt=""></a>
+                                                                                                                  alt=""></a>
                                     @else
                                         <a class="primary_img" href="{{route('route.viewDetail',$v->id)}}"><img src="storage/{{$v->images[0]->url}}" alt=""></a>
 
@@ -130,9 +130,9 @@
                                 <div class="col-12">
                                     <div class="brand_container owl-carousel">
                                         @foreach($data_brands as $v)
-                                        <div class="single_brand">
-                                            <a href="#"><img src="storage/{{$v->image}}" alt=""></a>
-                                        </div>
+                                            <div class="single_brand">
+                                                <a href="#"><img src="storage/{{$v->image}}" alt=""></a>
+                                            </div>
                                         @endforeach
                                     </div>
                                 </div>
@@ -167,7 +167,7 @@
 
                                         <a class="primary_img" href="{{route('route.viewDetail',$v->slug)}}"><img src="storage/{{$v->images[0]->url}}" alt=""></a>
                                         <a class="secondary_img" href="{{route('route.viewDetail',$v->slug)}}"><img src="storage/{{$v->images[1]->url}}"
-                                                                              alt=""></a>
+                                                                                                                    alt=""></a>
                                     @else
                                         <a class="primary_img" href="{{route('route.viewDetail',$v->slug)}}"><img src="storage/{{$v->images[0]->url}}" alt=""></a>
 
@@ -277,7 +277,7 @@
                                     @if(count($v->images) > 1)
                                         <a class="primary_img" href="{{route('route.viewDetail',$v->id)}}"><img src="storage/{{$v->images[0]->url}}" alt=""></a>
                                         <a class="secondary_img" href="{{route('route.viewDetail',$v->id)}}"><img src="storage/{{$v->images[1]->url}}"
-                                                                              alt=""></a>
+                                                                                                                  alt=""></a>
                                     @else
                                         <a class="primary_img" href="{{route('route.viewDetail',$v->id)}}"><img src="storage/{{$v->images[0]->url}}" alt=""></a>
 
