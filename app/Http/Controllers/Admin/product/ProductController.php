@@ -41,6 +41,11 @@ class ProductController extends Controller
         $files = $request->file('files');// Lấy danh sách các tệp đã tải lên từ ô input file
         $countVariations = (int)($request->input('lengthFor')); // lấy số lương biến thể đếm được ở bên giao diện
         $slug = Str::slug($request->input('productName'));// tạo slug thông qua name
+        $count = 1;
+        while (Product::where('slug', $slug)->exists()) {
+            $slug = Str::slug($slug) . '-' . $count;
+            $count++;
+        }
         $product = Product::create([// lưu thôn tin sản phẩm
             'product_name' => $request->input('productName'),
             'description' => $request->input('description'),
@@ -85,6 +90,11 @@ class ProductController extends Controller
         $requestAll = $request->all();
         if ($product->product_name !== $request->input('productName')) {
             $slug = Str::slug($request->input('productName'));
+            $count = 1;
+            while (Product::where('slug', $slug)->exists()) {
+                $slug = Str::slug($slug) . '-' . $count;
+                $count++;
+            }
             $product->product_name = $request->input('productName');
             $product->slug = $slug;
         }

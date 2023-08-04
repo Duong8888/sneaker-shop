@@ -156,7 +156,7 @@
                 <a href="{{route('route.myCart')}}">View cart</a>
             </div>
             <div class="cart_button">
-                <a class="active" href="checkout.html">Checkout</a>
+                <a class="active" href="{{route('checkout.checkout')}}">Checkout</a>
             </div>
 
         </div>

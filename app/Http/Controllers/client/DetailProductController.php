@@ -9,7 +9,7 @@ use App\Models\Size;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 
-class DetailController extends Controller
+class DetailProductController extends Controller
 {
     public function addSession(Request $request, $id){
         $valueDetail = $request->except(['_token','slug']);

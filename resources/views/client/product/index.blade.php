@@ -120,27 +120,23 @@
                     <div class="section_title">
                         <h2><span> <strong>Thương hiệu</strong>đặc trưng</span></h2>
                     </div>
-                    <div class="product_carousel featured_four  product_column5 owl-carousel">
-                        @foreach($data_brands as $v)
-                            <div class="single_featured">
-                                <div class="featured_thumb">
-                                    <a href="#"><img src="storage/{{$v->image}}" alt=""></a>
-                                </div>
-                                <div class="featured_content">
-                                    <h3 class="product_name"><a href="#">{{$v->name_brand}}</a></h3>
-                                    {{--                                <div class="sub_featured">--}}
-                                    {{--                                    <ul>--}}
-                                    {{--                                        <li><a href="#">Handbag</a></li>--}}
-                                    {{--                                        <li><a href="#">Accessories</a></li>--}}
-                                    {{--                                        <li><a href="#">Clothing</a></li>--}}
-                                    {{--                                        <li><a href="#">Shoes</a></li>--}}
-                                    {{--                                    </ul>--}}
-                                    {{--                                </div>--}}
-                                    <a class="view_more" href="#">shop now</a>
+                    <!--brand area start-->
+                    <div class="brand_area mb-42">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="brand_container owl-carousel">
+                                        @foreach($data_brands as $v)
+                                        <div class="single_brand">
+                                            <a href="#"><img src="storage/{{$v->image}}" alt=""></a>
+                                        </div>
+                                        @endforeach
+                                    </div>
                                 </div>
                             </div>
-                        @endforeach
+                        </div>
                     </div>
+                    <!--brand area end-->
                 </div>
             </div>
         </div>
@@ -238,7 +234,7 @@
 
     <!--banner area start-->
     <section class="banner_area banner_static mb-50 d-flex align-items-center"
-             data-bgimg="{{asset('ui-client/assets/img/bg/banner7.jpg')}}">
+             data-bgimg="https://as2.ftcdn.net/v2/jpg/03/98/40/63/1000_F_398406350_TM01RxiN6Owk32GEgNLQQJ6LDag7PWOi.jpg">
         <div class="container">
             <div class="row">
                 <div class="col-12">
@@ -246,7 +242,7 @@
                         <h2>Automotive Led</h2>
                         <h1>Headlight Kits</h1>
                         <p>HVC brings you only the best quality headlight kits</p>
-                        <a href="shop.html">Discover Now</a>
+                        <a href="#" class="bg-dark text-white">Discover Now</a>
                     </div>
                 </div>
             </div>
@@ -391,149 +387,7 @@
     </section>
     <!--product area end-->
 
-    <!--brand area start-->
-    <div class="brand_area mb-42">
-        <div class="container">
-            <div class="row">
-                <div class="col-12">
-                    <div class="brand_container owl-carousel">
-                        <div class="single_brand">
-                            <a href="#"><img src="{{asset('ui-client/assets/img/brand/brand.png')}}" alt=""></a>
-                        </div>
-                        <div class="single_brand">
-                            <a href="#"><img src="{{asset('ui-client/assets/img/brand/brand1.png')}}" alt=""></a>
-                        </div>
-                        <div class="single_brand">
-                            <a href="#"><img src="{{asset('ui-client/assets/img/brand/brand2.png')}}" alt=""></a>
-                        </div>
-                        <div class="single_brand">
-                            <a href="#"><img src="{{asset('ui-client/assets/img/brand/brand3.png')}}" alt=""></a>
-                        </div>
-                        <div class="single_brand">
-                            <a href="#"><img src="{{asset('ui-client/assets/img/brand/brand4.png')}}" alt=""></a>
-                        </div>
-                        <div class="single_brand">
-                            <a href="#"><img src="{{asset('ui-client/assets/img/brand/brand2.png')}}" alt=""></a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!--brand area end-->
 
-    <!--blog area start-->
-    <section class="blog_section mb-50">
-        <div class="container">
-            <div class="row">
-                <div class="col-12">
-                    <div class="section_title">
-                        <h2><span> <strong>Latest</strong>Blogs</span></h2>
-                    </div>
-                    <div class="blog_carousel blog_column4 owl-carousel">
-                        <div class="single_blog">
-                            <div class="blog_thumb">
-                                <a href="blog-details.html"><img src="{{asset('ui-client/assets/img/blog/blog1.jpg')}}"
-                                                                 alt=""></a>
-                            </div>
-                            <div class="blog_content">
-                                <div class="date_post">
-                                    <span>07 Feb 2019</span>
-                                </div>
-                                <h3><a href="blog-details.html">2-Bromeliad Mount Care: How to Water and Care for
-                                        Mounted</a></h3>
-                                <div class="blog_desc">
-                                    <p>Virtual reality and 3-D technology are already well-established in the
-                                        entertainment...</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="single_blog">
-                            <div class="blog_thumb">
-                                <a href="blog-details.html"><img src="assets/img/blog/blog2.jpg" alt=""></a>
-                            </div>
-                            <div class="blog_content">
-                                <div class="date_post">
-                                    <span>05 Feb 2019</span>
-                                </div>
-                                <h3><a href="blog-details.html">Bromeliad Mount Care: How to Water and Care for
-                                        Mounted</a></h3>
-                                <div class="blog_desc">
-                                    <p>Virtual reality and 3-D technology are already well-established in the
-                                        entertainment...</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="single_blog">
-                            <div class="blog_thumb">
-                                <a href="blog-details.html"><img src="assets/img/blog/blog3.jpg" alt=""></a>
-                            </div>
-                            <div class="blog_content">
-                                <div class="date_post">
-                                    <span>04 Feb 2019</span>
-                                </div>
-                                <h3><a href="blog-details.html">Mounted Tropical Plant Care: How to Grow Tropical
-                                        Plants</a></h3>
-                                <div class="blog_desc">
-                                    <p>Virtual reality and 3-D technology are already well-established in the
-                                        entertainment...</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="single_blog">
-                            <div class="blog_thumb">
-                                <a href="blog-details.html"><img src="assets/img/blog/blog4.jpg" alt=""></a>
-                            </div>
-                            <div class="blog_content">
-                                <div class="date_post">
-                                    <span>07 Feb 2019</span>
-                                </div>
-                                <h3><a href="blog-details.html">Plantlet Care: How To Pot Up and Care For Juvenile
-                                        Houseplants</a></h3>
-                                <div class="blog_desc">
-                                    <p>Virtual reality and 3-D technology are already well-established in the
-                                        entertainment...</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="single_blog">
-                            <div class="blog_thumb">
-                                <a href="blog-details.html"><img src="assets/img/blog/blog5.jpg" alt=""></a>
-                            </div>
-                            <div class="blog_content">
-                                <div class="date_post">
-                                    <span>08 Feb 2019</span>
-                                </div>
-                                <h3><a href="blog-details.html">The Definitive List of Pumpkin Spice Everything fotr
-                                        2018</a></h3>
-                                <div class="blog_desc">
-                                    <p>Virtual reality and 3-D technology are already well-established in the
-                                        entertainment...</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="single_blog">
-                            <div class="blog_thumb">
-                                <a href="blog-details.html"><img src="assets/img/blog/blog3.jpg" alt=""></a>
-                            </div>
-                            <div class="blog_content">
-                                <div class="date_post">
-                                    <span>07 Feb 2019</span>
-                                </div>
-                                <h3><a href="blog-details.html">Mounted Tropical Plant Care: How to Grow Tropical
-                                        Plants</a></h3>
-                                <div class="blog_desc">
-                                    <p>Virtual reality and 3-D technology are already well-established in the
-                                        entertainment...</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!--blog area end-->
 @endsection
 @section('script-page')
 
