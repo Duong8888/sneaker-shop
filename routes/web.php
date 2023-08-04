@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
@@ -64,6 +65,10 @@ Route::group(['prefix' => 'size', 'as' => 'size.', 'middleware' => ['auth', 'ver
     Route::delete('/delete/{id}', [SizeController::class, 'delete'])->name('delete');
     Route::match(['GET', 'POST'], 'add', [SizeController::class, 'add'])->name('add');
     Route::match(['GET', 'POST'], '/edit/{id}', [SizeController::class, 'update'])->name('edit');
+});
+
+Route::group(['middleware' => ['auth', 'verified']],function (){
+    Route::resource('/order',OrderController::class);
 });
 
 

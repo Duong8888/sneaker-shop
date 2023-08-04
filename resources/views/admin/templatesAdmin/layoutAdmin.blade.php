@@ -125,12 +125,6 @@
 
                 <li class="menu-title">Apps</li>
 
-                <li class="menu-item">
-                    <a href="#" class="menu-link">
-                        <span class="menu-icon"><i data-feather="calendar"></i></span>
-                        <span class="menu-text"> thuộc tính </span>
-                    </a>
-                </li>
 
                 <li class="menu-item">
                     <a href="#menuProjects" data-bs-toggle="collapse" class="menu-link">
@@ -141,7 +135,7 @@
                         <ul class="sub-menu">
                             <li class="menu-item">
                                 <a href="{{route('route.brands.list')}}" class="menu-link">
-                                    <span class="menu-text">danh sách Thương hiệu</span>
+                                    <span class="menu-text">Danh sách thương hiệu</span>
                                 </a>
                             </li>
                             <li class="menu-item">
@@ -156,14 +150,14 @@
                 <li class="menu-item">
                     <a href="#menuTasks" data-bs-toggle="collapse" class="menu-link">
                         <span class="menu-icon"><i data-feather="clipboard"></i></span>
-                        <span class="menu-text"> Tasks </span>
+                        <span class="menu-text"> Đơn hàng </span>
                         <!-- <span class="menu-arrow"></span> -->
                     </a>
                     <div class="collapse" id="menuTasks">
                         <ul class="sub-menu">
                             <li class="menu-item">
-                                <a href="#" class="menu-link">
-                                    <span class="menu-text">List</span>
+                                <a href="{{route('order.index')}}" class="menu-link">
+                                    <span class="menu-text">Danh sách đơn hàng</span>
                                 </a>
                             </li>
 
