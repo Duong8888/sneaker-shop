@@ -131,7 +131,7 @@
                                 <a href="wishlist.html"><span class="lnr lnr-heart"></span> Wish list </a>
                                 <span class="wishlist_quantity">3</span>
                             </div>
-                            <div class="mini_cart_wrapper">
+                            <div class="mini_cart_wrapper wrp_mini_cart">
                                 <a href="javascript:void(0)"><span class="lnr lnr-cart"></span>My Cart </a>
                                 <span class="cart_quantity">2</span>
                             </div>
@@ -146,56 +146,14 @@
 
     <!--mini cart-->
     <div class="mini_cart">
-        <div class="cart_close">
-            <div class="cart_text">
-                <h3>cart</h3>
-            </div>
-            <div class="mini_cart_close">
-                <a href="javascript:void(0)"><i class="ion-android-close"></i></a>
-            </div>
-        </div>
-        <div class="cart_item">
-            <div class="cart_img">
-                <a href="#"><img src="{{asset('ui-client/assets/img/s-product/product.jpg')}}" alt=""></a>
-            </div>
-            <div class="cart_info">
-                <a href="#">JBL Flip 3 Splasroof Portable Bluetooth 2</a>
+        <div class="miniCart" data-view-miniCart="{{route('route.loadTable')}}">
 
-                <span class="quantity">Qty: 1</span>
-                <span class="price_cart">$60.00</span>
+        </div>
 
-            </div>
-            <div class="cart_remove">
-                <a href="#"><i class="ion-android-close"></i></a>
-            </div>
-        </div>
-        <div class="cart_item">
-            <div class="cart_img">
-                <a href="#"><img src="{{asset('ui-client/assets/img/s-product/product2.jpg')}}" alt=""></a>
-            </div>
-            <div class="cart_info">
-                <a href="#">Koss Porta Pro On Ear Headphones </a>
-                <span class="quantity">Qty: 1</span>
-                <span class="price_cart">$69.00</span>
-            </div>
-            <div class="cart_remove">
-                <a href="#"><i class="ion-android-close"></i></a>
-            </div>
-        </div>
-        <div class="mini_cart_table">
-            <div class="cart_total">
-                <span>Sub total:</span>
-                <span class="price">$138.00</span>
-            </div>
-            <div class="cart_total mt-10">
-                <span>total:</span>
-                <span class="price">$138.00</span>
-            </div>
-        </div>
 
         <div class="mini_cart_footer">
             <div class="cart_button">
-                <a href="cart.html">View cart</a>
+                <a href="{{route('route.myCart')}}">View cart</a>
             </div>
             <div class="cart_button">
                 <a class="active" href="checkout.html">Checkout</a>

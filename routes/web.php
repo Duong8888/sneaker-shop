@@ -1,19 +1,14 @@
 <?php
 
-use App\Http\Controllers\CartController;
+use App\Http\Controllers\Admin\BrandsController;
+use App\Http\Controllers\Admin\color\ColorController;
+use App\Http\Controllers\Admin\product\ProductController;
+use App\Http\Controllers\Admin\size\SizeController;
+use App\Http\Controllers\Admin\TrashBrandController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
-use App\Http\Controllers\Admin\product\ProductController;
-use App\Http\Controllers\Admin\BrandsController;
-use App\Http\Controllers\Admin\TrashBrandController;
-use App\Http\Controllers\Admin\color\ColorController;
-use App\Http\Controllers\Admin\size\SizeController;
 
-
-
-use App\Http\Controllers\client\ProductClientController;
-use App\Http\Controllers\client\DetailController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
