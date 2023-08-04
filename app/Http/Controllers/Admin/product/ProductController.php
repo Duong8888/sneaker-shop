@@ -119,14 +119,14 @@ class ProductController extends Controller
             }
         }
         // thự hiện update các biến thể
-       foreach ($request->all() as $key => $value){
-           // Kiểm tra nếu khóa bắt đầu bằng "quantity-Variations-"
-           if(strpos($key, 'quantity-variations-') === 0 || strpos($key, 'price-variations-') === 0){
-               $variableId = explode('-', $key)[2]; // lấy id bản gi cần update
-               $variableIdColum = explode('-', $key)[0];
-               Variations::where('id', $variableId)->update([$variableIdColum => $value]);
-           }
-       }
+        foreach ($request->all() as $key => $value){
+            // Kiểm tra nếu khóa bắt đầu bằng "quantity-Variations-"
+            if(strpos($key, 'quantity-variations-') === 0 || strpos($key, 'price-variations-') === 0){
+                $variableId = explode('-', $key)[2]; // lấy id bản gi cần update
+                $variableIdColum = explode('-', $key)[0];
+                Variations::where('id', $variableId)->update([$variableIdColum => $value]);
+            }
+        }
         $product->save();
         return response()->json(['message' => 'updated thanh cong']);
     }

@@ -106,10 +106,12 @@
         object-fit: cover;
     }
 
+
     .image-order{
         width: 50px;
         height: 50px;
         border-radius:5px;
         object-fit: cover;
     }
+
 </style>

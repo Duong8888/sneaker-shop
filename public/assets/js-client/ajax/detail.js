@@ -120,7 +120,6 @@ $(document).ready(function () {
                                         <form action="">
                                             <input id="variants_quantity" min="1" max="100" step="2" value="1" type="number">
 
-<!--                                            button event-->
                                             <button type="button" data-bs-dismiss="modal" id="add_to_cart">Thêm vào giỏ hàng</button>
                                         </form>
                                     </div>
@@ -147,7 +146,7 @@ $(document).ready(function () {
                     },
                 });
 
-                // console.log(myCart);
+
                 // event
                 $('#add_to_cart').click(function () {
 
@@ -169,38 +168,23 @@ $(document).ready(function () {
                             let found = false;
                             let newItem = {};
                             let newMyCart;
-                            // console.log('mảng hiện có');
-                            // console.log(data.mycart.data); // log ra mảng hiện tại đang có
                             for (cartItem of data.mycart.data) {
                                 if (cartItem.product_id == product_id && cartItem.size_id == size && cartItem.color_id == color) {
                                     cartItem['quantity'] = +cartItem.quantity + +quantity;
                                     newItem = cartItem; // gán item đã thay đổi quantity vào bieens new
-
                                     newMyCart = data.mycart.data.filter(item => cartItem.product_id !== newProduct.product_id); // xóa id bị trùng trên cart
-                                    // console.log(newMyCart)
-
-
                                     found = true; // gán found bằng true
                                     break;
                                 }
                             }
-                            ;
-
                             if (found) {
-                                // console.log('mảng đã sửa khi lặp')
-                                // console.log(data.mycart.data)
-
-                                // data.mycart.data.push(newItem);
                                 saveCart(newMyCart)
                             } else {
                                 data.mycart.data.push(newProduct);
                                 saveCart(data.mycart.data)
                             }
-
-
                         }
                     }
-
                 });
             },
             error: function (error) {
@@ -210,7 +194,6 @@ $(document).ready(function () {
     }
 
     function saveCart(data) {
-
         $.ajax({
             url: save_cart,
             method: 'POST',
@@ -218,7 +201,6 @@ $(document).ready(function () {
                 data,
                 _token: $('meta[name="csrf-token"]').attr('content')
             },
-
             success: function (response) {
                 console.log(response);
                 toastr["success"]("Thêm giỏ hàng thành công!")
@@ -227,7 +209,5 @@ $(document).ready(function () {
                 console.log(error);
             }
         });
-
-
     }
 });

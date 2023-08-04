@@ -1,5 +1,6 @@
 <?php
 
+
 use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\ProfileController;
@@ -11,10 +12,11 @@ use App\Http\Controllers\Admin\TrashBrandController;
 use App\Http\Controllers\Admin\color\ColorController;
 use App\Http\Controllers\Admin\size\SizeController;
 
-
-
 use App\Http\Controllers\client\ProductClientController;
 use App\Http\Controllers\client\DetailProductController;
+
+
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -66,6 +68,7 @@ Route::group(['prefix' => 'size', 'as' => 'size.', 'middleware' => ['auth', 'ver
     Route::match(['GET', 'POST'], 'add', [SizeController::class, 'add'])->name('add');
     Route::match(['GET', 'POST'], '/edit/{id}', [SizeController::class, 'update'])->name('edit');
 });
+
 
 Route::group(['middleware' => ['auth', 'verified']],function (){
     Route::resource('/order',OrderController::class);
